@@ -29,3 +29,6 @@ jobs:
 
       - name: Build project
         run: bun run build
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag archiweb-td:$(date +%s)
