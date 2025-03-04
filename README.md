@@ -1,38 +1,45 @@
-# sv
+# TD-archiweb
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Description
 
-## Creating a project
+Project built for the archiweb class, which is a recipes website
 
-If you're seeing this, you've probably already done this step. Congrats!
+This project uses bun
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Local deployment
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install dependencies:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun run install
 ```
 
-## Building
+Run (dev mode)
 
-To create a production version of your app:
+```bash
+bun dev
+```
+Add `--open` to automatically open web browser
+
+To create a production version :
 
 ```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+To preview the production build :
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+npm run preview
+```
+
+## CI/CD
+
+CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested
+
+They perform several tests on the app
+
+CD jobs run when a branch is merged with the `main` branch.
+It deploys a Docker image
+[online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
+
