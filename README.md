@@ -36,7 +36,10 @@ npm run preview
 ## CI/CD
 
 CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested
-Then perform several tests on the app
+
+They perform several tests on the app
 
 CD jobs run when a branch is merged with the `main` branch.
-It deploys a Docker image on `https://hub.docker.com/repository/docker/magnoir/archiweb-td/general`
+It deploys a Docker image
+[online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
+
