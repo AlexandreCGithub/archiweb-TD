@@ -37,8 +37,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ${{ vars.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }} .
+        run: docker build -t ${{ vars.IMAGE_NAME }}:latest .
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ vars.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
+        run: docker push ${{ vars.IMAGE_NAME }}:latest
 
