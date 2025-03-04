@@ -30,15 +30,19 @@ jobs:
       - name: Build project
         run: bun run build
 
+      - name: 'Create env file'
+        run: cat ${{ vars.DOCKERHUB_PSEUDO }}
+          cat ${{ vars.IMAGE_NAME }}
+
       - name: Log into Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ env.DOCKERHUB_PSEUDO }}
+          username: ${{ vars.DOCKERHUB_PSEUDO }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }} .
+        run: docker build -t ${{ vars.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }} .
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
+        run: docker push ${{ vars.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
 
