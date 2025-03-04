@@ -1,11 +1,25 @@
-FROM oven/bun:canary-alpine
+# Étape 1 : Build de l'application
+FROM oven/bun:alpine AS builder
+WORKDIR /app
 
-COPY package.json ./
-COPY bun.lockb ./
-COPY src ./
+# Copier uniquement les fichiers nécessaires pour installer les dépendances
+COPY package.json bun.lockb ./
+RUN bun install --frozen-lockfile
 
-RUN bun install
-COPY . .
+# Copier le reste des fichiers pour la compilation
+COPY src ./src
+COPY . . 
+
+# Compiler l’application
 RUN bun run build
+
+# Étape 2 : Run de l'application
+FROM oven/bun:alpine
+WORKDIR /app
+
+# Copy only the necessary files from the builder image to the final image
+COPY --from=builder /app/build ./build
 EXPOSE 3000
-ENTRYPOINT ["bun", "./build"]   
+
+# Lancer l'application avec Bun
+ENTRYPOINT ["bun", "./build"]
