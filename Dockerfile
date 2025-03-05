@@ -19,7 +19,7 @@ WORKDIR /app
 
 # Copy only the necessary files from the builder image to the final image
 COPY --from=builder /app/build ./build
-EXPOSE 3000
+EXPOSE 80
 
 # Lancer l'application avec Bun
 ENTRYPOINT ["bun", "./build"]
