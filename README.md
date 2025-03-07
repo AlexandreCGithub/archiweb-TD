@@ -19,6 +19,7 @@ Run (dev mode)
 ```bash
 bun dev
 ```
+
 Add `--open` to automatically open web browser
 
 To create a production version :
@@ -42,4 +43,3 @@ They perform several tests on the app
 CD jobs run when a branch is merged with the `main` branch.
 It deploys a Docker image
 [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
-
