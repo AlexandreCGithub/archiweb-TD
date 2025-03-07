@@ -43,3 +43,9 @@ They perform several tests on the app
 CD jobs run when a branch is merged with the `main` branch.
 It deploys a Docker image
 [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
+
+To run tests locally:
+
+```bash
+bun run test
+```
