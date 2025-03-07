@@ -43,3 +43,12 @@ CD jobs run when a branch is merged with the `main` branch.
 It deploys a Docker image
 [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
 
+## Pages
+
+`/` : list of the recipes
+`/recipes/{id}` : description of a specific message
+`/favorites` : list of favorites of the connected user
+
+*... add more here if needed...*
+
+
