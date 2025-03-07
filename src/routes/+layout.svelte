@@ -2,6 +2,8 @@
     import 'bootstrap/dist/css/bootstrap.css';
     import "bootstrap-icons/font/bootstrap-icons.css";
     import scriptSrc from 'bootstrap/dist/js/bootstrap.bundle.js?url';
+
+    import NavBar from '../lib/components/NavBar.svelte';
 </script>
 
 <svelte:head>
@@ -9,25 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src={scriptSrc}></script>
 </svelte:head>
-<div class="container p-3 mx-auto text-center">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-        </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-        </form>
+<NavBar />
 
-        <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-light">Sign-up</button>
-        </div>
+<main>
+    <div class="container py-3 px-0 mx-auto text-center">
+        <slot />
     </div>
-
-    <main>
-        <div class="container py-3 px-0 mx-auto text-center">
-            <slot />
-        </div>
-    </main>
-</div>
+</main>

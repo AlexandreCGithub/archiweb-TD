@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-    
     interface Recipes {
         id: string;
         createdAt: string;
