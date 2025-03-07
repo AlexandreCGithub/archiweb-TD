@@ -2,6 +2,7 @@
     import 'bootstrap/dist/css/bootstrap.css';
     import "bootstrap-icons/font/bootstrap-icons.css";
     import scriptSrc from 'bootstrap/dist/js/bootstrap.bundle.js?url';
+    import Footbar from '../lib/components/Footbar.svelte';
 </script>
 
 <svelte:head>
@@ -30,4 +31,6 @@
             <slot />
         </div>
     </main>
+
+    <Footbar/>
 </div>
