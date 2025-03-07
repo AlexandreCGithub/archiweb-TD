@@ -22,18 +22,6 @@ bun dev
 
 Add `--open` to automatically open web browser
 
-To create a production version :
-
-```bash
-npm run build
-```
-
-To preview the production build :
-
-```bash
-npm run preview
-```
-
 ## CI/CD
 
 CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested
