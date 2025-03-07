@@ -19,19 +19,8 @@ Run (dev mode)
 ```bash
 bun dev
 ```
+
 Add `--open` to automatically open web browser
-
-To create a production version :
-
-```bash
-npm run build
-```
-
-To preview the production build :
-
-```bash
-npm run preview
-```
 
 ## CI/CD
 
@@ -43,6 +32,12 @@ CD jobs run when a branch is merged with the `main` branch.
 It deploys a Docker image
 [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
 
+To run tests locally:
+
+```bash
+bun run test
+```
+
 ## Pages
 
 `/` : list of the recipes
@@ -53,5 +48,6 @@ It deploys a Docker image
 
 
 *... add more here if needed...*
+
 
 
