@@ -26,6 +26,9 @@
 	console.log(recipe);
 </script>
 
+<svelte:head>
+    <title>{recipe.name}</title>
+</svelte:head>
 <div class="row text-start mb-4">
 	<div class="col-md-4">
 		<img src={recipe.image_url} alt={recipe.name} class="img-fluid rounded-2 shadow" />

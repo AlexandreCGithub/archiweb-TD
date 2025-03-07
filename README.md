@@ -37,3 +37,17 @@ To run tests locally:
 ```bash
 bun run test
 ```
+
+## Pages
+
+`/` : list of the recipes
+
+`/recipes/{id}` : description of a specific message
+
+`/favorites` : list of favorites of the connected user
+
+
+*... add more here if needed...*
+
+
+
