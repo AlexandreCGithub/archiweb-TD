@@ -14,32 +14,10 @@
   </svelte:head>
   
   <main class="text-center">
-    <h1>Oops!</h1>
+    <h1>404</h1>
     <p>Sorry, the page you're looking for does not exist.</p>
     <p>
-      <a href="/" class="btn btn-primary">Go back to the homepage</a>
+        <a href="/" class="btn btn-outline-light me-2">Go back to the homepage</a>
     </p>
   </main>
-  
-  <style>
-    main {
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 3rem;
-    }
-    p {
-      font-size: 1.2rem;
-    }
-    .btn {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    .btn:hover {
-      background-color: #0056b3;
-    }
-  </style>
   
