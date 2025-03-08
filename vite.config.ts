@@ -1,9 +1,9 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from "@testing-library/svelte/vite";
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [svelte()],
+	plugins: [sveltekit()],
     test: {
         workspace: [{
             extends: "./vite.config.ts",
