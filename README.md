@@ -22,6 +22,10 @@ bun dev
 
 Add `--open` to automatically open web browser
 
+## Online deployment
+
+The app is supposed to be deployed [there](https://chi.cours.quimerch.com/)
+
 ## CI/CD
 
 CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested
