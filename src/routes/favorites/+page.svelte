@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-	interface Recipes {
+	interface Recipe {
 		id: string;
 		createdAt: string;
 		name: string;
@@ -20,14 +20,15 @@
 	}
 	
 	let { data }: PageProps = $props();
-	let recipes: Recipes[] = data.recipes.map((item: { recipe: Recipes }) => item.recipe);
+	let recipes: Recipe[] = data.recipes;
 </script>
 
 <div
 	class="p-5 text-center bg-body-tertiary rounded-2 my-4 shadow"
 	style="background: url('/home.png') center/cover no-repeat; color: white;"
 >
-	<h1 class="text-body-emphasis">Favorites</h1>
+	<h1 class="text-body-emphasis">Favorites ⭐</h1>
+	<p class="lead">Public</p>
 </div>
 
 <div class="row">
