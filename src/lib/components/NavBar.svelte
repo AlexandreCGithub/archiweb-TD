@@ -1,23 +1,32 @@
 <script lang="ts">
 	import { submitLogin } from './NavBar';
-  
+	
 	let isModalOpen = false;
 	let username = '';
 	let password = '';
+	let isLoggedIn = false;  // Variable pour savoir si l'utilisateur est connecté
+	let userPseudo = '';  // Pour stocker le pseudo de l'utilisateur
   
 	const openModal = () => {
 	  isModalOpen = true;
 	};
-  
+	
 	const closeModal = () => {
 	  isModalOpen = false;
 	};
-  
+	
 	const handleLogin = async () => {
 	  const success = await submitLogin(username, password);
 	  if (success) {
+		isLoggedIn = true;
+		userPseudo = username;
 		closeModal();
 	  }
+	};
+	
+	const handleLogout = () => {
+	  isLoggedIn = false;
+	  userPseudo = '';
 	};
   </script>
   
@@ -37,8 +46,13 @@
 	  </form>
   
 	  <div class="text-end">
-		<button type="button" class="btn btn-outline-light me-2" on:click={openModal}>Login</button>
-		<button type="button" class="btn btn-light">Sign-up</button>
+		{#if !isLoggedIn}
+		  <button type="button" class="btn btn-outline-light me-2" on:click={openModal}>Login</button>
+		  <button type="button" class="btn btn-light">Sign-up</button>
+		{:else}
+		  <span class="text-white me-3">Hello, {userPseudo}</span>
+		  <button type="button" class="btn btn-outline-light" on:click={handleLogout}>Logout</button>
+		{/if}
 	  </div>
 	</div>
   </nav>
