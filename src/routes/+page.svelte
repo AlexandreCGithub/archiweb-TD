@@ -20,7 +20,6 @@
 	}
 
 	let { data }: PageProps = $props();
-
 	let recipes: Recipes[] = data.recipes;
 </script>
 

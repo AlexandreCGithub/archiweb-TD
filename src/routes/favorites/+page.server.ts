@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	});
 	const data = await response.json();
 	return {
-		recipe: data
-	};
+		recipes: data
+	  };
 };
 
