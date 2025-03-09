@@ -4,8 +4,8 @@
 	let isModalOpen = false;
 	let username = '';
 	let password = '';
-	let isLoggedIn = false;  // Variable pour savoir si l'utilisateur est connecté
-	let userPseudo = '';  // Pour stocker le pseudo de l'utilisateur
+	let isLoggedIn = false;
+	let userPseudo = ''; 
   
 	const openModal = () => {
 	  isModalOpen = true;
