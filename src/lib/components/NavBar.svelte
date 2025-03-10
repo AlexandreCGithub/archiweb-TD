@@ -63,7 +63,7 @@
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title">Login</h5>
-			<button type="button" class="btn-close" on:click={closeModal}></button>
+			<button type="button" class="btn-close" on:click={closeModal} aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
 			<form on:submit|preventDefault={handleLogin}>
@@ -96,6 +96,6 @@
   {/if}
   
   {#if isModalOpen}
-	<div class="modal-backdrop fade show" on:click={closeModal}></div>
+	<button type="button" class="modal-backdrop fade show" on:click={closeModal} on:keydown={e => e.key === 'Enter' && closeModal()} aria-label="Close modal"></button>
   {/if}
   

@@ -1,11 +1,9 @@
 <script>
 	import 'bootstrap/dist/css/bootstrap.css';
 	import 'bootstrap-icons/font/bootstrap-icons.css';
-    import 'bootstrap/dist/css/bootstrap.css';
-    import "bootstrap-icons/font/bootstrap-icons.css";
 	import scriptSrc from 'bootstrap/dist/js/bootstrap.bundle.js?url';
-    import NavBar from '../lib/components/NavBar.svelte';
-    import Footbar from '../lib/components/FootBar.svelte';
+    import NavBar from '$lib/components/NavBar.svelte';
+    import Footbar from '$lib/components/FootBar.svelte';
 </script>
 
 <svelte:head>
