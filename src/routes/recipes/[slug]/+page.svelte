@@ -1,28 +1,10 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-
-	interface Recipes {
-		id: string;
-		createdAt: string;
-		name: string;
-		description: string;
-		instructions: string;
-		category: string;
-		published: boolean;
-		created_by: string;
-		calories: number;
-		cost: number;
-		prep_time: number;
-		cook_time: number;
-		servings: number;
-		image_url: string;
-		disclaimer: string;
-		when_to_eat: string;
-	}
+	import type { Recipe } from "$lib/types/Recipe";
 
 	let { data }: PageProps = $props();
 
-	let recipe: Recipes = data.recipe;
+	let recipe: Recipe = data.recipe;
 	console.log(recipe);
 </script>
 
