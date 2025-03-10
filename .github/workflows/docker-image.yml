@@ -64,7 +64,7 @@ jobs:
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
-    needs: cd
+    needs: ci
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     steps:
