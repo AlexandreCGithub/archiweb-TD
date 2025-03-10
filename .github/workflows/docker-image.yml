@@ -1,4 +1,4 @@
-name: CI SONAR CD
+name: CI CD
 
 on:
   push:
@@ -27,8 +27,7 @@ jobs:
 
       - name: Run tests
         run: bun run test
-      
-  sonar:
+  sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
     steps:
@@ -44,6 +43,7 @@ jobs:
           args: >
             -Dsonar.organization=archiweb_archiweb
             -Dsonar.projectKey=archiweb
+            -Dsonar.branch.name=main
 
   cd:
     name: CD - Build & Push Docker Image
