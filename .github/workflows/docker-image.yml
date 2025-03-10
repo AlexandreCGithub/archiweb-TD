@@ -40,6 +40,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: src
+          args: >
+            -Dsonar.organization=archiweb_archiweb
+            -Dsonar.projectKey=archiweb
 
   cd:
     name: CD - Build & Push Docker Image
