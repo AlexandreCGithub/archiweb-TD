@@ -42,8 +42,8 @@ jobs:
         with:
           projectBaseDir: src
           args: >
-            -Dsonar.organization=archiweb_archiweb
-            -Dsonar.projectKey=archiweb
+            -Dsonar.organization=archiweb
+            -Dsonar.projectKey=archiweb-td
 
   cd:
     name: CD - Build & Push Docker Image
