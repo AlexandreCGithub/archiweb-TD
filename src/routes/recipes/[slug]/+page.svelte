@@ -2,10 +2,9 @@
 	import type { PageProps } from './$types';
 	import type { Recipe } from "$lib/types/Recipe";
 
-	let { data }: PageProps = $props();
+	let { data, form }: PageProps = $props();
 
 	let recipe: Recipe = data.recipe;
-	console.log(recipe);
 </script>
 
 <svelte:head>
@@ -49,6 +48,40 @@
 		</div>
 
 		<p class="lead mt-4">{recipe.description}</p>
+		<form method="POST" action="?/login">
+			<input type="hidden" name="recipeID" value="{recipe.id}">
+			<button formaction="?/addFavorite">Add to Favorites ⭐</button>
+			<button formaction="?/deleteFavorite">Remove Favorite ❌</button>
+			<br><br>
+			{#if form?.status !== undefined}
+			{#if form?.status == 200}
+			<div class="alert alert-success" role="alert">
+				{#if form?.action == 'addFavorite'}
+				<p><strong>Favorite Added! 🎉</strong></p>
+				{:else}
+				<p><strong>Favorite Removed</strong></p>
+				{/if}
+			</div>
+			{:else if form?.status == 401}
+			<div class="alert alert-danger" role="alert">
+				<p><strong>Unauthorized! Please log in. 🔒</strong></p>
+			</div>
+			{:else if form?.status == 403}
+			<div class="alert alert-warning" role="alert">
+				<p><strong>Forbidden! You don't have permission. 🚫</strong></p>
+			</div>
+			{:else if form?.status == 409}
+			<div class="alert alert-info" role="alert">
+				<p><strong>Conflict! This favorite already exists. 🔄</strong></p>
+			</div>
+			{:else}
+			<div class="alert alert-secondary" role="alert">
+				<p><strong>An unexpected error occurred. Please try again later. ⚠️</strong></p>
+			</div>
+			{/if}
+			{/if}
+		</form>
+		
 	</div>
 </div>
 
