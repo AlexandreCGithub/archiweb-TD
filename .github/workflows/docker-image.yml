@@ -45,7 +45,7 @@ jobs:
             -Dsonar.organization=archiweb_archiweb
             -Dsonar.projectKey=archiweb
             -Dsonar.branch.name=main
-            -Dsonar.pullrequest.base=master
+            -Dsonar.pullrequest.base=main
 
   cd:
     name: CD - Build & Push Docker Image
