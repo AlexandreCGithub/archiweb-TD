@@ -4,8 +4,8 @@ import { render, screen } from '@testing-library/svelte';
 import FootBar from './FootBar.svelte';
 
 describe('FootBar Component', () => {
-	test('displays the correct text content', () => {
+	test('Affiche le bon texte sur la FootBar', () => {
 		render(FootBar);
-		expect(screen.getByText('Site by Chi Team.')).toBeInTheDocument();
+		expect(screen.getByText("Site de l'équipe Chi.")).toBeInTheDocument();
 	});
 });
