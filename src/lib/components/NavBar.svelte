@@ -1,22 +1,46 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import type { PageData } from '../../routes/$types';
+	import { applyAction, deserialize } from '$app/forms';
 
-	let isModalOpen = $state(false);
+	let { data }: { data: PageData } = $props();
 
-	let props = $props();
-	let userPseudo = $state(props.userPseudo);
-
-	$effect(() => {
-		userPseudo = props.userPseudo;
-	});
-
-	const handleLogout = () => {
-		userPseudo = '';
+	const parseJwt = (token: string | null) => {
+		if (!token) return null;
+		try {
+			return JSON.parse(atob(token.split('.')[1]));
+		} catch (error) {
+			return null;
+		}
 	};
 
+	let userPseudo = $state(parseJwt(data.token)?.iss);
+
+	let isModalOpen = $state(false);
 	const changeModalStatus = () => {
 		isModalOpen = isModalOpen ? false : true;
 	};
+
+	async function handleSubmit(
+		event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }
+	) {
+		event.preventDefault();
+		const data = new FormData(event.currentTarget);
+
+		const response = await fetch(event.currentTarget.action, {
+			method: 'POST',
+			body: data
+		});
+
+		const result = deserialize(await response.text());
+		if (result.type === 'success') {
+			changeModalStatus();
+			if (result.data && typeof result.data.token === 'string') {
+				userPseudo = parseJwt(result.data.token)?.iss;
+			}
+		} else {
+			await applyAction(result);
+		}
+	}
 </script>
 
 <nav class="container p-3 mx-auto text-center">
@@ -42,18 +66,7 @@
 				>
 			{:else}
 				<span class="text-white me-3">Hello, {userPseudo}</span>
-				<form
-					method="POST"
-					use:enhance={() => {
-						return async ({ result }) => {
-							if (result.type === 'success') {
-								handleLogout();
-								console.log('logout', userPseudo);
-							}
-						};
-					}}
-					action="?/logout"
-				>
+				<form method="POST" action="?/logout">
 					<button type="submit" class="btn btn-outline-light">Logout</button>
 				</form>
 			{/if}
@@ -71,18 +84,7 @@
 					></button>
 				</div>
 				<div class="modal-body text-center">
-					<form
-						method="POST"
-						use:enhance={() => {
-							return async ({ result }) => {
-								if (result.type === 'success') {
-									changeModalStatus();
-									console.log('login', userPseudo);
-								}
-							};
-						}}
-						action="?/login"
-					>
+					<form method="POST" onsubmit={handleSubmit} action="?/login">
 						<div class="mb-3">
 							<label for="username" class="form-label">Username</label>
 							<input

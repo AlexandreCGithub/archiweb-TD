@@ -87,7 +87,7 @@
 <div class="row text-start col-md-4">
 	<span class="display-4">Instructions</span>
 	<ul class="list-group list-group-flush mx-3">
-		{#each recipe.instructions.split('-') as ingredient (ingredient.id)}
+		{#each recipe.instructions.split('-') as ingredient (ingredient)}
 			{#if ingredient.trim() !== ''}
 				<li class="list-group-item">{ingredient}</li>
 			{/if}
