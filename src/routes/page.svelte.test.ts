@@ -69,7 +69,7 @@ describe('/+page.svelte', () => {
 		expect(screen.getByText('A delicious test recipe.')).toBeInTheDocument();
 		expect(screen.getByText(/Preparation/i)).toBeInTheDocument();
 		expect(screen.getByText(/15 min/i)).toBeInTheDocument();
-		expect(screen.getByText(/Cooking/i)).toBeInTheDocument();
+		expect(screen.getByText(/Cuisson/i)).toBeInTheDocument();
 		expect(screen.getByText(/30 min/i)).toBeInTheDocument();
 	});
 });

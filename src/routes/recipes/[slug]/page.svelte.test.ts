@@ -40,7 +40,7 @@ describe('/+page.svelte', () => {
 		expect(screen.getByText(mockRecipe.name)).toBeInTheDocument();
 		expect(screen.getByText(/by Chef Tester/i)).toBeInTheDocument();
 		expect(screen.getByText(/Preparation/i)).toBeInTheDocument();
-		expect(screen.getByText(/Cooking/i)).toBeInTheDocument();
+		expect(screen.getByText(/Cuisson/i)).toBeInTheDocument();
 		expect(screen.getByText(/Calories/i)).toBeInTheDocument();
 
 		expect(
