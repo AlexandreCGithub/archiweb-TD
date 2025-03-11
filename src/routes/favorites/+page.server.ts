@@ -1,6 +1,7 @@
+import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Recipe } from '$lib/types/Recipe';
-import { fail } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ cookies }) => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
@@ -11,11 +12,15 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	});
 
 	if (response.status == 401) {
-		return fail(401, { success: false, message: 'You are not connected' });
+		error(401, 'Vous devez être connecté pour voir vos favoris.');
+	}
+
+	if (!response.ok) {
+		error(response.status, 'Une erreur est survenue lors de la récupération des favoris.');
 	}
 
 	const data = await response.json();
-	return {
+	return data ? {
 		recipes: data.map((item: { recipe: Recipe }) => item.recipe)
-	};
+	} : null;
 };
