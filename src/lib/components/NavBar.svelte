@@ -19,7 +19,7 @@
 		isModalOpen = isModalOpen ? false : true;
 	};
 
-	async function handleSubmit(
+	async function handleLoginSubmit(
 		event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }
 	) {
 		event.preventDefault();
@@ -38,6 +38,23 @@
 			}
 		} else {
 			await applyAction(result);
+		}
+	}
+
+	async function handleLogoutSubmit(
+		event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }
+	) {
+		event.preventDefault();
+		const data = new FormData(event.currentTarget);
+
+		const response = await fetch(event.currentTarget.action, {
+			method: 'POST',
+			body: data
+		});
+
+		const result = deserialize(await response.text());
+		if (result.type === 'success') {
+			userPseudo = '';
 		}
 	}
 </script>
@@ -65,7 +82,7 @@
 				>
 			{:else}
 				<span class="text-white me-3">Hello, {userPseudo}</span>
-				<form method="POST" action="?/logout">
+				<form method="POST" action="?/logout" onsubmit={handleLogoutSubmit}>
 					<button type="submit" class="btn btn-outline-light">Logout</button>
 				</form>
 			{/if}
@@ -83,7 +100,7 @@
 					></button>
 				</div>
 				<div class="modal-body text-center">
-					<form method="POST" onsubmit={handleSubmit} action="?/login">
+					<form method="POST" onsubmit={handleLoginSubmit} action="?/login">
 						<div class="mb-3">
 							<label for="username" class="form-label">Username</label>
 							<input

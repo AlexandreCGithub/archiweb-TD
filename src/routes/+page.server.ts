@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { type Actions, fail, redirect } from '@sveltejs/kit';
+import { type Actions, fail } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async () => {
 	const response = await fetch('https://gourmet.cours.quimerch.com/recipes', {
@@ -70,6 +70,6 @@ export const actions = {
 
 	logout: async ({ cookies }) => {
 		cookies.set('token', '', { path: '/', maxAge: 0 });
-		throw redirect(303, '/');
+		return { success: true };
 	}
 } satisfies Actions;
