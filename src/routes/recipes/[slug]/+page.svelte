@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-	import type { Recipe } from "$lib/types/Recipe";
+	import type { Recipe } from '$lib/types/Recipe';
 
 	let { data, form }: PageProps = $props();
 
@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-    <title>{recipe.name}</title>
+	<title>{recipe.name}</title>
 </svelte:head>
 <div class="row text-start mb-4">
 	<div class="col-md-4">
@@ -49,46 +49,45 @@
 
 		<p class="lead mt-4">{recipe.description}</p>
 		<form method="POST" action="?/login">
-			<input type="hidden" name="recipeID" value="{recipe.id}">
+			<input type="hidden" name="recipeID" value={recipe.id} />
 			<button formaction="?/addFavorite">Add to Favorites ⭐</button>
 			<button formaction="?/deleteFavorite">Remove Favorite ❌</button>
-			<br><br>
+			<br /><br />
 			{#if form?.status !== undefined}
-			{#if form?.status == 200}
-			<div class="alert alert-success" role="alert">
-				{#if form?.action == 'addFavorite'}
-				<p><strong>Favorite Added! 🎉</strong></p>
+				{#if form?.status == 200}
+					<div class="alert alert-success" role="alert">
+						{#if form?.action == 'addFavorite'}
+							<p><strong>Favorite Added! 🎉</strong></p>
+						{:else}
+							<p><strong>Favorite Removed</strong></p>
+						{/if}
+					</div>
+				{:else if form?.status == 401}
+					<div class="alert alert-danger" role="alert">
+						<p><strong>Unauthorized! Please log in. 🔒</strong></p>
+					</div>
+				{:else if form?.status == 403}
+					<div class="alert alert-warning" role="alert">
+						<p><strong>Forbidden! You don't have permission. 🚫</strong></p>
+					</div>
+				{:else if form?.status == 409}
+					<div class="alert alert-info" role="alert">
+						<p><strong>Conflict! This favorite already exists. 🔄</strong></p>
+					</div>
 				{:else}
-				<p><strong>Favorite Removed</strong></p>
+					<div class="alert alert-secondary" role="alert">
+						<p><strong>An unexpected error occurred. Please try again later. ⚠️</strong></p>
+					</div>
 				{/if}
-			</div>
-			{:else if form?.status == 401}
-			<div class="alert alert-danger" role="alert">
-				<p><strong>Unauthorized! Please log in. 🔒</strong></p>
-			</div>
-			{:else if form?.status == 403}
-			<div class="alert alert-warning" role="alert">
-				<p><strong>Forbidden! You don't have permission. 🚫</strong></p>
-			</div>
-			{:else if form?.status == 409}
-			<div class="alert alert-info" role="alert">
-				<p><strong>Conflict! This favorite already exists. 🔄</strong></p>
-			</div>
-			{:else}
-			<div class="alert alert-secondary" role="alert">
-				<p><strong>An unexpected error occurred. Please try again later. ⚠️</strong></p>
-			</div>
-			{/if}
 			{/if}
 		</form>
-		
 	</div>
 </div>
 
 <div class="row text-start col-md-4">
 	<span class="display-4">Instructions</span>
 	<ul class="list-group list-group-flush mx-3">
-		{#each recipe.instructions.split('-') as ingredient}
+		{#each recipe.instructions.split('-') as ingredient (ingredient.id)}
 			{#if ingredient.trim() !== ''}
 				<li class="list-group-item">{ingredient}</li>
 			{/if}

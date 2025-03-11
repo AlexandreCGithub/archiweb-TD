@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-	import type { Recipe } from "$lib/types/Recipe";
+	import type { Recipe } from '$lib/types/Recipe';
 
 	let { data }: PageProps = $props();
 	let recipes: Recipe[] = data.recipes;
@@ -10,12 +10,12 @@
 	class="p-5 text-center bg-body-tertiary rounded-2 my-4 shadow"
 	style="background: url('/home.png') center/cover no-repeat; color: white;"
 >
-	<h1 class="text-body-emphasis">Title</h1>
+	<h1 class="text-body-emphasis">Marmitron</h1>
 	<p class="lead">Recipes</p>
 </div>
 
 <div class="row">
-	{#each recipes as recipe}
+	{#each recipes as recipe (recipe.id)}
 		{#if recipe.published}
 			<div class="col-md-4">
 				<a href={`/recipes/${recipe.id}`}>
