@@ -1,7 +1,7 @@
 import type { PageServerLoad, Actions } from './$types';
 
 const parseJwt = (token: string | undefined) => {
-	if (token==undefined) return undefined;
+	if (token == undefined) return undefined;
 	try {
 		return JSON.parse(atob(token.split('.')[1]));
 	} catch (e) {
@@ -24,11 +24,11 @@ export const load: PageServerLoad = async ({ params }) => {
 
 export const actions = {
 	// add a favorite
-	addFavorite: async ({ request,cookies }) => {
+	addFavorite: async ({ request, cookies }) => {
 		const formData = await request.formData();
 		const recipeID = formData.get('recipeID');
 		console.log('Adding ' + recipeID + ' to favorites ...');
-		const userPseudo = parseJwt(cookies.get("token"))?.iss
+		const userPseudo = parseJwt(cookies.get('token'))?.iss;
 		const response = await fetch(
 			`https://gourmet.cours.quimerch.com/users/${userPseudo}/favorites?recipeID=${recipeID}`,
 			{
@@ -36,7 +36,7 @@ export const actions = {
 				headers: {
 					Accept: 'application/json, application/xml',
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${cookies.get("token")}`
+					Authorization: `Bearer ${cookies.get('token')}`
 				}
 			}
 		);
@@ -50,18 +50,18 @@ export const actions = {
 	},
 
 	// remove a favorite
-	deleteFavorite: async ({ request,cookies }) => {
+	deleteFavorite: async ({ request, cookies }) => {
 		const formData = await request.formData();
 		const recipeID = formData.get('recipeID');
 		console.log('Removing ' + recipeID + ' from favorites ...');
-		const userPseudo = parseJwt(cookies.get("token"))?.iss
+		const userPseudo = parseJwt(cookies.get('token'))?.iss;
 		const response = await fetch(
 			`https://gourmet.cours.quimerch.com/users/${userPseudo}/favorites?recipeID=${recipeID}`,
 			{
 				method: 'DELETE',
 				headers: {
 					Accept: 'application/json, application/xml',
-					Authorization: `Bearer ${cookies.get("token")}`
+					Authorization: `Bearer ${cookies.get('token')}`
 				}
 			}
 		);
