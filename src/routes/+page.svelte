@@ -1,42 +1,73 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
+	import { writable } from 'svelte/store';
 
 	let { data }: PageProps = $props();
 	let recipes: Recipe[] = data.recipes;
+
+	// Stocke l'état de transformation pour chaque carte
+	let transform = writable<Record<string, string>>({});
+	let transform_title = $state('scale(1)');
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="p-5 text-center bg-body-tertiary rounded-2 my-4 shadow"
-	style="background: url('/home.png') center/cover no-repeat; color: white;"
+	class="p-5 text-center bg-body-tertiary rounded-2 my-4 shadow-lg"
+	style="background: url('/home.png') center/cover no-repeat; color: white;transition: all 0.5s"
+	onmouseenter={() => (transform_title = 'scale(1.01)')}
+	style:transform={transform_title}
+	onmouseleave={() => (transform_title = 'scale(1)')}
 >
 	<h1 class="text-body-emphasis">Marmitron</h1>
-	<p class="lead">Recipes</p>
+	<h2 class="fw-normal">Explore Our Recipes</h2>
 </div>
 
 <div class="row">
 	{#each recipes as recipe (recipe.id)}
 		{#if recipe.published}
 			<div class="col-md-4">
-				<a href={`/recipes/${recipe.id}`}>
+				<a href={`/recipes/${recipe.id}`} class="text-decoration-none">
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<div
-						class="text-center bg-body-tertiary mb-4 rounded-2 shadow"
-						style="position: relative;"
+						class="card text-white bg-dark mb-4 rounded-2 shadow-lg"
+						onmouseenter={() => transform.update((t) => ({ ...t, [recipe.id]: 'scale(1.07)' }))}
+						onmouseleave={() => transform.update((t) => ({ ...t, [recipe.id]: 'scale(1)' }))}
+						style="transition: all 0.5s"
+						style:transform={$transform[recipe.id] || 'scale(1)'}
 					>
-						<div
-							class="image-container rounded-2 shadow"
-							style="background: url('{recipe.image_url}') center/cover no-repeat; filter: blur(3px); height: 200px;"
-						></div>
-
-						<div
-							style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; filter: blur(0px);"
-						>
-							<div>
-								<h1 class="text-body-emphasis">{recipe.name}</h1>
-								<p class="lead text-white">{recipe.description}</p>
-								<span class="badge bg-dark">Preparation Time : {recipe.prep_time} min ⏳</span>
-								<span class="badge bg-secondary">Cooking Time : {recipe.cook_time} min 🔥</span>
-								<h3 class="text-body-emphasis mt-3 text-capitalize">{recipe.when_to_eat}</h3>
+						<img
+							src={recipe.image_url}
+							class="card-img-top"
+							alt={recipe.name}
+							style="object-fit: cover; height: 200px"
+						/>
+						<div class="card-body text-start">
+							<div class="d-flex justify-content-between align-items-start">
+								<h2 class="card-title mb-0">
+									{recipe.name.slice(0, 20)}{recipe.name.length > 20 ? '...' : ''}
+								</h2>
+								<span class="badge rounded-pill text-bg-light text-capitalize"
+									>{recipe.when_to_eat}</span
+								>
+							</div>
+							<p class="lead mb-2">
+								{recipe.description.slice(0, 30)}{recipe.description.length > 30 ? '...' : ''}
+							</p>
+							<div class="d-flex justify-content-between align-items-center mb-2">
+								<div>
+									<i class="bi bi-clock"></i>
+									<span> Preparation :</span><span class="fw-bold">
+										&nbsp{recipe.prep_time} min</span
+									>
+								</div>
+								<div>
+									<i class="bi bi-clock-history"></i>
+									<span> Cooking : </span><span class="fw-bold"> &nbsp{recipe.cook_time} min</span>
+								</div>
+							</div>
+							<div class="text-center mt-3">
+								<button type="button" class="btn btn-outline-light">See Recipe</button>
 							</div>
 						</div>
 					</div>
