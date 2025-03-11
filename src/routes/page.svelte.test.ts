@@ -1,7 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import '@testing-library/jest-dom/vitest';
 import { render, screen } from '@testing-library/svelte';
-import Page from '../routes/+page.svelte';
+import Page from './+page.svelte';
 
 const mockRecipes = [
 	{
@@ -44,19 +43,28 @@ const mockRecipes = [
 
 describe('/+page.svelte', () => {
 	test('renders the page header correctly', () => {
-		render(Page, { data: { recipes: mockRecipes } });
-		expect(screen.getByText('Title')).toBeInTheDocument();
+		render(Page, {
+			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes },
+			form: null
+		});
+		expect(screen.getByText('Marmitron')).toBeInTheDocument();
 		expect(screen.getByText('Recipes')).toBeInTheDocument();
 	});
 
 	test('renders only published recipes', () => {
-		render(Page, { data: { recipes: mockRecipes } });
+		render(Page, {
+			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes },
+			form: null
+		});
 		expect(screen.getByText('Test Recipe 1')).toBeInTheDocument();
 		expect(screen.queryByText('Test Recipe 2')).not.toBeInTheDocument();
 	});
 
 	test('displays correct recipe details', () => {
-		render(Page, { data: { recipes: mockRecipes } });
+		render(Page, {
+			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes },
+			form: null
+		});
 		expect(screen.getByText('Test Recipe 1')).toBeInTheDocument();
 		expect(screen.getByText('A delicious test recipe.')).toBeInTheDocument();
 		expect(screen.getByText(/Preparation Time/i)).toBeInTheDocument();

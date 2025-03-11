@@ -1,19 +1,18 @@
 <script lang="ts">
-	import type { PageData } from '../../routes/$types';
 	import { applyAction, deserialize } from '$app/forms';
 
-	let { data }: { data: PageData } = $props();
+	let { data } = $props();
 
 	const parseJwt = (token: string | null) => {
 		if (!token) return null;
 		try {
 			return JSON.parse(atob(token.split('.')[1]));
-		} catch (error) {
-			return null;
+		} catch (e) {
+			return e;
 		}
 	};
 
-	let userPseudo = $state(parseJwt(data.token)?.iss);
+	let userPseudo = $state(parseJwt(data?.token)?.iss);
 
 	let isModalOpen = $state(false);
 	const changeModalStatus = () => {

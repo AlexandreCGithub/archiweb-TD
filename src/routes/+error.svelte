@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	export function load({ status }: { status: number }) {
 		if (status === 404) {
 			return {

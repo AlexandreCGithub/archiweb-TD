@@ -58,7 +58,12 @@ export const actions = {
 		} else {
 			const responseData = await response.json();
 			token = responseData.token;
-			cookies.set('token', token, { path: '/', maxAge: 60 * 15 });
+			cookies.set('token', token, {
+				path: '/',
+				maxAge: 60 * 15,
+				httpOnly: true,
+				sameSite: 'strict'
+			});
 		}
 		return { success: true, token: token };
 	},

@@ -3,10 +3,9 @@
 	import 'bootstrap-icons/font/bootstrap-icons.css';
 	import scriptSrc from 'bootstrap/dist/js/bootstrap.bundle.js?url';
 	import Footbar from '../lib/components/FootBar.svelte';
-	import type { PageData } from './$types';
 	import NavBar from '$lib/components/NavBar.svelte';
 
-	let { data, children }: { data: PageData; children: any } = $props();
+	let { data, children } = $props();
 </script>
 
 <svelte:head>
