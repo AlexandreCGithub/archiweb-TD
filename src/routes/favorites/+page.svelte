@@ -35,8 +35,8 @@
 				  <div>
 					<h1 class="text-body-emphasis">{recipe.name}</h1>
 					<p class="lead text-white">{recipe.description}</p>
-					<span class="badge bg-dark">Preparation Time : {recipe.prep_time} min ⏳</span>
-					<span class="badge bg-secondary">Cooking Time : {recipe.cook_time} min 🔥</span>
+					<span class="badge bg-dark">Preparation : {recipe.prep_time} min ⏳</span>
+					<span class="badge bg-secondary">Cuisson : {recipe.cook_time} min 🔥</span>
 					<h3 class="text-body-emphasis mt-3 text-capitalize">{recipe.when_to_eat}</h3>
 				  </div>
 				</div>

@@ -63,11 +63,11 @@
 								</div>
 								<div>
 									<i class="bi bi-clock-history"></i>
-									<span> Cooking : </span><span class="fw-bold"> &nbsp{recipe.cook_time} min</span>
+									<span> Cuisson : </span><span class="fw-bold"> &nbsp{recipe.cook_time} min</span>
 								</div>
 							</div>
 							<div class="text-center mt-3">
-								<button type="button" class="btn btn-outline-light">See Recipe</button>
+								<button type="button" class="btn btn-outline-light">Voir la recette</button>
 							</div>
 						</div>
 					</div>
