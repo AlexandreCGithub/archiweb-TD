@@ -50,8 +50,4 @@ bun run test
 
 `/favorites` : list of favorites of the connected user
 
-
-*... add more here if needed...*
-
-
-
+_... add more here if needed..._
