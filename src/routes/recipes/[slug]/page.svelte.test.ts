@@ -24,17 +24,23 @@ const mockRecipe = {
 
 describe('/+page.svelte', () => {
 	test('renders the recipe name in the title', () => {
-		render(Page, { data: { recipe: mockRecipe } });
+		render(Page, {
+			data: { token: null, recipe: mockRecipe },
+			form: null
+		});
 		expect(document.title).toBe(mockRecipe.name);
 	});
 
 	test('displays the recipe details correctly', () => {
-		render(Page, { data: { recipe: mockRecipe } });
+		render(Page, {
+			data: { token: null, recipe: mockRecipe },
+			form: null
+		});
 
 		expect(screen.getByText(mockRecipe.name)).toBeInTheDocument();
 		expect(screen.getByText(/by Chef Tester/i)).toBeInTheDocument();
-		expect(screen.getByText(/Preparation Time/i)).toBeInTheDocument();
-		expect(screen.getByText(/Cooking Time/i)).toBeInTheDocument();
+		expect(screen.getByText(/Preparation/i)).toBeInTheDocument();
+		expect(screen.getByText(/Cooking/i)).toBeInTheDocument();
 		expect(screen.getByText(/Calories/i)).toBeInTheDocument();
 
 		expect(
@@ -43,7 +49,10 @@ describe('/+page.svelte', () => {
 	});
 
 	test('displays the recipe instructions as a list', () => {
-		render(Page, { data: { recipe: mockRecipe } });
+		render(Page, {
+			data: { token: null, recipe: mockRecipe },
+			form: null
+		});
 		const instructions = screen.getAllByRole('listitem');
 		expect(instructions).toHaveLength(3);
 		expect(instructions[0]).toHaveTextContent('Step 1');
