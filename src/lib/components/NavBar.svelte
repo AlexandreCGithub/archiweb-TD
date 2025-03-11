@@ -59,7 +59,7 @@
 	}
 </script>
 
-<nav class="container p-3 mx-auto text-center">
+<nav class="container py-3 px-0 mx-auto text-center">
 	<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 		<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 			<li><a href="/" class="nav-link px-2 text-white">Home</a></li>
@@ -138,3 +138,12 @@
 		aria-label="Close modal"
 	></button>
 {/if}
+
+<style>
+	.form-control:focus {
+		border-color: #000000;
+		box-shadow:
+			inset 0 1px 1px rgba(0, 0, 0, 0.075),
+			0 0 8px rgba(255, 255, 255, 0.6);
+	}
+</style>

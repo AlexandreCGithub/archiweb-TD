@@ -1,9 +1,5 @@
-<footer class="bg-dark text-light py-4 mt-5">
+<footer class="text-light py-3">
 	<div class="container text-center">
-		<p>Site by Chi Team.</p>
-		<p>
-			<span class="text-light">Contact</span> |
-			<span class="text-light">Legal mentions</span>
-		</p>
+		<p class="lead">Site by Chi Team.</p>
 	</div>
 </footer>
