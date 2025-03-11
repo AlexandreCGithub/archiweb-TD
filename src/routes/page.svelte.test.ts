@@ -48,7 +48,7 @@ describe('/+page.svelte', () => {
 			form: null
 		});
 		expect(screen.getByText('Marmitron')).toBeInTheDocument();
-		expect(screen.getByText('Recipes')).toBeInTheDocument();
+		expect(screen.getByText('Explore Our Recipes')).toBeInTheDocument();
 	});
 
 	test('renders only published recipes', () => {
@@ -67,9 +67,9 @@ describe('/+page.svelte', () => {
 		});
 		expect(screen.getByText('Test Recipe 1')).toBeInTheDocument();
 		expect(screen.getByText('A delicious test recipe.')).toBeInTheDocument();
-		expect(screen.getByText(/Preparation Time/i)).toBeInTheDocument();
-		expect(screen.getByText(/15 min /i)).toBeInTheDocument();
-		expect(screen.getByText(/Cooking Time/i)).toBeInTheDocument();
-		expect(screen.getByText(/30 min /i)).toBeInTheDocument();
+		expect(screen.getByText(/Preparation/i)).toBeInTheDocument();
+		expect(screen.getByText(/15 min/i)).toBeInTheDocument();
+		expect(screen.getByText(/Cooking/i)).toBeInTheDocument();
+		expect(screen.getByText(/30 min/i)).toBeInTheDocument();
 	});
 });
