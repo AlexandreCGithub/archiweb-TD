@@ -1,4 +1,3 @@
-import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Recipe } from '$lib/types/Recipe';
 import { error } from '@sveltejs/kit';
@@ -20,7 +19,9 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	}
 
 	const data = await response.json();
-	return data ? {
-		recipes: data.map((item: { recipe: Recipe }) => item.recipe)
-	} : null;
+	return data
+		? {
+				recipes: data.map((item: { recipe: Recipe }) => item.recipe)
+			}
+		: null;
 };
