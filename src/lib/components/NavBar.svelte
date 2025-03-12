@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { applyAction, deserialize } from '$app/forms';
+	import { goto } from '$app/navigation';
+	import { get } from 'svelte/store';
+	import { page } from '$app/state';
 
 	let { data } = $props();
 
@@ -55,6 +58,9 @@
 		const result = deserialize(await response.text());
 		if (result.type === 'success') {
 			userPseudo = '';
+			if (page.url.pathname == '/favorites') {
+			goto('/');
+			}
 		}
 	}
 </script>
