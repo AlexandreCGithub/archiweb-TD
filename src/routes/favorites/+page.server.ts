@@ -19,9 +19,12 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	}
 
 	const data = await response.json();
-	return data
-		? {
-				recipes: data.map((item: { recipe: Recipe }) => item.recipe)
-			}
-		: null;
+	if (!data) {
+		error(500, 'Une erreur est survenue lors de la récupération des favoris.');
+	}
+	else {
+		return {
+			recipes: data.map((item: { recipe: Recipe }) => item.recipe)
+		};
+	}
 };

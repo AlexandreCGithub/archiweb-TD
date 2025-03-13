@@ -44,17 +44,15 @@ const mockRecipes = [
 describe('/+page.svelte', () => {
 	test('renders the page header correctly', () => {
 		render(Page, {
-			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes },
-			form: null
+			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes }
 		});
 		expect(screen.getByText('Marmitron')).toBeInTheDocument();
-		expect(screen.getByText('Explore Our Recipes')).toBeInTheDocument();
+		expect(screen.getByText('Découvrez nos recettes')).toBeInTheDocument();
 	});
 
 	test('renders only published recipes', () => {
 		render(Page, {
-			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes },
-			form: null
+			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes }
 		});
 		expect(screen.getByText('Test Recipe 1')).toBeInTheDocument();
 		expect(screen.queryByText('Test Recipe 2')).not.toBeInTheDocument();
@@ -62,8 +60,7 @@ describe('/+page.svelte', () => {
 
 	test('displays correct recipe details', () => {
 		render(Page, {
-			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes },
-			form: null
+			data: { token: null, data: undefined, status: undefined, recipes: mockRecipes }
 		});
 		expect(screen.getByText('Test Recipe 1')).toBeInTheDocument();
 		expect(screen.getByText('A delicious test recipe.')).toBeInTheDocument();
