@@ -5,8 +5,9 @@
 	import type { Recipe } from '$lib/types/Recipe';
 
 	let { data, form }: PageProps = $props();
-
 	let recipe: Recipe = data.recipe;
+	let isFavorite = true;
+  
 </script>
 
 <svelte:head>
@@ -53,8 +54,14 @@
 			<p class="lead mt-4">{recipe.description}</p>
 			<form method="POST" use:enhance>
 				<input type="hidden" name="recipeID" value={recipe.id} />
-				<button type="submit" class="btn btn-light" formaction="?/addFavorite">Ajouter aux Favoris ⭐</button>
-				<button type ="submit" class="btn btn-light" formaction="?/deleteFavorite">Retirer ❌</button>
+				<button 
+					type="submit" 
+					class="btn btn-light" 
+					aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+					formaction={isFavorite ? "?/deleteFavorite" : "?/addFavorite"}
+				>
+					<i class={isFavorite ? "fas fa-star" : "far fa-star"}></i>
+				</button>
 				<br /><br />
 				{#if form?.status !== undefined}
 					{#if form?.status == 200}

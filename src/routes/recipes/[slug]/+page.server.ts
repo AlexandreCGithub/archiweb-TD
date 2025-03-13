@@ -11,6 +11,7 @@ const parseJwt = (token: string | undefined) => {
 };
 
 export const load: PageServerLoad = async ({ params }) => {
+	// getting information about the recipe
 	const { slug } = params;
 	const response = await fetch(`https://gourmet.cours.quimerch.com/recipes/${slug}`, {
 		headers: {
@@ -27,6 +28,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	}
 
 	const data = await response.json();
+
+
 	return {
 		recipe: data
 	};
