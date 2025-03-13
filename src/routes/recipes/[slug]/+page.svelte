@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
 
@@ -49,10 +50,10 @@
 			</div>
 
 			<p class="lead mt-4">{recipe.description}</p>
-			<form method="POST" action="?/login">
+			<form method="POST" use:enhance>
 				<input type="hidden" name="recipeID" value={recipe.id} />
-				<button formaction="?/addFavorite">Ajouter aux Favoris ⭐</button>
-				<button formaction="?/deleteFavorite">Retirer ❌</button>
+				<button type="submit" class="btn btn-light" formaction="?/addFavorite">Ajouter aux Favoris ⭐</button>
+				<button type ="submit" class="btn btn-light" formaction="?/deleteFavorite">Retirer ❌</button>
 				<br /><br />
 				{#if form?.status !== undefined}
 					{#if form?.status == 200}
