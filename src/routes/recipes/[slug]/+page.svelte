@@ -27,11 +27,11 @@
 			<div class="d-flex justify-content-between align-items-center mb-2">
 				<div>
 					<i class="bi bi-clock"></i>
-					<span> Preparation Time </span><span class="fw-bold">: {recipe.prep_time} min</span>
+					<span> Preparation </span><span class="fw-bold">: {recipe.prep_time} min</span>
 				</div>
 				<div>
 					<i class="bi bi-clock-history"></i>
-					<span> Cooking Time </span><span class="fw-bold">: {recipe.cook_time} min</span>
+					<span> Cuisson </span><span class="fw-bold">: {recipe.cook_time} min</span>
 				</div>
 			</div>
 
@@ -51,8 +51,8 @@
 			<p class="lead mt-4">{recipe.description}</p>
 			<form method="POST" action="?/login">
 				<input type="hidden" name="recipeID" value={recipe.id} />
-				<button formaction="?/addFavorite">Add to Favorites ⭐</button>
-				<button formaction="?/deleteFavorite">Remove Favorite ❌</button>
+				<button formaction="?/addFavorite">Ajouter aux Favoris ⭐</button>
+				<button formaction="?/deleteFavorite">Retirer ❌</button>
 				<br /><br />
 				{#if form?.status !== undefined}
 					{#if form?.status == 200}

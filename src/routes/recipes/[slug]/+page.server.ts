@@ -1,4 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
+import { error } from '@sveltejs/kit';
 
 const parseJwt = (token: string | undefined) => {
 	if (token == undefined) return undefined;
@@ -16,6 +17,15 @@ export const load: PageServerLoad = async ({ params }) => {
 			Accept: 'application/json, application/xml'
 		}
 	});
+
+	if (response.status == 404) {
+		error(404, `Recette ${slug} introuvable.`);
+	}
+	
+	if (!response.ok) {
+		error(response.status, 'Une erreur est survenue lors de la récupération des favoris.');
+	}
+
 	const data = await response.json();
 	return {
 		recipe: data

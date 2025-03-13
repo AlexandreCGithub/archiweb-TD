@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { applyAction, deserialize } from '$app/forms';
 	import { searchValue } from '$lib/stores/search';
+	import { goto } from '$app/navigation';
+	import { get } from 'svelte/store';
+	import { page } from '$app/state';
 
 	let { data } = $props();
 
@@ -56,6 +59,9 @@
 		const result = deserialize(await response.text());
 		if (result.type === 'success') {
 			userPseudo = '';
+			if (page.url.pathname == '/favorites') {
+			goto('/');
+			}
 		}
 	}
 </script>
@@ -63,8 +69,10 @@
 <nav class="container py-3 px-0 mx-auto text-center">
 	<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 		<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-			<li><a href="/favorites" class="nav-link px-2 text-white">Favorites ⭐</a></li>
+			<li><a href="/" class="nav-link px-2 text-white">Accueil</a></li>
+			{#if userPseudo}
+				<li><a href="/favorites" class="nav-link px-2 text-white">Favoris ⭐</a></li>
+			{/if}
 		</ul>
 		<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
 			<input
@@ -78,10 +86,10 @@
 		<div class="text-end d-flex align-items-center">
 			{#if !userPseudo}
 				<button type="button" class="btn btn-outline-light me-2" onclick={changeModalStatus}
-					>Login</button
+					>Se connecter</button
 				>
 			{:else}
-				<span class="text-white me-3">Hello, {userPseudo}</span>
+				<span class="text-white me-3">Bonjour, {userPseudo}</span>
 				<form method="POST" action="/?/logout" onsubmit={handleLogoutSubmit}>
 					<button type="submit" class="btn btn-outline-light">Logout</button>
 				</form>
@@ -95,14 +103,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Login</h5>
+					<h5 class="modal-title">Se connecter</h5>
 					<button type="button" class="btn-close" onclick={changeModalStatus} aria-label="Close"
 					></button>
 				</div>
 				<div class="modal-body text-center">
 					<form method="POST" onsubmit={handleLoginSubmit} action="/?/login">
 						<div class="mb-3">
-							<label for="username" class="form-label">Username</label>
+							<label for="username" class="form-label">Nom d'utilisateur</label>
 							<input
 								type="text"
 								class="form-control"
@@ -114,7 +122,7 @@
 							/>
 						</div>
 						<div class="mb-3">
-							<label for="password" class="form-label">Password</label>
+							<label for="password" class="form-label">Mot de passe</label>
 							<input
 								type="password"
 								class="form-control"
@@ -125,7 +133,7 @@
 								required
 							/>
 						</div>
-						<button type="submit" class="btn btn-primary">Login</button>
+						<button type="submit" class="btn btn-primary">Se connecter</button>
 					</form>
 				</div>
 			</div>
