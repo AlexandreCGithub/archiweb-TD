@@ -1,4 +1,5 @@
 <script lang="ts">
+	import "@fortawesome/fontawesome-free/css/all.min.css";
 	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
 
