@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { applyAction, deserialize } from '$app/forms';
+	import { searchValue } from '$lib/stores/search';
 	import { goto } from '$app/navigation';
 	import { get } from 'svelte/store';
 	import { page } from '$app/state';
@@ -73,16 +74,15 @@
 				<li><a href="/favorites" class="nav-link px-2 text-white">Favoris ⭐</a></li>
 			{/if}
 		</ul>
-
 		<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
 			<input
 				type="search"
 				class="form-control form-control-dark text-bg-dark"
 				placeholder="Search..."
 				aria-label="Search"
+				bind:value={$searchValue}
 			/>
 		</form>
-
 		<div class="text-end d-flex align-items-center">
 			{#if !userPseudo}
 				<button type="button" class="btn btn-outline-light me-2" onclick={changeModalStatus}

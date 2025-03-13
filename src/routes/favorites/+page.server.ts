@@ -19,7 +19,9 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	}
 
 	const data = await response.json();
-	return data ? {
-		recipes: data.map((item: { recipe: Recipe }) => item.recipe)
-	} : null;
+	return data
+		? {
+				recipes: data.map((item: { recipe: Recipe }) => item.recipe)
+			}
+		: null;
 };

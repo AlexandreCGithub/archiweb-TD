@@ -1,14 +1,27 @@
 <script lang="ts">
-	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
 	import { writable } from 'svelte/store';
+	import { searchValue } from '$lib/stores/search';
 
-	let { data }: PageProps = $props();
+	let { data } = $props();
 	let recipes: Recipe[] = data.recipes;
 
-	// Stocke l'état de transformation pour chaque carte
 	let transform = writable<Record<string, string>>({});
 	let transform_title = $state('scale(1)');
+
+	function removeAccents(str: string): string {
+		return str
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '');
+	}
+
+	let filteredRecipes: Recipe[] = $state([]);
+
+	$effect(() => {
+		filteredRecipes = recipes.filter((recipe) =>
+			removeAccents(recipe.name.toLowerCase()).includes(removeAccents($searchValue.toLowerCase()))
+		);
+	});
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -24,7 +37,7 @@
 </div>
 
 <div class="row">
-	{#each recipes as recipe (recipe.id)}
+	{#each filteredRecipes as recipe (recipe.id)}
 		{#if recipe.published}
 			<div class="col-md-4">
 				<a href={`/recipes/${recipe.id}`} class="text-decoration-none">
