@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	if (response.status == 404) {
 		error(404, `Recette ${slug} introuvable.`);
 	}
-	
+
 	if (!response.ok) {
 		error(response.status, 'Une erreur est survenue lors de la récupération des favoris.');
 	}

@@ -2,7 +2,6 @@
 	import { applyAction, deserialize } from '$app/forms';
 	import { searchValue } from '$lib/stores/search';
 	import { goto } from '$app/navigation';
-	import { get } from 'svelte/store';
 	import { page } from '$app/state';
 
 	let { data } = $props();
@@ -60,7 +59,7 @@
 		if (result.type === 'success') {
 			userPseudo = '';
 			if (page.url.pathname == '/favorites') {
-			goto('/');
+				goto('/');
 			}
 		}
 	}
@@ -78,8 +77,8 @@
 			<input
 				type="search"
 				class="form-control form-control-dark text-bg-dark"
-				placeholder="Search..."
-				aria-label="Search"
+				placeholder="Rechercher..."
+				aria-label="Rechercher"
 				bind:value={$searchValue}
 			/>
 		</form>
@@ -116,7 +115,7 @@
 								class="form-control"
 								id="username"
 								name="username"
-								placeholder="Username"
+								placeholder="Nom d'utilisateur"
 								autocomplete="username"
 								required
 							/>
@@ -128,7 +127,7 @@
 								class="form-control"
 								id="password"
 								name="password"
-								placeholder="Password"
+								placeholder="Mot de passe"
 								autocomplete="current-password"
 								required
 							/>
