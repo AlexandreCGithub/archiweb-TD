@@ -1,13 +1,13 @@
 <script lang="ts">
 	import "@fortawesome/fontawesome-free/css/all.min.css";
-	import { applyAction } from '$app/forms';
 	import { enhance } from '$app/forms';
 	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
 
-	let { data, form }: PageProps = $props();
+	let { data }: PageProps = $props();
 	let recipe: Recipe = data.recipe;
-	let isFavorite = $state(true);
+	let isFavorite = $state(false);
+	isFavorite = data.isAlreadyFavorite;
 	let msg = $state('');
 
 	function changeFavorite() {

@@ -1,5 +1,8 @@
 import type { PageServerLoad, Actions } from './$types';
+import {get } from "svelte/store";
 import { error } from '@sveltejs/kit';
+import { favoritesTab,addFavorite, removeFavorite } from "$lib/stores/favoritesStore";
+import type { Recipe } from '$lib/types';
 
 const parseJwt = (token: string | undefined) => {
 	if (token == undefined) return undefined;
@@ -10,9 +13,46 @@ const parseJwt = (token: string | undefined) => {
 	}
 };
 
-export const load: PageServerLoad = async ({ params }) => {
+// Pour savoir si la recette particulière de cette page est déjà favorite, on utilise un store
+// Il est rempli si le store actuel est null
+
+export const load: PageServerLoad = async ({ params,cookies }) => {
+	// load favorites in store if favorites tab is empty
+	// ********************************
+	console.log(get(favoritesTab));
+	if (get(favoritesTab)==null) // si pas de favoris dans le store
+	{
+		const favResponse = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
+			headers: {
+				Accept: 'application/json, application/xml',
+				Authorization: `Bearer ${cookies.get('token')}`
+			}
+		});
+		if(favResponse.ok)
+		{
+			const favJsonResponse = await favResponse.json();
+			if(favJsonResponse!=null)
+			{
+				favoritesTab.set([]);
+				favJsonResponse.forEach((item: { recipe: Recipe; }) => addFavorite(item.recipe.id));
+				console.log("Le store a désormais " + favJsonResponse.length + " recettes favorites");
+				console.log(get(favoritesTab));
+			}
+		}
+		else
+		{
+			console.log("Les favoris n'ont pas pu être chargés dans le store, erreur " + favResponse.status);
+		}
+	}
+	// ********************************
+
+
 	// getting information about the recipe
 	const { slug } = params;
+
+	const favorites = get(favoritesTab);
+	const isAlreadyFavorite = favorites ? favorites.includes(slug) : false;
+
 	const response = await fetch(`https://gourmet.cours.quimerch.com/recipes/${slug}`, {
 		headers: {
 			Accept: 'application/json, application/xml'
@@ -31,7 +71,8 @@ export const load: PageServerLoad = async ({ params }) => {
 
 
 	return {
-		recipe: data
+		recipe: data,
+		isAlreadyFavorite : isAlreadyFavorite,
 	};
 };
 
@@ -55,6 +96,7 @@ export const actions = {
 		);
 		if (response.ok) {
 			console.log('Adding ' + recipeID + ' to favorites succeded');
+			addFavorite(String(recipeID));
 			return { success: true, action: 'addFavorite', isFavorite: true };
 		} else {
 			console.log('Adding ' + recipeID + ' to favorites failed : ' + response.status);
@@ -81,6 +123,7 @@ export const actions = {
 
 		if (response.ok) {
 			console.log('Removing ' + recipeID + ' from favorites succeeded');
+			removeFavorite(String(recipeID));
 			return { success: true, action: 'deleteFavorite', isFavorite: false };
 		} else {
 			console.log('Removing ' + recipeID + ' from favorites failed : ' + response.status);
