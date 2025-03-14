@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 export const favoritesTab = writable<string[] | null>(null); //si non chargé : null, à distinguer de tableau vide (chargé mais aucun favori)
 
@@ -18,4 +18,9 @@ export function addFavorite(str: string) {
       }
       return favorites.filter(favorite => favorite !== str);
     });
+  }
+
+  export function resetFavorites()
+  {
+    favoritesTab.set(null);
   }

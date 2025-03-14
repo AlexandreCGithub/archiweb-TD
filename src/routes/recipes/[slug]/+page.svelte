@@ -10,6 +10,17 @@
 	isFavorite = data.isAlreadyFavorite;
 	let msg = $state('');
 
+	const parseJwt = (token: string | null) => {
+		if (!token) return null;
+		try {
+			return JSON.parse(atob(token.split('.')[1]));
+		} catch (e) {
+			return e;
+		}
+	};
+
+	let userPseudo = $state(parseJwt(data?.token)?.iss);
+
 	function changeFavorite() {
 		isFavorite = !isFavorite;
 	}
@@ -58,6 +69,7 @@
 			</div>
 
 			<p class="lead mt-4">{recipe.description}</p>
+			{#if userPseudo}
 			<form method="POST" use:enhance={({}) => {
 						return async ({ result }) => {
 						if (result.type === 'success') {
@@ -91,6 +103,7 @@
 				<br /><br />
 				<p><strong>{msg}</strong></p>
 			</form>
+			{/if}
 		</div>
 	</div>
 

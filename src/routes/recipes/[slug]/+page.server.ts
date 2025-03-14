@@ -1,7 +1,7 @@
 import type { PageServerLoad, Actions } from './$types';
 import {get } from "svelte/store";
 import { error } from '@sveltejs/kit';
-import { favoritesTab,addFavorite, removeFavorite } from "$lib/stores/favoritesStore";
+import { favoritesTab,addFavorite, removeFavorite, resetFavorites } from "$lib/stores/favoritesStore";
 import type { Recipe } from '$lib/types';
 
 const parseJwt = (token: string | undefined) => {
@@ -19,9 +19,19 @@ const parseJwt = (token: string | undefined) => {
 export const load: PageServerLoad = async ({ params,cookies }) => {
 	// load favorites in store if favorites tab is empty
 	// ********************************
+	console.log("Etat du store")
 	console.log(get(favoritesTab));
-	if (get(favoritesTab)==null) // si pas de favoris dans le store
+
+	const userPseudo = parseJwt(cookies.get('token'))?.iss;
+	if(!userPseudo)
 	{
+		console.log("Vidage du store car déconnecté")
+		resetFavorites();
+	}
+
+	if (get(favoritesTab)==null&&userPseudo) // si store null et un pseudo connecté
+	{
+		console.log("Remplissage du store...")
 		const favResponse = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
 			headers: {
 				Accept: 'application/json, application/xml',
