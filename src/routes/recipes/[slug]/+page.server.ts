@@ -55,10 +55,10 @@ export const actions = {
 		);
 		if (response.ok) {
 			console.log('Adding ' + recipeID + ' to favorites succeded');
-			return { status: response.status, action: 'addFavorite' };
+			return { success: true, action: 'addFavorite', isFavorite: true };
 		} else {
 			console.log('Adding ' + recipeID + ' to favorites failed : ' + response.status);
-			return { status: response.status, action: 'addFavorite' };
+			return { success: false, action: 'addFavorite', isFavorite: false };
 		}
 	},
 
@@ -81,10 +81,10 @@ export const actions = {
 
 		if (response.ok) {
 			console.log('Removing ' + recipeID + ' from favorites succeeded');
-			return { status: response.status, action: 'deleteFavorite' };
+			return { success: true, action: 'deleteFavorite', isFavorite: false };
 		} else {
 			console.log('Removing ' + recipeID + ' from favorites failed : ' + response.status);
-			return { status: response.status, action: 'deleteFavorite' };
+			return { success: false, action: 'deleteFavorite', isFavorite: true };
 		}
 	}
 } satisfies Actions;
