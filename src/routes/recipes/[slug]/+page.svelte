@@ -1,11 +1,30 @@
 <script lang="ts">
+	import "@fortawesome/fontawesome-free/css/all.min.css";
 	import { enhance } from '$app/forms';
 	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
 
-	let { data, form }: PageProps = $props();
-
+	let { data }: PageProps = $props();
 	let recipe: Recipe = data.recipe;
+	let isFavorite = $state(false);
+	isFavorite = data.isAlreadyFavorite;
+	let msg = $state('');
+
+	const parseJwt = (token: string | null) => {
+		if (!token) return null;
+		try {
+			return JSON.parse(atob(token.split('.')[1]));
+		} catch (e) {
+			return e;
+		}
+	};
+
+	let userPseudo = $state(parseJwt(data?.token)?.iss);
+
+	function changeFavorite() {
+		isFavorite = !isFavorite;
+	}
+
 </script>
 
 <svelte:head>
@@ -50,39 +69,41 @@
 			</div>
 
 			<p class="lead mt-4">{recipe.description}</p>
-			<form method="POST" use:enhance>
+			{#if userPseudo}
+			<form method="POST" use:enhance={({}) => {
+						return async ({ result }) => {
+						if (result.type === 'success') {
+							if (result.status === 200) {
+								changeFavorite();
+								if (result.data && result.data.action === 'addFavorite') {
+									msg = 'Favorite Added! 🎉';
+								} else {
+									msg = 'Favorite Removed';
+								}
+							} 
+						} else {
+							if (result.status === 401) {
+								msg = 'Unauthorized! Please log in. 🔒';
+							} else if (result.status === 403) {
+								msg = 'Forbidden! You don\'t have permission. 🚫';
+							} else if (result.status === 409) {
+								msg = 'Conflict! This favorite already exists. 🔄';
+						}
+					}
+				}}}>
 				<input type="hidden" name="recipeID" value={recipe.id} />
-				<button type="submit" class="btn btn-light" formaction="?/addFavorite">Ajouter aux Favoris ⭐</button>
-				<button type ="submit" class="btn btn-light" formaction="?/deleteFavorite">Retirer ❌</button>
+				<button 
+					type="submit" 
+					class="btn btn-light" 
+					aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+					formaction={isFavorite ? "?/deleteFavorite" : "?/addFavorite"}
+				>
+					<i class={isFavorite ? "fas fa-star" : "far fa-star"}></i>
+				</button>
 				<br /><br />
-				{#if form?.status !== undefined}
-					{#if form?.status == 200}
-						<div class="alert alert-success" role="alert">
-							{#if form?.action == 'addFavorite'}
-								<p><strong>Favorite Added! 🎉</strong></p>
-							{:else}
-								<p><strong>Favorite Removed</strong></p>
-							{/if}
-						</div>
-					{:else if form?.status == 401}
-						<div class="alert alert-danger" role="alert">
-							<p><strong>Unauthorized! Please log in. 🔒</strong></p>
-						</div>
-					{:else if form?.status == 403}
-						<div class="alert alert-warning" role="alert">
-							<p><strong>Forbidden! You don't have permission. 🚫</strong></p>
-						</div>
-					{:else if form?.status == 409}
-						<div class="alert alert-info" role="alert">
-							<p><strong>Conflict! This favorite already exists. 🔄</strong></p>
-						</div>
-					{:else}
-						<div class="alert alert-secondary" role="alert">
-							<p><strong>An unexpected error occurred. Please try again later. ⚠️</strong></p>
-						</div>
-					{/if}
-				{/if}
+				<p><strong>{msg}</strong></p>
 			</form>
+			{/if}
 		</div>
 	</div>
 

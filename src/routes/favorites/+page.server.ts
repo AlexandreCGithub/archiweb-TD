@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import type { Recipe } from '$lib/types/Recipe';
-import { error } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ cookies }) => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
@@ -9,7 +9,6 @@ export const load: PageServerLoad = async ({ cookies }) => {
 			Authorization: `Bearer ${cookies.get('token')}`
 		}
 	});
-
 	if (response.status == 401) {
 		error(401, 'Vous devez être connecté pour voir vos favoris.');
 	}
@@ -18,13 +17,14 @@ export const load: PageServerLoad = async ({ cookies }) => {
 		error(response.status, 'Une erreur est survenue lors de la récupération des favoris.');
 	}
 
-	const data = await response.json();
-	if (!data) {
-		error(500, 'Une erreur est survenue lors de la récupération des favoris.');
-	}
-	else {
+	const jsonResponse = await response.json();
+	if(jsonResponse==null)
+	{
 		return {
-			recipes: data.map((item: { recipe: Recipe }) => item.recipe)
+			recipes: [] as Recipe[]			
 		};
 	}
+	return {
+		recipes: jsonResponse.map((item: { recipe: Recipe }) => item.recipe) as Recipe[]
+	};	
 };

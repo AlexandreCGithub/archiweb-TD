@@ -4,8 +4,8 @@
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
 
 	let { data } = $props();
-
-	let recipes: Recipe[] = data?.recipes;
+	
+	let recipes: Recipe[] = data?.recipes ?? [];
 	const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 </script>
 
@@ -20,7 +20,7 @@
 		{/each}
 	{:else}
 		<div class="col-12">
-			<p class="text-center">Vous n'avez pas de favoris enregistrés.</p>
+			<p class="text-center fs-4">Vous n'avez pas de favoris enregistrés.</p>
 		</div>
 	{/if}
 </div>
