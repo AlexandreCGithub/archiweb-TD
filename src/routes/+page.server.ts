@@ -47,7 +47,7 @@ export const actions = {
 				password: password
 			})
 		});
-		let token: string;
+		let apiToken: string;
 		if (!response.ok) {
 			return fail(401, {
 				username,
@@ -57,19 +57,19 @@ export const actions = {
 			});
 		} else {
 			const responseData = await response.json();
-			token = responseData.token;
-			cookies.set('token', token, {
+			apiToken = responseData.token;
+			await cookies.set('token', apiToken, {
 				path: '/',
 				maxAge: 60 * 15,
 				httpOnly: true,
 				sameSite: 'strict'
 			});
 		}
-		return { success: true, token: token };
+		return { success: true, token: apiToken };
 	},
 
 	logout: async ({ cookies }) => {
-		cookies.set('token', '', { path: '/', maxAge: 0 });
+		await cookies.delete('token', { path: '/' });
 		return { success: true };
 	}
 } satisfies Actions;

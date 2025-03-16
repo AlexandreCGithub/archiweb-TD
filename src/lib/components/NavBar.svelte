@@ -58,9 +58,8 @@
 		const result = deserialize(await response.text());
 		if (result.type === 'success') {
 			userPseudo = '';
-			if (page.url.pathname == '/favorites') {
-				goto('/');
-			}
+			if (page.url.pathname !== '/') await goto('/');
+			window.location.reload();
 		}
 	}
 </script>
