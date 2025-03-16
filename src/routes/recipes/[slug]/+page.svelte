@@ -1,5 +1,4 @@
 <script lang="ts">
-	import "@fortawesome/fontawesome-free/css/all.min.css";
 	import { enhance } from '$app/forms';
 	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
@@ -24,7 +23,7 @@
 	function changeFavorite() {
 		isFavorite = !isFavorite;
 	}
-
+	
 </script>
 
 <svelte:head>
@@ -70,39 +69,64 @@
 
 			<p class="lead mt-4">{recipe.description}</p>
 			{#if userPseudo}
-			<form method="POST" use:enhance={({}) => {
+				<form
+					method="POST"
+					use:enhance={() => {
 						return async ({ result }) => {
-						if (result.type === 'success') {
-							if (result.status === 200) {
-								changeFavorite();
-								if (result.data && result.data.action === 'addFavorite') {
-									msg = 'Favorite Added! 🎉';
-								} else {
-									msg = 'Favorite Removed';
+							if (result.type === 'success') {
+								if (result.status === 200) {
+									changeFavorite();
+									if (result.data && result.data.action === 'addFavorite') {
+										msg = 'Favorite Added! 🎉';
+									} else {
+										msg = 'Favorite Removed';
+									}
 								}
-							} 
-						} else {
-							if (result.status === 401) {
-								msg = 'Unauthorized! Please log in. 🔒';
-							} else if (result.status === 403) {
-								msg = 'Forbidden! You don\'t have permission. 🚫';
-							} else if (result.status === 409) {
-								msg = 'Conflict! This favorite already exists. 🔄';
-						}
-					}
-				}}}>
-				<input type="hidden" name="recipeID" value={recipe.id} />
-				<button 
-					type="submit" 
-					class="btn btn-light" 
-					aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-					formaction={isFavorite ? "?/deleteFavorite" : "?/addFavorite"}
+							} else {
+								if (result.status === 401) {
+									msg = 'Unauthorized! Please log in. 🔒';
+								} else if (result.status === 403) {
+									msg = "Forbidden! You don't have permission. 🚫";
+								} else if (result.status === 409) {
+									msg = 'Conflict! This favorite already exists. 🔄';
+								}
+							}
+						};
+					}}
 				>
-					<i class={isFavorite ? "fas fa-star" : "far fa-star"}></i>
+					<input type="hidden" name="recipeID" value={recipe.id} />
+					<button
+					type="submit"
+					class="btn btn-dark"
+					aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+					formaction={isFavorite ? '?/deleteFavorite' : '?/addFavorite'}
+				>
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<i id="star" class="{isFavorite ? 'bi bi-star-fill text-danger' : 'bi bi-star'}"
+				onmouseenter={(event) => {
+					if (!isFavorite) {
+						event.currentTarget.classList.remove('bi-star');
+						event.currentTarget.classList.add('bi-star-fill', 'text-danger');
+					}
+				}}
+				onmouseout={(event) => {
+					if (!isFavorite) {
+						event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
+						event.currentTarget.classList.add('bi-star');
+					}
+				}}
+				onblur={(event) => {
+					if (!isFavorite) {
+						event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
+						event.currentTarget.classList.add('bi-star');
+					}
+				}}
+				></i>
 				</button>
-				<br /><br />
-				<p><strong>{msg}</strong></p>
-			</form>
+				
+					<br /><br />
+					<p><strong>{msg}</strong></p>
+				</form>
 			{/if}
 		</div>
 	</div>

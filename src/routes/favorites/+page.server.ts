@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import type { Recipe } from '$lib/types/Recipe';
-import { error, json } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ cookies }) => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
@@ -18,13 +18,12 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	}
 
 	const jsonResponse = await response.json();
-	if(jsonResponse==null)
-	{
+	if (jsonResponse == null) {
 		return {
-			recipes: [] as Recipe[]			
+			recipes: [] as Recipe[]
 		};
 	}
 	return {
 		recipes: jsonResponse.map((item: { recipe: Recipe }) => item.recipe) as Recipe[]
-	};	
+	};
 };

@@ -1,7 +1,12 @@
 import type { PageServerLoad, Actions } from './$types';
-import {get } from "svelte/store";
+import { get } from 'svelte/store';
 import { error } from '@sveltejs/kit';
-import { favoritesTab,addFavorite, removeFavorite, resetFavorites } from "$lib/stores/favoritesStore";
+import {
+	favoritesTab,
+	addFavorite,
+	removeFavorite,
+	resetFavorites
+} from '$lib/stores/favoritesStore';
 import type { Recipe } from '$lib/types';
 
 const parseJwt = (token: string | undefined) => {
@@ -16,46 +21,42 @@ const parseJwt = (token: string | undefined) => {
 // Pour savoir si la recette particulière de cette page est déjà favorite, on utilise un store
 // Il est rempli si le store actuel est null
 
-export const load: PageServerLoad = async ({ params,cookies }) => {
+export const load: PageServerLoad = async ({ params, cookies }) => {
 	// load favorites in store if favorites tab is empty
 	// ********************************
-	console.log("Etat du store")
+	console.log('Etat du store');
 	console.log(get(favoritesTab));
 
 	const userPseudo = parseJwt(cookies.get('token'))?.iss;
-	if(!userPseudo)
-	{
-		console.log("Vidage du store car déconnecté")
+	if (!userPseudo) {
+		console.log('Vidage du store car déconnecté');
 		resetFavorites();
 	}
 
-	if (get(favoritesTab)==null&&userPseudo) // si store null et un pseudo connecté
-	{
-		console.log("Remplissage du store...")
+	if (get(favoritesTab) == null && userPseudo) {
+		// si store null et un pseudo connecté
+		console.log('Remplissage du store...');
 		const favResponse = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
 			headers: {
 				Accept: 'application/json, application/xml',
 				Authorization: `Bearer ${cookies.get('token')}`
 			}
 		});
-		if(favResponse.ok)
-		{
+		if (favResponse.ok) {
 			const favJsonResponse = await favResponse.json();
-			if(favJsonResponse!=null)
-			{
+			if (favJsonResponse != null) {
 				favoritesTab.set([]);
-				favJsonResponse.forEach((item: { recipe: Recipe; }) => addFavorite(item.recipe.id));
-				console.log("Le store a désormais " + favJsonResponse.length + " recettes favorites");
+				favJsonResponse.forEach((item: { recipe: Recipe }) => addFavorite(item.recipe.id));
+				console.log('Le store a désormais ' + favJsonResponse.length + ' recettes favorites');
 				console.log(get(favoritesTab));
 			}
-		}
-		else
-		{
-			console.log("Les favoris n'ont pas pu être chargés dans le store, erreur " + favResponse.status);
+		} else {
+			console.log(
+				"Les favoris n'ont pas pu être chargés dans le store, erreur " + favResponse.status
+			);
 		}
 	}
 	// ********************************
-
 
 	// getting information about the recipe
 	const { slug } = params;
@@ -79,10 +80,9 @@ export const load: PageServerLoad = async ({ params,cookies }) => {
 
 	const data = await response.json();
 
-
 	return {
 		recipe: data,
-		isAlreadyFavorite : isAlreadyFavorite,
+		isAlreadyFavorite: isAlreadyFavorite
 	};
 };
 

@@ -4,7 +4,6 @@
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
 
 	let { data } = $props();
-	
 	let recipes: Recipe[] = data?.recipes ?? [];
 	const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 </script>
