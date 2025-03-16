@@ -23,7 +23,6 @@
 	function changeFavorite() {
 		isFavorite = !isFavorite;
 	}
-	
 </script>
 
 <svelte:head>
@@ -96,34 +95,36 @@
 				>
 					<input type="hidden" name="recipeID" value={recipe.id} />
 					<button
-					type="submit"
-					class="btn btn-dark"
-					aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
-					formaction={isFavorite ? '?/deleteFavorite' : '?/addFavorite'}
-				>
-				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<i id="star" class="{isFavorite ? 'bi bi-star-fill text-danger' : 'bi bi-star'}"
-				onmouseenter={(event) => {
-					if (!isFavorite) {
-						event.currentTarget.classList.remove('bi-star');
-						event.currentTarget.classList.add('bi-star-fill', 'text-danger');
-					}
-				}}
-				onmouseout={(event) => {
-					if (!isFavorite) {
-						event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
-						event.currentTarget.classList.add('bi-star');
-					}
-				}}
-				onblur={(event) => {
-					if (!isFavorite) {
-						event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
-						event.currentTarget.classList.add('bi-star');
-					}
-				}}
-				></i>
-				</button>
-				
+						type="submit"
+						class="btn btn-dark"
+						aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+						formaction={isFavorite ? '?/deleteFavorite' : '?/addFavorite'}
+					>
+						<!-- svelte-ignore a11y_no_static_element_interactions -->
+						<i
+							id="star"
+							class={isFavorite ? 'bi bi-star-fill text-danger' : 'bi bi-star'}
+							onmouseenter={(event) => {
+								if (!isFavorite) {
+									event.currentTarget.classList.remove('bi-star');
+									event.currentTarget.classList.add('bi-star-fill', 'text-danger');
+								}
+							}}
+							onmouseout={(event) => {
+								if (!isFavorite) {
+									event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
+									event.currentTarget.classList.add('bi-star');
+								}
+							}}
+							onblur={(event) => {
+								if (!isFavorite) {
+									event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
+									event.currentTarget.classList.add('bi-star');
+								}
+							}}
+						></i>
+					</button>
+
 					<br /><br />
 					<p><strong>{msg}</strong></p>
 				</form>

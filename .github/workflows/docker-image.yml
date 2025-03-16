@@ -27,7 +27,7 @@ jobs:
 
       - name: Applying linter
         run: bun lint
-        
+
       - name: Run tests
         run: bun run test
 
