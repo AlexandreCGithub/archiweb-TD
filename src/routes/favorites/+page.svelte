@@ -1,25 +1,12 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/types/Recipe';
-	import TitleBanner from '$lib/components/TitleBanner.svelte';
-	import RecipeCard from '$lib/components/RecipeCard.svelte';
+	import MainPage from '$lib/components/MainPage.svelte';
 
 	let { data } = $props();
-	let recipes: Recipe[] = data?.recipes ?? [];
-	const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
+	let dataRecipes: Recipe[] = data?.recipes;
+	let title = 'Favoris';
+	let subtitle = 'Vos plats favoris !';
+	let isPageFavorite = true;
 </script>
 
-<TitleBanner {titleData} />
-
-<div class="row">
-	{#if recipes && recipes.length > 0}
-		{#each recipes as recipe (recipe.id)}
-			{#if recipe.published}
-				<RecipeCard {recipe} />
-			{/if}
-		{/each}
-	{:else}
-		<div class="col-12">
-			<p class="text-center fs-4">Vous n'avez pas de favoris enregistrés.</p>
-		</div>
-	{/if}
-</div>
+<MainPage {title} {subtitle} {dataRecipes} {isPageFavorite} />
