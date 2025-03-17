@@ -40,7 +40,7 @@ export const actions = {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json, application/xml',
-				'Content-Type': '*/*'
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				username: username,
