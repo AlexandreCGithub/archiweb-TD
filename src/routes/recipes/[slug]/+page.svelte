@@ -37,14 +37,15 @@
 	<title>{recipe.name}</title>
 </svelte:head>
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="bg-dark p-3 rounded-3"
+<div
+	class="bg-dark p-3 rounded-3"
 	style="transition: all 0.5s"
 	onmouseenter={() => (zoomOnHover = 'scale(1.02)')}
 	style:transform={zoomOnHover}
-	onmouseleave={() => (zoomOnHover = 'scale(1)')}>
+	onmouseleave={() => (zoomOnHover = 'scale(1)')}
+>
 	<div class="row text-start mb-4">
 		<div class="col-md-4">
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<button type="button" onclick={changeModalStatus} class="p-0 border-0 bg-transparent">
 				<img src={recipe.image_url} alt={recipe.name} class="img-fluid rounded-2 shadow" />
 			</button>
@@ -160,15 +161,28 @@
 	</div>
 </div>
 {#if isModalOpen}
-	<div class="modal fade show d-block" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div
+		class="modal fade show d-block"
+		id="imagemodal"
+		tabindex="-1"
+		role="dialog"
+		aria-labelledby="myModalLabel"
+		aria-hidden="true"
+	>
 		<div class="modal-dialog modal-fullscreen">
-			<div class="modal-content">   
+			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">{recipe.name}</h5>
-					<button type="button" class="btn-close" onclick={changeModalStatus} aria-label="Close"></button>
-				</div>         
+					<button type="button" class="btn-close" onclick={changeModalStatus} aria-label="Close"
+					></button>
+				</div>
 				<div class="modal-body d-flex justify-content-center align-items-center">
-					<img src={recipe.image_url} alt={recipe.name + "preview"} class="imagepreview" style="max-width: 100%; max-height: 100vh; object-fit: contain;">
+					<img
+						src={recipe.image_url}
+						alt={recipe.name + 'preview'}
+						class="imagepreview"
+						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
+					/>
 				</div>
 			</div>
 		</div>
