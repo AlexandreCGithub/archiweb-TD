@@ -19,7 +19,7 @@ WORKDIR /app
 
 # Définition des variables d'environnement
 ENV HOST=0.0.0.0 PORT=80
-ENV ORIGIN=https://chi.cours.quimerch.com
+ENV ORIGIN=*
 ENV PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host
 # Copy only the necessary files from the builder image to the final image
 COPY --from=builder /app/build ./build
