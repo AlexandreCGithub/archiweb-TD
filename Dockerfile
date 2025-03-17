@@ -17,11 +17,11 @@ RUN bun run build
 FROM oven/bun:alpine
 WORKDIR /app
 
+# Définition des variables d'environnement
+ENV HOST=0.0.0.0 PORT=80
 # Copy only the necessary files from the builder image to the final image
 COPY --from=builder /app/build ./build
 EXPOSE 80
 
 # Lancer l'application avec Bun
-ENV HOST=0.0.0.0
-ENV PORT=80
-ENTRYPOINT ["/bin/sh", "-c", "echo HOST=$HOST PORT=$PORT && bun ./build"]
+ENTRYPOINT ["bun", "./build"]
