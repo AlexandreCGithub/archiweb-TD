@@ -88,7 +88,7 @@
 				>
 			{:else}
 				<span class="text-white me-3">Bonjour, {userPseudo}</span>
-				<form method="POST" action="?/logout" onsubmit={handleLogoutSubmit}>
+				<form method="POST" action="/?/logout" onsubmit={handleLogoutSubmit}>
 					<button type="submit" class="btn btn-outline-light">Logout</button>
 				</form>
 			{/if}
@@ -106,7 +106,7 @@
 					></button>
 				</div>
 				<div class="modal-body text-center">
-					<form method="POST" onsubmit={handleLoginSubmit} action="?/login">
+					<form method="POST" onsubmit={handleLoginSubmit} action="/?/login">
 						<div class="mb-3">
 							<label for="username" class="form-label">Nom d'utilisateur</label>
 							<input
