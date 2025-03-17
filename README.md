@@ -34,13 +34,22 @@ The app is supposed to be deployed [there](https://chi.cours.quimerch.com/)
 
 Based on the docker image published [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
 
-## 3. Pages
+## 3. Contents
+
+### Pages
 
 `/` : list of the recipes
 
 `/recipes/{id}` : description of a specific message
 
 `/favorites` : list of favorites of the connected user
+
+### Features
+
+- User can log in and log out
+- User can add and remove favorites when connected
+- User can see its own favorites if connected
+- Any one should be able to connected and the website should work
 
 ## 4. CI/CD Pipeline
 
