@@ -19,7 +19,6 @@ WORKDIR /app
 
 # Définition des variables d'environnement
 ENV HOST=0.0.0.0 PORT=80
-ENV ORIGIN=http://localhost:80
 
 # Copy only the necessary files from the builder image to the final image
 COPY --from=builder /app/build ./build
