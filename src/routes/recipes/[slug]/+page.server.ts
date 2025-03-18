@@ -84,6 +84,7 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 		recipe: data,
 		isAlreadyFavorite: isAlreadyFavorite
 	};
+
 };
 
 export const actions = {

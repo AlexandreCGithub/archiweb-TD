@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { PageProps } from './$types';
 	import type { Recipe } from '$lib/types/Recipe';
+	import { onDestroy } from 'svelte';
 
 	let { data }: PageProps = $props();
 	let recipe: Recipe = data.recipe;
@@ -31,6 +32,13 @@
 	const changeModalStatus = () => {
 		isModalOpen = isModalOpen ? false : true;
 	};
+
+	const evtSource = new EventSource("https://gourmet.cours.quimerch.com/recipes/raclt/stars");
+
+	evtSource.onmessage = function(event) {
+		console.log(event);
+	}
+
 </script>
 
 <svelte:head>
