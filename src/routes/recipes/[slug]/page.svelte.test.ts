@@ -25,7 +25,7 @@ const mockRecipe = {
 describe('/+page.svelte', () => {
 	test('renders the recipe name in the title', () => {
 		render(Page, {
-			data: { token: null, recipe: mockRecipe },
+			data: { token: null, recipe: mockRecipe, isAlreadyFavorite: false },
 			form: null
 		});
 		expect(document.title).toBe(mockRecipe.name);
@@ -33,7 +33,7 @@ describe('/+page.svelte', () => {
 
 	test('displays the recipe details correctly', () => {
 		render(Page, {
-			data: { token: null, recipe: mockRecipe },
+			data: { token: null, recipe: mockRecipe, isAlreadyFavorite: false },
 			form: null
 		});
 
@@ -50,7 +50,7 @@ describe('/+page.svelte', () => {
 
 	test('displays the recipe instructions as a list', () => {
 		render(Page, {
-			data: { token: null, recipe: mockRecipe },
+			data: { token: null, recipe: mockRecipe, isAlreadyFavorite: false },
 			form: null
 		});
 		const instructions = screen.getAllByRole('listitem');
