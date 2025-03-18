@@ -38,6 +38,7 @@
 			changeModalStatus();
 			if (result.data && typeof result.data.token === 'string') {
 				userPseudo = parseJwt(result.data.token)?.iss;
+				window.location.reload();
 			}
 		} else {
 			await applyAction(result);
@@ -131,7 +132,7 @@
 								required
 							/>
 						</div>
-						<button type="submit" class="btn btn-primary">Se connecter</button>
+						<button type="submit" class="btn btn-light">Se connecter</button>
 					</form>
 				</div>
 			</div>
