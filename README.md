@@ -1,12 +1,20 @@
 # TD-archiweb
 
-## Description
+## 1. Description
 
-Project built for the archiweb class, which is a recipes website
+Project built for the archiweb class, which is a recipes website.
 
-This project uses bun
+This project uses Svelte/Sveltekit
 
-## Local deployment
+This project uses bun as a package manager
+
+## 2. Deployment
+
+### Local deployment
+
+Download repository
+
+Install bun if needed
 
 Install dependencies:
 
@@ -22,27 +30,15 @@ bun dev
 
 Add `--open` to automatically open web browser
 
-## Online deployment
+### Online deployment
 
 The app is supposed to be deployed [there](https://chi.cours.quimerch.com/)
 
-## CI/CD
+Based on the docker image published [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
 
-CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested
+## 3. Contents
 
-They perform several tests on the app
-
-CD jobs run when a branch is merged with the `main` branch.
-It deploys a Docker image
-[online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
-
-To run tests locally:
-
-```bash
-bun run test
-```
-
-## Pages
+### Pages
 
 `/` : list of the recipes
 
@@ -50,4 +46,31 @@ bun run test
 
 `/favorites` : list of favorites of the connected user
 
-_... add more here if needed..._
+### Features
+
+- User can log in and log out
+- User can add and remove favorites when connected
+- User can see its own favorites if connected
+- Any one should be able to connected and the website should work
+
+## 4. Tests & CI/CD Pipeline
+
+This project uses a pipeline.
+
+CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested. They check the linter and perform tests on the app.
+
+CD jobs run when a branch is merged with the `main` branch, and if the CI succeeds. A branch should be merged only if CI of last commit succeeded.
+It deploys a Docker image
+[online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
+
+To format code:
+
+```bash
+bun format
+```
+
+To run tests locally:
+
+```bash
+bun run test
+```
