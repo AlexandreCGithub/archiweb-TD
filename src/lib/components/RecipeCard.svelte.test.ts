@@ -19,7 +19,7 @@ describe('RecipeCard Component', () => {
 		expect(screen.getByText(recipe.name)).toBeInTheDocument();
 	});
 
-	test('affiche correctement l\'image de la recette', () => {
+	test("affiche correctement l'image de la recette", () => {
 		render(RecipeCard, { props: { recipe } });
 
 		expect(screen.getByAltText(recipe.name)).toHaveAttribute('src', recipe.image_url);
