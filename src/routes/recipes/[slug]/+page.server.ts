@@ -3,11 +3,12 @@ import { get } from 'svelte/store';
 import { error } from '@sveltejs/kit';
 import {
 	favoritesTab,
-	addFavorite,
-	removeFavorite,
+	addFavoriteToStore,
+	removeFavoriteFromStore,
 	resetFavorites
 } from '$lib/stores/favoritesStore';
 import type { Recipe } from '$lib/types';
+import { getMyFavorites, postFavorite, deleteFavorite, getRecipe } from '$lib/api';
 
 const parseJwt = (token: string | undefined) => {
 	if (token == undefined) return undefined;
@@ -36,17 +37,12 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	if (get(favoritesTab) == null && userPseudo) {
 		// si store null et un pseudo connecté
 		console.log('Remplissage du store...');
-		const favResponse = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
-			headers: {
-				Accept: 'application/json, application/xml',
-				Authorization: `Bearer ${cookies.get('token')}`
-			}
-		});
+		const favResponse = await getMyFavorites(cookies.get('token') as string);
 		if (favResponse.ok) {
 			const favJsonResponse = await favResponse.json();
 			if (favJsonResponse != null) {
 				favoritesTab.set([]);
-				favJsonResponse.forEach((item: { recipe: Recipe }) => addFavorite(item.recipe.id));
+				favJsonResponse.forEach((item: { recipe: Recipe }) => addFavoriteToStore(item.recipe.id));
 				console.log('Le store a désormais ' + favJsonResponse.length + ' recettes favorites');
 				console.log(get(favoritesTab));
 			}
@@ -64,11 +60,7 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	const favorites = get(favoritesTab);
 	const isAlreadyFavorite = favorites ? favorites.includes(slug) : false;
 
-	const response = await fetch(`https://gourmet.cours.quimerch.com/recipes/${slug}`, {
-		headers: {
-			Accept: 'application/json, application/xml'
-		}
-	});
+	const response = await getRecipe(slug);
 
 	if (response.status == 404) {
 		error(404, `Recette ${slug} introuvable.`);
@@ -93,20 +85,14 @@ export const actions = {
 		const recipeID = formData.get('recipeID');
 		console.log('Adding ' + recipeID + ' to favorites ...');
 		const userPseudo = parseJwt(cookies.get('token'))?.iss;
-		const response = await fetch(
-			`https://gourmet.cours.quimerch.com/users/${userPseudo}/favorites?recipeID=${recipeID}`,
-			{
-				method: 'POST',
-				headers: {
-					Accept: 'application/json, application/xml',
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${cookies.get('token')}`
-				}
-			}
+		const response = await postFavorite(
+			userPseudo,
+			recipeID as string,
+			cookies.get('token') as string
 		);
 		if (response.ok) {
 			console.log('Adding ' + recipeID + ' to favorites succeded');
-			addFavorite(String(recipeID));
+			addFavoriteToStore(String(recipeID));
 			return { success: true, action: 'addFavorite', isFavorite: true };
 		} else {
 			console.log('Adding ' + recipeID + ' to favorites failed : ' + response.status);
@@ -120,20 +106,15 @@ export const actions = {
 		const recipeID = formData.get('recipeID');
 		console.log('Removing ' + recipeID + ' from favorites ...');
 		const userPseudo = parseJwt(cookies.get('token'))?.iss;
-		const response = await fetch(
-			`https://gourmet.cours.quimerch.com/users/${userPseudo}/favorites?recipeID=${recipeID}`,
-			{
-				method: 'DELETE',
-				headers: {
-					Accept: 'application/json, application/xml',
-					Authorization: `Bearer ${cookies.get('token')}`
-				}
-			}
+		const response = await deleteFavorite(
+			userPseudo,
+			recipeID as string,
+			cookies.get('token') as string
 		);
 
 		if (response.ok) {
 			console.log('Removing ' + recipeID + ' from favorites succeeded');
-			removeFavorite(String(recipeID));
+			removeFavoriteFromStore(String(recipeID));
 			return { success: true, action: 'deleteFavorite', isFavorite: false };
 		} else {
 			console.log('Removing ' + recipeID + ' from favorites failed : ' + response.status);
