@@ -1,4 +1,4 @@
-export const fetchRecipe = async (slug: string) => {
+export const getRecipe = async (slug: string) => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/recipes/${slug}`, {
 		headers: {
 			Accept: 'application/json, application/xml'
@@ -7,7 +7,7 @@ export const fetchRecipe = async (slug: string) => {
 	return response;
 };
 
-export const fetchRecipes = async () => {
+export const getRecipes = async () => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/recipes`, {
 		headers: {
 			Accept: 'application/json, application/xml'

@@ -1,14 +1,11 @@
 import type { PageServerLoad } from './$types';
 import type { Recipe } from '$lib/types/Recipe';
 import { error } from '@sveltejs/kit';
+import { getMyFavorites } from '$lib/api';
 
 export const load: PageServerLoad = async ({ cookies }) => {
-	const response = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
-		headers: {
-			Accept: 'application/json, application/xml',
-			Authorization: `Bearer ${cookies.get('token')}`
-		}
-	});
+	const token = cookies.get('token');
+	const response = await getMyFavorites(token as string);
 	if (response.status == 401) {
 		error(401, 'Vous devez être connecté pour voir vos favoris.');
 	}
