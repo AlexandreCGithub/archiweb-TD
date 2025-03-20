@@ -57,7 +57,11 @@ Based on the docker image published [online](https://hub.docker.com/repository/d
 
 This project uses a pipeline.
 
-CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested. They check the linter and perform tests on the app.
+CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested. They check :
+
+- project configuration
+- the linter
+- perform tests on the app
 
 CD jobs run when a branch is merged with the `main` branch, and if the CI succeeds. A branch should be merged only if CI of last commit succeeded.
 It deploys a Docker image
