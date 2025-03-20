@@ -1,12 +1,9 @@
 import type { PageServerLoad } from './$types';
 import { type Actions, fail } from '@sveltejs/kit';
+import { getRecipes, postLogin } from '$lib/api';
 
 export const load: PageServerLoad = async () => {
-	const response = await fetch('https://gourmet.cours.quimerch.com/recipes', {
-		headers: {
-			Accept: 'application/json, application/xml'
-		}
-	});
+	const response = await getRecipes();
 
 	if (!response.ok) {
 		return fail(500, { success: false, message: 'Something has gone wrong!' });
@@ -36,17 +33,7 @@ export const actions = {
 			});
 		}
 
-		const response = await fetch('https://gourmet.cours.quimerch.com/login', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json, application/xml',
-				'Content-Type': '*/*'
-			},
-			body: JSON.stringify({
-				username: username,
-				password: password
-			})
-		});
+		const response = await postLogin(username as string, password as string);
 		let apiToken: string;
 		if (!response.ok) {
 			return fail(401, {

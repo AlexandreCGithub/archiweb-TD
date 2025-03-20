@@ -1,4 +1,4 @@
-export const fetchMyFavorites = async (token: string) => {
+export const getMyFavorites = async (token: string) => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
 		headers: {
 			Accept: 'application/json, application/xml',
@@ -8,9 +8,9 @@ export const fetchMyFavorites = async (token: string) => {
 	return response;
 };
 
-export const addAFavorite = async (userPseudo: string, recipeID: string, token: string) => {
+export const postFavorite = async (username: string, recipeID: string, token: string) => {
 	const response = await fetch(
-		`https://gourmet.cours.quimerch.com/users/${userPseudo}/favorites?recipeID=${recipeID}`,
+		`https://gourmet.cours.quimerch.com/users/${username}/favorites?recipeID=${recipeID}`,
 		{
 			method: 'POST',
 			headers: {
@@ -23,9 +23,9 @@ export const addAFavorite = async (userPseudo: string, recipeID: string, token: 
 	return response;
 };
 
-export const deleteAFavorite = async (userPseudo: string, recipeID: string, token: string) => {
+export const deleteFavorite = async (username: string, recipeID: string, token: string) => {
 	const response = await fetch(
-		`https://gourmet.cours.quimerch.com/users/${userPseudo}/favorites?recipeID=${recipeID}`,
+		`https://gourmet.cours.quimerch.com/users/${username}/favorites?recipeID=${recipeID}`,
 		{
 			method: 'DELETE',
 			headers: {
