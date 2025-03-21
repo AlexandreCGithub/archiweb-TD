@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { applyAction, deserialize } from '$app/forms';
-	import { searchValue } from '$lib/stores/search';
+	import searchValue from '$lib/stores/search';
+	import darkMode from '$lib/stores/darkMode';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 
@@ -20,6 +21,14 @@
 	let isModalOpen = $state(false);
 	const changeModalStatus = () => {
 		isModalOpen = isModalOpen ? false : true;
+	};
+
+	const changeDarkMode = () => {
+		if ($darkMode === 'true') {
+			darkMode.set('false');
+		} else {
+			darkMode.set('true');
+		}
 	};
 
 	async function handleLoginSubmit(
@@ -65,37 +74,78 @@
 	}
 </script>
 
-<nav class="container py-3 px-0 mx-auto text-center">
-	<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-		<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="/" class="nav-link px-2 text-white">Accueil</a></li>
-			{#if userPseudo}
-				<li><a href="/favorites" class="nav-link px-2 text-white">Favoris ⭐</a></li>
-			{/if}
-		</ul>
-		<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-			<input
-				type="search"
-				class="form-control form-control-dark text-bg-dark"
-				placeholder="Rechercher..."
-				aria-label="Rechercher"
-				bind:value={$searchValue}
-			/>
-		</form>
-		<div class="text-end d-flex align-items-center">
-			{#if !userPseudo}
-				<button type="button" class="btn btn-outline-light me-2" onclick={changeModalStatus}
-					>Se connecter</button
-				>
-			{:else}
-				<span class="text-white me-3">Bonjour, {userPseudo}</span>
-				<form method="POST" action="/?/logout" onsubmit={handleLogoutSubmit}>
-					<button type="submit" class="btn btn-outline-light">Logout</button>
-				</form>
-			{/if}
+<div class="container py-md-3 py-sm-0 px-0 mx-auto text-center">
+	<nav class="navbar navbar-expand-sm">
+		<!-- Bouton de menu rétractable -->
+		<button
+			class="navbar-toggler ms-3"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarNav"
+			aria-controls="navbarNav"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Contenu de la navbar -->
+		<div class="collapse navbar-collapse mx-0" id="navbarNav">
+			<ul class="navbar-nav me-auto mb-0">
+				<li class="nav-item me-3">
+					<a href="/" class="nav-link text-white p-0 fix-white-color">Accueil</a>
+				</li>
+				{#if userPseudo}
+					<li class="nav-item">
+						<a href="/favorites" class="nav-link text-white p-0 fix-white-color">Favoris ⭐</a>
+					</li>
+				{/if}
+			</ul>
+
+			<form class="d-flex me-3 mb-0" role="search">
+				<input
+					type="search"
+					class="form-control form-control-dark text-bg-dark"
+					placeholder="Rechercher..."
+					aria-label="Rechercher"
+					bind:value={$searchValue}
+				/>
+			</form>
+
+			<div class="d-flex align-items-center">
+				{#if !userPseudo}
+					<button type="button" class="btn btn-outline-light me-3" onclick={changeModalStatus}>
+						Se connecter
+					</button>
+				{:else}
+					<span class="text-white me-3 fix-white-color">Bonjour, {userPseudo}</span>
+					<form method="POST" action="/?/logout" onsubmit={handleLogoutSubmit}>
+						<button type="submit" class="btn btn-outline-light me-3">Logout</button>
+					</form>
+				{/if}
+				{#if $darkMode}
+					<button
+						type="button"
+						class="btn btn-outline-light me-0"
+						onclick={changeDarkMode}
+						aria-label="Changer de thème"
+					>
+						<i class="bi bi-brightness-high"></i>
+					</button>
+				{:else}
+					<button
+						type="button"
+						class="btn btn-outline-light me-0"
+						onclick={changeDarkMode}
+						aria-label="Changer de thème"
+					>
+						<i class="bi bi-moon"></i>
+					</button>
+				{/if}
+			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
+</div>
 
 {#if isModalOpen}
 	<div class="modal fade show d-block" tabindex="-1" style="display: block;">
@@ -132,7 +182,7 @@
 								required
 							/>
 						</div>
-						<button type="submit" class="btn btn-light">Se connecter</button>
+						<button type="submit" class="btn btn-outline-light">Se connecter</button>
 					</form>
 				</div>
 			</div>
@@ -145,12 +195,3 @@
 		aria-label="Close modal"
 	></button>
 {/if}
-
-<style>
-	.form-control:focus {
-		border-color: #000000;
-		box-shadow:
-			inset 0 1px 1px rgba(0, 0, 0, 0.075),
-			0 0 8px rgba(255, 255, 255, 0.6);
-	}
-</style>
