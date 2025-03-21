@@ -106,19 +106,6 @@
 							if (result.type === 'success') {
 								if (result.status === 200) {
 									changeFavorite();
-									if (result.data && result.data.action === 'addFavorite') {
-										msg = 'Favorite Added! 🎉';
-									} else {
-										msg = 'Favorite Removed';
-									}
-								}
-							} else {
-								if (result.status === 401) {
-									msg = 'Unauthorized! Please log in. 🔒';
-								} else if (result.status === 403) {
-									msg = "Forbidden! You don't have permission. 🚫";
-								} else if (result.status === 409) {
-									msg = 'Conflict! This favorite already exists. 🔄';
 								}
 							}
 						};
