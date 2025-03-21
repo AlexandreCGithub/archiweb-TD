@@ -10,7 +10,13 @@
 		subtitle,
 		dataRecipes,
 		isPageFavorite
-	}: { pageTitle: string, title: string; subtitle: string; dataRecipes: Recipe[]; isPageFavorite: boolean } = $props();
+	}: {
+		pageTitle: string;
+		title: string;
+		subtitle: string;
+		dataRecipes: Recipe[];
+		isPageFavorite: boolean;
+	} = $props();
 	let recipes: Recipe[] = dataRecipes;
 
 	function removeAccents(str: string): string {

@@ -23,7 +23,6 @@ const parseJwt = (token: string | undefined) => {
 // Il est rempli si le store actuel est null
 
 export const load: PageServerLoad = async ({ params, cookies }) => {
-
 	const userPseudo = parseJwt(cookies.get('token'))?.iss;
 	if (!userPseudo) {
 		resetFavorites();
