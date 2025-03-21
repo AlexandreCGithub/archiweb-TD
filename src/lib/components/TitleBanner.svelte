@@ -15,6 +15,6 @@
 	style:transform={transform_title}
 	onmouseleave={() => (transform_title = 'scale(1)')}
 >
-	<h1 class="text-body-emphasis">{title}</h1>
-	<h2 class="fw-normal">{subtitle}</h2>
+	<h1 class="fix-white-color">{title}</h1>
+	<h2 class="fw-normal fix-white-color">{subtitle}</h2>
 </div>

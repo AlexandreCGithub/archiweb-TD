@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/types/Recipe';
-	import { searchValue } from '$lib/stores/search';
+	import searchValue from '$lib/stores/search';
 	import TitleBanner from '$lib/components/TitleBanner.svelte';
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
 

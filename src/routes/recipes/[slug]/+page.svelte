@@ -115,7 +115,7 @@
 					<div class="align-items-bottom">
 						<button
 							type="submit"
-							class="btn btn-dark"
+							class="btn btn-outline-light"
 							aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
 							formaction={isFavorite ? '?/deleteFavorite' : '?/addFavorite'}
 						>
