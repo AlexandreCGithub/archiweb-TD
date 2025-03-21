@@ -5,11 +5,18 @@
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
 
 	let {
+		pageTitle,
 		title,
 		subtitle,
 		dataRecipes,
 		isPageFavorite
-	}: { title: string; subtitle: string; dataRecipes: Recipe[]; isPageFavorite: boolean } = $props();
+	}: {
+		pageTitle: string;
+		title: string;
+		subtitle: string;
+		dataRecipes: Recipe[];
+		isPageFavorite: boolean;
+	} = $props();
 	let recipes: Recipe[] = dataRecipes;
 
 	function removeAccents(str: string): string {
@@ -25,6 +32,10 @@
 	});
 	const titleData = { title: title, subtitle: subtitle };
 </script>
+
+<svelte:head>
+	<title>{pageTitle}</title>
+</svelte:head>
 
 <TitleBanner {titleData} />
 
