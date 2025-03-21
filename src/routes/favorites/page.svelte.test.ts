@@ -6,9 +6,11 @@ describe('MainPage - Texte Favoris', () => {
 	test('affiche le titre et le sous-titre correctement', () => {
 		const title = 'Favoris';
 		const subtitle = 'Vos plats favoris !';
-
+		const pageTitle = 'Favoris';
 		// Rendu du composant avec les props appropriées
-		render(MainPage, { props: { title, subtitle, dataRecipes: [], isPageFavorite: true } });
+		render(MainPage, {
+			props: { pageTitle, title, subtitle, dataRecipes: [], isPageFavorite: true }
+		});
 
 		// Vérifier que le titre est présent
 		expect(screen.getByText(title)).toBeInTheDocument();
