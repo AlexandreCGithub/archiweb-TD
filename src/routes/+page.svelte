@@ -7,6 +7,7 @@
 	let title = 'Marmitron';
 	let subtitle = 'Découvrez nos recettes';
 	let isPageFavorite = false;
+	let pageTitle = 'Accueil';
 </script>
 
-<MainPage {title} {subtitle} {dataRecipes} {isPageFavorite} />
+<MainPage {pageTitle} {title} {subtitle} {dataRecipes} {isPageFavorite} />

@@ -7,6 +7,7 @@
 	let title = 'Favoris';
 	let subtitle = 'Vos plats favoris !';
 	let isPageFavorite = true;
+	let pageTitle = 'Favoris';
 </script>
 
-<MainPage {title} {subtitle} {dataRecipes} {isPageFavorite} />
+<MainPage {pageTitle} {title} {subtitle} {dataRecipes} {isPageFavorite} />
