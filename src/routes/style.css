@@ -1,0 +1,73 @@
+:root {
+	--dark-mode: #212529;
+	--light-mode: #f8f9fa;
+	--dark-mode-rgb: 33, 37, 41;
+	--light-mode-rgb: 248, 249, 250;
+	--light-secondary-mode: #6c757d;
+	--invert-close-icon: invert(1);
+	--grayscale-close-icon: grayscale(100%);
+	--opacity-close-icon: 0.5;
+}
+:global(body) {
+	color: var(--light-mode);
+	--bs-white-rgb: var(--light-mode-rgb);
+	--bs-light-rgb: var(--light-mode-rgb);
+	--bs-dark-rgb: var(--dark-mode-rgb);
+	--bs-emphasis-color: var(--light-mode);
+	--bs-heading-color: var(--light-mode);
+	--bs-modal-color: var(--dark-mode);
+	--bs-border-color: var(--light-mode);
+	--bs-body-color: var(--light-mode);
+	--bs-secondary-color: var(--light-secondary-mode);
+	--bs-body-bg: var(--dark-mode);
+}
+
+:global(.btn) {
+	--bs-btn-bg: var(--dark-mode);
+	background-color: var(--bs-btn-bg);
+}
+
+:global(.btn-close) {
+	--bs-btn-close-white-filter: var(--invert-close-icon) var(--grayscale-close-icon) brightness(200%);
+	--bs-btn-close-opacity: var(--opacity-close-icon);
+}
+:global(.btn-outline-light) {
+	--bs-btn-color: var(--light-mode);
+	--bs-btn-border-color: var(--light-mode);
+	--bs-btn-hover-color: var(--dark-mode);
+	--bs-btn-hover-bg: var(--light-mode);
+	--bs-btn-hover-border-color: var(--dark-mode);
+	--bs-btn-focus-shadow-rgb: var(--light-mode);
+	--bs-btn-active-color: var(--dark-mode);
+	--bs-btn-active-bg: var(--light-mode);
+	--bs-btn-active-border-color: var(--dark-mode);
+	--bs-btn-disabled-color: var(--dark-mode);
+	--bs-btn-disabled-border-color: var(--dark-mode);
+}
+:global(.text-bg-light) {
+	color: var(--dark-mode) !important;
+}
+:global(.text-bg-dark) {
+	color: var(--light-mode) !important;
+}
+
+:global(.form-control:focus) {
+	border-color: var(--light-mode);
+	box-shadow:
+		inset 0 1px 1px rgba(0, 0, 0, 0.075),
+		0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+:global(.modal) {
+	--bs-modal-color: var(--light-mode);
+	--bs-modal-bg: var(--dark-mode);
+}
+
+:global(.modal-content) {
+	background-color: var(--dark-mode);
+	--bs-body-bg: var(--dark-mode);
+}
+
+:global(.fix-white-color) {
+	color: #f8f9fa !important;
+}
