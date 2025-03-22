@@ -80,6 +80,8 @@ To run tests locally:
 bun run test
 ```
 
-## 5. CO2 emissions and Green IT
+## 5. Performance optimisations
+
+## 6. CO2 emissions and Green IT
 
 Link here
