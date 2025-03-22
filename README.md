@@ -51,11 +51,12 @@ Based on the docker image published [online](https://hub.docker.com/repository/d
 - User can log in and log out
 - User can add and remove favorites when connected
 - User can see its own favorites if connected
+- User can see the number of favorites a recipe has
 - Any one should be able to connected and the website should work
 
-## 4. Tests & CI/CD Pipeline
+## 4. Tests, CI/CD Pipeline & Good practices
 
-This project uses a pipeline.
+This project is developped using branches & pull requests and uses a pipeline.
 
 CI jobs run each time there is an update on a branch with a pull request. If a pull request is created on an already existing branch with several commits, the last one is tested. They check :
 
@@ -78,3 +79,9 @@ To run tests locally:
 ```bash
 bun run test
 ```
+
+## 5. Performance optimisations
+
+## 6. CO2 emissions and Green IT
+
+Link here
