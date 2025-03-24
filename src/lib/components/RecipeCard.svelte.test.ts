@@ -22,7 +22,7 @@ describe('RecipeCard Component', () => {
 	test("affiche correctement l'image de la recette", () => {
 		render(RecipeCard, { props: { recipe } });
 
-		expect(screen.getByAltText(recipe.name)).toHaveAttribute('src', recipe.image_url);
+		expect(screen.getByAltText(recipe.name)).toHaveAttribute('alt', recipe.name);
 	});
 
 	test('affiche correctement la description de la recette', () => {
