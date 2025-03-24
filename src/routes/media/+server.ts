@@ -1,7 +1,7 @@
 export async function GET({ url }) {
 	const imageUrl = url.searchParams.get('src');
 	if (!imageUrl) {
-		return new Response(imageUrl, { 
+		return new Response(imageUrl, {
 			status: 200,
 			headers: {
 				'Content-Type': 'application/octet-stream',
@@ -12,7 +12,7 @@ export async function GET({ url }) {
 
 	const response = await fetch(imageUrl);
 	if (!response.ok) {
-		return new Response(imageUrl, { 
+		return new Response(imageUrl, {
 			status: 200,
 			headers: {
 				'Content-Type': 'application/octet-stream',
