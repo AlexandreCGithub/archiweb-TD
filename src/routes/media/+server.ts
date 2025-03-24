@@ -1,11 +1,13 @@
-import { error } from '@sveltejs/kit';
-
 export async function GET({ url }) {
 	const imageUrl = url.searchParams.get('src');
-	if (!imageUrl) throw error(400, 'Missing image URL');
+	if (!imageUrl) {
+		return new Response(imageUrl, { status: 200 });
+	}
 
 	const response = await fetch(imageUrl);
-	if (!response.ok) throw error(500, 'Error fetching image');
+	if (!response.ok) {
+		return new Response(imageUrl, { status: 200 });
+	}
 
 	return new Response(response.body, {
 		headers: {
