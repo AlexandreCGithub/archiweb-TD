@@ -1,10 +1,12 @@
 import { describe, test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/svelte';
 import TitleBanner from '$lib/components/TitleBanner.svelte';
+import homeImg from '$lib/images/home.png';
+import type { TitleData } from '$lib/types/TitleData';
 
 describe('TitleBanner Component', () => {
 	test('affiche correctement le titre et le sous-titre', () => {
-		const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
+		const titleData: TitleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 
 		render(TitleBanner, { props: { titleData } });
 
@@ -13,7 +15,7 @@ describe('TitleBanner Component', () => {
 	});
 
 	test('Mouvement quand hover', async () => {
-		const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
+		const titleData: TitleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 		const { container } = render(TitleBanner, { props: { titleData } });
 
 		const div = container.querySelector('div');
@@ -34,6 +36,6 @@ describe('TitleBanner Component', () => {
 		const { container } = render(TitleBanner, { props: { titleData } });
 
 		const div = container.querySelector('div');
-		expect(div).toHaveStyle('background: url("/home.png") center/cover no-repeat');
+		expect(div).toHaveStyle('background: url(' + homeImg + ') center/cover no-repeat');
 	});
 });
