@@ -3,6 +3,7 @@
 	import searchValue from '$lib/stores/search';
 	import TitleBanner from '$lib/components/TitleBanner.svelte';
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
+	import type { TitleData } from '$lib/types/TitleData';
 
 	let {
 		pageTitle,
@@ -30,7 +31,7 @@
 			removeAccents(recipe.name.toLowerCase()).includes(removeAccents($searchValue.toLowerCase()))
 		);
 	});
-	const titleData = { title: title, subtitle: subtitle };
+	const titleData: TitleData = { title: title, subtitle: subtitle };
 </script>
 
 <svelte:head>

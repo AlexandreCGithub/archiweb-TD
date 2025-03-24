@@ -63,7 +63,12 @@
 	<div class="row text-start mb-4">
 		<div class="col-md-4">
 			<button type="button" onclick={changeModalStatus} class="p-0 border-0 bg-transparent">
-				<img src={recipe.image_url} alt={recipe.name} class="img-fluid rounded-2 shadow" />
+				<img
+					src={recipe.image_url}
+					alt={recipe.name}
+					class="img-fluid rounded-2 shadow"
+					loading="lazy"
+				/>
 			</button>
 		</div>
 		<div class="col-md-8 d-flex flex-column justify-content-center">
@@ -194,6 +199,7 @@
 						alt={recipe.name + 'preview'}
 						class="imagepreview"
 						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
+						loading="lazy"
 					/>
 				</div>
 			</div>

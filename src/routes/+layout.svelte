@@ -5,6 +5,8 @@
 	import Footbar from '$lib/components/FootBar.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
 	import darkMode from '$lib/stores/darkMode';
+	import homeImg from '$lib/images/home.png';
+
 	let { data, children } = $props();
 
 	$effect(() => {
@@ -39,7 +41,7 @@
 <!-- Image de fond avec flou -->
 <div
 	class="position-fixed top-0 start-0 w-100 h-100 z-n1"
-	style="background: url('/home.png') center/cover no-repeat; filter: blur(10px);"
+	style="background: url('{homeImg}') center/cover no-repeat; filter: blur(10px);"
 ></div>
 <main class="container py-1 px-0 mx-auto text-center">
 	{@render children()}
