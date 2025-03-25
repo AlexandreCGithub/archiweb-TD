@@ -19,7 +19,6 @@
 				class="card-img-top"
 				alt={recipe.name}
 				style="object-fit: cover; height: 200px"
-				loading="lazy"
 				onerror={(event) => {
 					const target = event.target as HTMLImageElement;
 					target.onerror = null;

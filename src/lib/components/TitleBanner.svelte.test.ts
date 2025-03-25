@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/svelte';
 import TitleBanner from '$lib/components/TitleBanner.svelte';
-import homeImg from '$lib/images/home.png';
+import homeImg from '$lib/images/home.webp';
 import type { TitleData } from '$lib/types/TitleData';
 
 describe('TitleBanner Component', () => {

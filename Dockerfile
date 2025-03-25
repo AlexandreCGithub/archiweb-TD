@@ -15,6 +15,7 @@ RUN bun run build
 
 # Étape 2 : Run de l'application
 FROM oven/bun:alpine
+RUN apk add vips-dev
 WORKDIR /app
 
 # Définition des variables d'environnement
