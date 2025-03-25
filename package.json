@@ -44,8 +44,6 @@
 		"@popperjs/core": "^2.11.8",
 		"bootstrap": "^5.3.3",
 		"bootstrap-icons": "^1.11.3",
-		"sass": "^1.85.1",
-		"sharp": "^0.33.5",
-		"vite-plugin-node-polyfills": "^0.23.0"
+		"sass": "^1.85.1"
 	}
 }
