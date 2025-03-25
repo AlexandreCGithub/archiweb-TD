@@ -194,7 +194,7 @@
 					></button>
 				</div>
 				<div class="modal-body d-flex justify-content-center align-items-center">
-					<enhanced:img
+					<img
 						src={recipe.image_url}
 						alt={recipe.name + 'preview'}
 						class="imagepreview"
