@@ -64,10 +64,14 @@
 		<div class="col-md-4">
 			<button type="button" onclick={changeModalStatus} class="p-0 border-0 bg-transparent">
 				<img
-					src={recipe.image_url}
-					alt={recipe.name}
+					src="/media?src={recipe.image_url}"
 					class="img-fluid rounded-2 shadow"
-					loading="lazy"
+					alt={recipe.name}
+					onerror={(event) => {
+						const target = event.target as HTMLImageElement;
+						target.onerror = null;
+						target.src = recipe.image_url;
+					}}
 				/>
 			</button>
 		</div>
@@ -195,11 +199,15 @@
 				</div>
 				<div class="modal-body d-flex justify-content-center align-items-center">
 					<img
-						src={recipe.image_url}
+						src="/media?src={recipe.image_url}"
 						alt={recipe.name + 'preview'}
 						class="imagepreview"
 						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
-						loading="lazy"
+						onerror={(event) => {
+							const target = event.target as HTMLImageElement;
+							target.onerror = null;
+							target.src = recipe.image_url;
+						}}
 					/>
 				</div>
 			</div>

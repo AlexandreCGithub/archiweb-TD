@@ -6,7 +6,7 @@
 	import NavBar from '$lib/components/NavBar.svelte';
 	import darkMode from '$lib/stores/darkMode';
 	import homeImg from '$lib/images/home.webp';
-	import iconImg from '$lib/images/favicon.png';
+	import favicon from '$lib/images/favicon.png';
 
 	let { data, children } = $props();
 
@@ -32,7 +32,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={iconImg} />
+	<link rel="icon" href={favicon} />
 	<script src={scriptSrc}></script>
 </svelte:head>
 

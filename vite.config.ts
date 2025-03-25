@@ -35,7 +35,7 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				manualChunks: () => {
-					return 'my-app';
+					return 'general';
 				}
 			}
 		}
