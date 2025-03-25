@@ -15,15 +15,10 @@
 			style:transform
 		>
 			<img
-				src="/media?src={recipe.image_url}"
+				src={recipe.image_url}
 				class="card-img-top"
 				alt={recipe.name}
 				style="object-fit: cover; height: 200px"
-				onerror={(event) => {
-					const target = event.target as HTMLImageElement;
-					target.onerror = null;
-					target.src = recipe.image_url;
-				}}
 			/>
 			<div class="card-body text-start">
 				<div class="d-flex justify-content-between align-items-start">
