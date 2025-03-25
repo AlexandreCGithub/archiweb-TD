@@ -68,7 +68,7 @@
 				class="p-0 border-0 bg-transparent"
 				aria-label="Open image modal"
 			>
-				<enhanced:img src={recipe.image_url} class="img-fluid rounded-2 shadow" alt={recipe.name} />
+				<img src={recipe.image_url} class="img-fluid rounded-2 shadow" alt={recipe.name} />
 			</button>
 		</div>
 		<div class="col-md-8 d-flex flex-column justify-content-center">

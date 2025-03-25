@@ -14,7 +14,7 @@
 			style="transition: all 0.5s"
 			style:transform
 		>
-			<enhanced:img
+			<img
 				src={recipe.image_url}
 				class="card-img-top"
 				alt={recipe.name}
