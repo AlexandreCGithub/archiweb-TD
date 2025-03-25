@@ -15,7 +15,7 @@
 			style:transform
 		>
 			<img
-				src="/media?src={recipe.image_url}"
+				src={recipe.image_url}
 				class="card-img-top"
 				alt={recipe.name}
 				style="object-fit: cover; height: 200px"

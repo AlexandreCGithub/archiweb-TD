@@ -1,5 +1,5 @@
 <script lang="ts">
-	import homeImg from '$lib/images/home.png';
+	import homeImg from '$lib/images/home.webp';
 	import type { TitleData } from '$lib/types/TitleData';
 
 	let { titleData }: { titleData: TitleData } = $props();
