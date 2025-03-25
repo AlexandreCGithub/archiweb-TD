@@ -4,7 +4,7 @@ export async function GET({ url }) {
 
 	return new Response(response.body, {
 		headers: {
-			'Content-Type': 'image/webp',
+			'Content-Type': response.headers.get('Content-Type') || 'application/octet-stream',
 			'Cache-Control': 'max-age=86400'
 		}
 	});
