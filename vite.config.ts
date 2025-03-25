@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vite';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 
 export default defineConfig({
 	plugins: [sveltekit()],
@@ -8,7 +9,7 @@ export default defineConfig({
 		workspace: [
 			{
 				extends: './vite.config.ts',
-				plugins: [svelteTesting()],
+				plugins: [svelteTesting(), enhancedImages()],
 
 				test: {
 					name: 'client',
