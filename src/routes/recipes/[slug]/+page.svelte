@@ -62,17 +62,13 @@
 >
 	<div class="row text-start mb-4">
 		<div class="col-md-4">
-			<button type="button" onclick={changeModalStatus} class="p-0 border-0 bg-transparent">
-				<img
-					src="/media?src={recipe.image_url}"
-					class="img-fluid rounded-2 shadow"
-					alt={recipe.name}
-					onerror={(event) => {
-						const target = event.target as HTMLImageElement;
-						target.onerror = null;
-						target.src = recipe.image_url;
-					}}
-				/>
+			<button
+				type="button"
+				onclick={changeModalStatus}
+				class="p-0 border-0 bg-transparent"
+				aria-label="Open image modal"
+			>
+				<img src={recipe.image_url} class="img-fluid rounded-2 shadow" alt={recipe.name} />
 			</button>
 		</div>
 		<div class="col-md-8 d-flex flex-column justify-content-center">
@@ -199,15 +195,10 @@
 				</div>
 				<div class="modal-body d-flex justify-content-center align-items-center">
 					<img
-						src="/media?src={recipe.image_url}"
+						src={recipe.image_url}
 						alt={recipe.name + 'preview'}
 						class="imagepreview"
 						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
-						onerror={(event) => {
-							const target = event.target as HTMLImageElement;
-							target.onerror = null;
-							target.src = recipe.image_url;
-						}}
 					/>
 				</div>
 			</div>

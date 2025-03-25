@@ -36,6 +36,6 @@ describe('TitleBanner Component', () => {
 		const { container } = render(TitleBanner, { props: { titleData } });
 
 		const div = container.querySelector('div');
-		expect(div).toHaveStyle('background: url(' + homeImg + ') center/cover no-repeat');
+		expect(div).toHaveStyle('background: url(' + homeImg + ') center no-repeat');
 	});
 });

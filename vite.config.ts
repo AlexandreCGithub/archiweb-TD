@@ -30,14 +30,5 @@ export default defineConfig({
 				}
 			}
 		]
-	},
-	build: {
-		rollupOptions: {
-			output: {
-				manualChunks: () => {
-					return 'general';
-				}
-			}
-		}
 	}
 });
