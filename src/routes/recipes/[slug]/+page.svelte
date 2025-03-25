@@ -67,7 +67,6 @@
 					src="/media?src={recipe.image_url}"
 					class="img-fluid rounded-2 shadow"
 					alt={recipe.name}
-					loading="lazy"
 					onerror={(event) => {
 						const target = event.target as HTMLImageElement;
 						target.onerror = null;
@@ -204,7 +203,6 @@
 						alt={recipe.name + 'preview'}
 						class="imagepreview"
 						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
-						loading="lazy"
 						onerror={(event) => {
 							const target = event.target as HTMLImageElement;
 							target.onerror = null;
