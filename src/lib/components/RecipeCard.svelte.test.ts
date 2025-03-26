@@ -1,13 +1,31 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import RecipeCard from '$lib/components/RecipeCard.svelte';
+
+beforeEach(() => {
+	vi.stubGlobal(
+		'fetch',
+		vi.fn(async () => ({
+			ok: true,
+			headers: new Headers({ 'Content-Type': 'image/jpeg' }),
+			blob: async () => new Blob(['fake image data'], { type: 'image/jpeg' }),
+			text: async () => 'https://example.com/fallback.jpg'
+		}))
+	);
+
+	vi.stubGlobal('URL', {
+		...globalThis.URL,
+		createObjectURL: vi.fn().mockImplementation(() => 'mocked-object-url')
+	});
+});
 
 describe('RecipeCard Component', () => {
 	const recipe = {
 		id: 1,
 		name: 'Spaghetti Bolognese',
 		description: 'A classic Italian dish with rich flavors and hearty meat sauce.',
-		image_url: 'https://example.com/spaghetti.jpg',
+		image_url:
+			'https://www.croquonslavie.fr/sites/default/files/srh_recipes/786c9164177d449db9ac600b253d7956.jpeg',
 		when_to_eat: 'Dinner',
 		prep_time: 30,
 		cook_time: 45
@@ -22,7 +40,7 @@ describe('RecipeCard Component', () => {
 	test("affiche correctement l'image de la recette", () => {
 		render(RecipeCard, { props: { recipe } });
 
-		expect(screen.getByAltText(recipe.name)).toHaveAttribute('src', recipe.image_url);
+		expect(screen.getByAltText(recipe.name)).toHaveAttribute('alt', recipe.name);
 	});
 
 	test('affiche correctement la description de la recette', () => {

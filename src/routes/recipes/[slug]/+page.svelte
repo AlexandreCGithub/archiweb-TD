@@ -9,6 +9,23 @@
 	let recipe: Recipe = data.recipe;
 	let favoritecount = $state('');
 
+	let imgAssessment = $state(true);
+	let imgSrc = $state(recipe.image_url);
+
+	onMount(async () => {
+		const response = await fetch('/media?src=' + recipe.image_url);
+		if (!response.ok) {
+			throw new Error(`Erreur HTTP: ${response.status}`);
+		}
+
+		if (response.headers.get('content-type') === 'text/plain') {
+			imgAssessment = false;
+			return;
+		}
+		const blob = await response.blob();
+		imgSrc = URL.createObjectURL(blob);
+	});
+
 	onMount(() => {
 		const hr = source(`https://gourmet.cours.quimerch.com/recipes/${recipe.id}/stars`, {
 			options: {
@@ -63,7 +80,11 @@
 	<div class="row text-start mb-4">
 		<div class="col-md-4">
 			<button type="button" onclick={changeModalStatus} class="p-0 border-0 bg-transparent">
-				<img src={recipe.image_url} alt={recipe.name} class="img-fluid rounded-2 shadow" />
+				{#if imgAssessment}
+					<img src={imgSrc} class="img-fluid rounded-2 shadow" alt={recipe.name} />
+				{:else}
+					<img src={recipe.image_url} class="img-fluid rounded-2 shadow" alt={recipe.name} />
+				{/if}
 			</button>
 		</div>
 		<div class="col-md-8 d-flex flex-column justify-content-center">
@@ -195,12 +216,21 @@
 					></button>
 				</div>
 				<div class="modal-body d-flex justify-content-center align-items-center">
-					<img
-						src={recipe.image_url}
-						alt={recipe.name + 'preview'}
-						class="imagepreview"
-						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
-					/>
+					{#if imgAssessment}
+						<img
+							src={imgSrc}
+							class="imagepreview"
+							style="max-width: 100%; max-height: 100vh; object-fit: contain;"
+							alt={recipe.name}
+						/>
+					{:else}
+						<img
+							src={recipe.image_url}
+							class="imagepreview"
+							style="max-width: 100%; max-height: 100vh; object-fit: contain;"
+							alt={recipe.name}
+						/>
+					{/if}
 				</div>
 			</div>
 		</div>
