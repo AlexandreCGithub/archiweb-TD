@@ -99,7 +99,11 @@
 
 			<p class="lead mt-4">{recipe.description}</p>
 			{#if favoritecount != ''}
-				<p>{favoritecount} ⭐ for this recipe !</p>
+				{#if favoritecount == '0'}
+					<p>No ⭐ for this recipe 😞</p>
+				{:else}
+					<p>{favoritecount} ⭐ for this recipe !</p>
+				{/if}
 			{/if}
 			{#if userPseudo}
 				<form
