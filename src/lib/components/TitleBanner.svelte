@@ -1,4 +1,5 @@
 <script lang="ts">
+	import homeImg from '$lib/images/home.webp';
 	let { titleData } = $props();
 
 	let transform_title = $state('scale(1)');
@@ -10,7 +11,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="p-5 text-center bg-body-tertiary rounded-2 my-4 shadow-lg"
-	style="background: url('/home.png') center/cover no-repeat; color: white;transition: all 0.5s"
+	style="background: url('{homeImg}') top/cover no-repeat; color: white;transition: all 0.5s"
 	onmouseenter={() => (transform_title = 'scale(1.01)')}
 	style:transform={transform_title}
 	onmouseleave={() => (transform_title = 'scale(1)')}
