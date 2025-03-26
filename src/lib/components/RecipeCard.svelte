@@ -1,7 +1,25 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	let { recipe } = $props();
 
 	let transform = $state('scale(1)');
+	let imgAssessment = $state(true);
+	let imgSrc = $state(recipe.image_url);
+
+	onMount(async () => {
+		const response = await fetch('/media?src=' + recipe.image_url);
+		if (!response.ok) {
+			throw new Error(`Erreur HTTP: ${response.status}`);
+		}
+
+		if (response.headers.get('content-type') === 'text/plain') {
+			imgAssessment = false;
+			return;
+		}
+		const blob = await response.blob();
+		imgSrc = URL.createObjectURL(blob);
+	});
 </script>
 
 <div class="col-md-4">
@@ -14,12 +32,21 @@
 			style="transition: all 0.5s"
 			style:transform
 		>
-			<img
-				src={recipe.image_url}
-				class="card-img-top"
-				alt={recipe.name}
-				style="object-fit: cover; height: 200px"
-			/>
+			{#if imgAssessment}
+				<img
+					src={imgSrc}
+					class="card-img-top"
+					alt={recipe.name}
+					style="object-fit: cover; height: 200px"
+				/>
+			{:else}
+				<img
+					src={recipe.image_url}
+					class="card-img-top"
+					alt={recipe.name}
+					style="object-fit: cover; height: 200px"
+				/>
+			{/if}
 			<div class="card-body text-start">
 				<div class="d-flex justify-content-between align-items-start">
 					<h2 class="card-title mb-0">
