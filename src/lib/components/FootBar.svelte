@@ -1,5 +1,5 @@
 <script lang="ts">
-	const commitNumber = import.meta.env.VITE_COMMIT_NUMBER || 'dev';
+	import { env } from '$env/dynamic/private';
 </script>
 
 <footer class="text-light py-3">
@@ -13,6 +13,7 @@
 		>
 			<i class="bi bi-github fix-white-color" style="font-size: 1.5rem;"></i>
 		</a>
-		<p>Version: {commitNumber}</p>
+		<p>Version: {env.VITE_COMMIT_NUMBER}</p>
+		<p>Version: {env.COMMIT_NUMBER}</p>
 	</div>
 </footer>
