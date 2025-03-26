@@ -3,12 +3,14 @@ FROM oven/bun:alpine AS builder
 WORKDIR /app
 
 # Copier uniquement les fichiers nécessaires pour installer les dépendances
-COPY package.json bun.lockb ./
-RUN bun install --frozen-lockfile
+COPY package.json bun.lock vite.config.ts \
+    .npmrc .prettierignore .prettierrc \
+    eslint.config.js svelte.config.js \
+    tsconfig.json vitest-setup-client.ts ./
 
-# Copier le reste des fichiers pour la compilation
 COPY src ./src
-COPY . . 
+
+RUN bun install
 
 # Compiler l’application
 RUN bun run build
