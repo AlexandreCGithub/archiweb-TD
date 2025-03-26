@@ -3,9 +3,7 @@ import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [
-		sveltekit()
-	],
+	plugins: [sveltekit()],
 	test: {
 		workspace: [
 			{
