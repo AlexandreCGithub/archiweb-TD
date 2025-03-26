@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { env } from '$env/dynamic/private';
+	import { env } from '$env/dynamic/public';
+	const commitNumber = env?.PUBLIC_VITE_COMMIT_NUMBER || 'dev';
+	const commitId = env?.PUBLIC_COMMIT_NUMBER || 'unknown';
 </script>
 
 <footer class="text-light py-3">
@@ -13,7 +15,7 @@
 		>
 			<i class="bi bi-github fix-white-color" style="font-size: 1.5rem;"></i>
 		</a>
-		<p>Version: {env.VITE_COMMIT_NUMBER}</p>
-		<p>Version: {env.COMMIT_NUMBER}</p>
+		<p>Version: {commitNumber}</p>
+		<p>Version: {commitId}</p>
 	</div>
 </footer>
