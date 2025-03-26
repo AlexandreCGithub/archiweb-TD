@@ -100,7 +100,7 @@
 			<p class="lead mt-4">{recipe.description}</p>
 			{#if favoritecount != ''}
 				{#if favoritecount == '0'}
-					<p>No ⭐ for this recipe 😞</p>
+					<p>Nobody ⭐ this recipe yet</p>
 				{:else}
 					<p>{favoritecount} ⭐ for this recipe !</p>
 				{/if}
