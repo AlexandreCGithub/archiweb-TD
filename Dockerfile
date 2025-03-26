@@ -16,7 +16,10 @@ RUN bun run build
 # Étape 2 : Run de l'application
 FROM oven/bun:alpine
 WORKDIR /app
+ARG COMMIT_NUMBER
+LABEL commit_number=${COMMIT_NUMBER}
 
+ENV VITE_COMMIT_NUMBER=${COMMIT_NUMBER}
 # Définition des variables d'environnement
 ENV HOST 0.0.0.0
 ENV PORT 80
