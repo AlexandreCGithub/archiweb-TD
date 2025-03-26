@@ -82,6 +82,8 @@ bun run test
 
 ## 5. Performance optimisations
 
+Performance [here](https://performance.quimerch.com/?token=cs)
+
 ## 6. CO2 emissions and Green IT
 
 Link here
