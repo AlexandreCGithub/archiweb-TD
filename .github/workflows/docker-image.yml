@@ -43,6 +43,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -65,7 +67,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build --build-arg COMMIT_NUMBER=${{ env.VITE_COMMIT_NUMBER }} --build-arg VITE_COMMIT_NUMBER=${{ env.VITE_COMMIT_NUMBER }} -t ${{ vars.IMAGE_NAME }}:latest .
+        run: docker build --build-arg VITE_COMMIT_NUMBER=${{ env.VITE_COMMIT_NUMBER }} -t ${{ vars.IMAGE_NAME }}:latest .
 
       - name: Push Docker image to Docker Hub
         run: docker push ${{ vars.IMAGE_NAME }}:latest
