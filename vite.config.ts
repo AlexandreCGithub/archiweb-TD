@@ -1,9 +1,17 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [
+		nodePolyfills({
+			globals: {
+				Buffer: true
+			}
+		}),
+		sveltekit()
+	],
 	test: {
 		workspace: [
 			{

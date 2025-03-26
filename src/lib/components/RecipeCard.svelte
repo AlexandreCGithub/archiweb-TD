@@ -12,7 +12,6 @@
 		if (!response.ok) {
 			throw new Error(`Erreur HTTP: ${response.status}`);
 		}
-
 		if (response.headers.get('content-type') === 'text/plain') {
 			imgAssessment = false;
 			return;
