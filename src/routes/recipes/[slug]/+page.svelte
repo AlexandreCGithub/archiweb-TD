@@ -98,6 +98,13 @@
 			</div>
 
 			<p class="lead mt-4">{recipe.description}</p>
+			{#if favoritecount != ''}
+				{#if favoritecount == '0'}
+					<p>Nobody ⭐ this recipe yet</p>
+				{:else}
+					<p>{favoritecount} ⭐ for this recipe !</p>
+				{/if}
+			{/if}
 			{#if userPseudo}
 				<form
 					method="POST"
@@ -112,7 +119,7 @@
 					}}
 				>
 					<input type="hidden" name="recipeID" value={recipe.id} />
-					<div class="align-items-bottom">
+					<div>
 						<button
 							type="submit"
 							class="btn btn-outline-light"
@@ -152,7 +159,6 @@
 								}}
 							></i>
 						</button>
-						<span>{favoritecount}</span>
 					</div>
 					<br /><br />
 					<p><strong>{msg}</strong></p>
