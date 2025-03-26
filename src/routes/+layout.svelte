@@ -36,6 +36,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="icon" href={iconImg} />
 	<script src={scriptSrc}></script>
+	<meta name="description" content="Navigation bar of the website" />
 </svelte:head>
 
 <NavBar {data} />
