@@ -1,4 +1,4 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import { render, screen } from '@testing-library/svelte';
 import Page from '../../recipes/[slug]/+page.svelte';
@@ -17,11 +17,27 @@ const mockRecipe = {
 	prep_time: 15,
 	cook_time: 30,
 	servings: 4,
-	image_url: '',
+	image_url:
+		'https://www.croquonslavie.fr/sites/default/files/srh_recipes/786c9164177d449db9ac600b253d7956.jpeg',
 	disclaimer: 'Test disclaimer.',
 	when_to_eat: 'breakfast'
 };
+beforeEach(() => {
+	vi.stubGlobal(
+		'fetch',
+		vi.fn(async () => ({
+			ok: true,
+			headers: new Headers({ 'Content-Type': 'image/jpeg' }),
+			blob: async () => new Blob(['fake image data'], { type: 'image/jpeg' }),
+			text: async () => 'https://example.com/fallback.jpg'
+		}))
+	);
 
+	vi.stubGlobal('URL', {
+		...globalThis.URL,
+		createObjectURL: vi.fn().mockImplementation(() => 'mocked-object-url')
+	});
+});
 describe('/+page.svelte', () => {
 	test('renders the recipe name in the title', () => {
 		render(Page, {

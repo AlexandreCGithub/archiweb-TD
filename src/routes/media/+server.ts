@@ -1,5 +1,8 @@
 export async function GET({ url }) {
-	const imageUrl = url.search.substring(url.search.indexOf('?src=') + 5);
+	let imageUrl = '';
+	if (url.toString().length > 0) {
+		imageUrl = url.search.substring(url.search.indexOf('?src=') + 5);
+	}
 	const response = await fetch(imageUrl);
 
 	if (!response.ok) {
