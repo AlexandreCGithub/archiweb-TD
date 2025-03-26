@@ -14,7 +14,7 @@ COPY . .
 RUN bun run build
 
 # Étape 2 : Run de l'application
-FROM oven/bun:alpine
+FROM node:alpine
 WORKDIR /app
 
 ARG VITE_COMMIT_NUMBER
@@ -29,4 +29,4 @@ COPY --from=builder /app/build ./build
 EXPOSE 80
 
 # Lancer l'application avec Bun
-ENTRYPOINT ["bun", "./build"]
+ENTRYPOINT ["node", "./build"]
