@@ -51,8 +51,8 @@ Based on the docker image published [online](https://hub.docker.com/repository/d
 - User can log in and log out
 - User can add and remove favorites when connected
 - User can see its own favorites if connected
-- User can see the number of favorites a recipe has
-- Any one should be able to connected and the website should work
+- User can see the number of favorites a recipe has in all cases
+- Any one should be able to connect and the website should work
 
 ## 4. Tests, CI/CD Pipeline & Good practices
 
