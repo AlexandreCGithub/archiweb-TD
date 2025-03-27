@@ -1,7 +1,6 @@
 # Étape 1 : Build de l'application
 FROM oven/bun:alpine AS builder
 WORKDIR /app
-
 # Copier uniquement les fichiers nécessaires pour installer les dépendances
 COPY package.json bun.lock vite.config.ts \
     .npmrc .prettierignore .prettierrc \
@@ -27,6 +26,7 @@ ENV HOST 0.0.0.0
 ENV PORT 80
 ENV ORIGIN https://chi.cours.quimerch.com
 # Copy only the necessary files from the builder image to the final image
+RUN npm install --os=linux --libc=musl --cpu=x64 sharp
 COPY --from=builder /app/build ./build
 EXPOSE 80
 
