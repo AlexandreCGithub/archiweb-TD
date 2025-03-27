@@ -1,5 +1,14 @@
 # TD-archiweb
 
+![Languages](https://img.shields.io/github/languages/top/AlexandreCGithub/archiweb-TD)
+![Contributors](https://img.shields.io/github/contributors/AlexandreCGithub/archiweb-TD)
+![Install with Bun](https://img.shields.io/badge/Install%20with-Bun-ff6347)
+
+![Vitest](https://img.shields.io/badge/Test%20with-Vitest-00b4d8)
+![Tests](https://github.com/AlexandreCGithub/archiweb-TD/actions/workflows/docker-image.yml/badge.svg)
+![Prettier](https://img.shields.io/badge/Prettier-Enabled-brightgreen)
+![ESLint](https://img.shields.io/badge/ESLint-Enabled-brightgreen)
+
 ## 1. Description
 
 Project built for the archiweb class, which is a recipes website.
