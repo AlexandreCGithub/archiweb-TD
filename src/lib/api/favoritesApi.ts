@@ -1,3 +1,4 @@
+// get all the favorites of a user (needs token)
 export const getMyFavorites = async (token: string) => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/favorites`, {
 		headers: {
@@ -8,6 +9,7 @@ export const getMyFavorites = async (token: string) => {
 	return response;
 };
 
+// add a recipe as Favorite for a user (needs token)
 export const postFavorite = async (username: string, recipeID: string, token: string) => {
 	const response = await fetch(
 		`https://gourmet.cours.quimerch.com/users/${username}/favorites?recipeID=${recipeID}`,
@@ -23,6 +25,7 @@ export const postFavorite = async (username: string, recipeID: string, token: st
 	return response;
 };
 
+// remove a recipe as Favorite for a user (needs token)
 export const deleteFavorite = async (username: string, recipeID: string, token: string) => {
 	const response = await fetch(
 		`https://gourmet.cours.quimerch.com/users/${username}/favorites?recipeID=${recipeID}`,

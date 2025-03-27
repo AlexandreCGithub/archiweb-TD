@@ -1,3 +1,4 @@
+// login giving credentials and receive a token
 export const postLogin = async (username: string, password: string) => {
 	const response = await fetch(`https://gourmet.cours.quimerch.com/login`, {
 		method: 'POST',
