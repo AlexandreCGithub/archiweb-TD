@@ -4,7 +4,6 @@ import { Buffer } from 'buffer';
 
 export async function GET({ url }) {
 	const imageUrl = decodeURIComponent(url.toString()).split('/media?src=')[1];
-
 	const response = await fetch(imageUrl);
 	if (!response.ok) {
 		return new Response(imageUrl, {
