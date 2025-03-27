@@ -1,28 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	let { recipe } = $props();
-
 	let transform = $state('scale(1)');
-	let imgAssessment = $state(true);
-	let imgSrc = $state(recipe.image_url);
-
-	onMount(async () => {
-		try {
-			const response = await fetch(encodeURIComponent(recipe.image_url));
-
-			if (!response.ok) {
-				imgAssessment = false;
-				return;
-			}
-
-			const blob = await response.blob();
-			imgSrc = URL.createObjectURL(blob);
-		} catch (error) {
-			console.error("Erreur lors du chargement de l'image :", error);
-			imgAssessment = false;
-		}
-	});
 </script>
 
 <div class="col-md-4">
@@ -35,21 +13,12 @@
 			style="transition: all 0.5s"
 			style:transform
 		>
-			{#if imgAssessment}
-				<img
-					src={imgSrc}
-					class="card-img-top"
-					alt={recipe.name}
-					style="object-fit: cover; height: 200px"
-				/>
-			{:else}
-				<img
-					src={recipe.image_url}
-					class="card-img-top"
-					alt={recipe.name}
-					style="object-fit: cover; height: 200px"
-				/>
-			{/if}
+			<img
+				src={'/media?src=' + encodeURIComponent(recipe.image_url)}
+				class="card-img-top"
+				alt={recipe.name}
+				style="object-fit: cover; height: 200px"
+			/>
 			<div class="card-body text-start">
 				<div class="d-flex justify-content-between align-items-start">
 					<h2 class="card-title mb-0">
@@ -75,7 +44,7 @@
 							/>
 							<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
 						</svg>
-						<span> Preparation :</span><span class="fw-bold"> &nbsp{recipe.prep_time} min</span>
+						<span> Préparation :</span><span class="fw-bold"> &nbsp{recipe.prep_time} min</span>
 					</div>
 					<div>
 						<svg

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import 'bootstrap/dist/css/bootstrap.min.css';
-	import scriptSrc from 'bootstrap/dist/js/bootstrap.bundle.min.js?url';
 	import Footbar from '$lib/components/FootBar.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
 	import darkMode from '$lib/stores/darkMode';
@@ -34,7 +33,6 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="icon" href={iconImg} />
-	<script src={scriptSrc}></script>
 	<meta name="description" content="Navigation bar of the website" />
 </svelte:head>
 
