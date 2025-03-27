@@ -2,9 +2,18 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vite';
 import { purgeCss } from 'vite-plugin-svelte-purgecss';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
-	plugins: [sveltekit(), purgeCss()],
+	plugins: [
+		sveltekit(),
+		purgeCss(),
+		nodePolyfills({
+			globals: {
+				Buffer: true
+			}
+		})
+	],
 	test: {
 		workspace: [
 			{
@@ -33,12 +42,16 @@ export default defineConfig({
 		]
 	},
 	build: {
+		commonjsOptions: {
+			exclude: []
+		},
 		rollupOptions: {
 			output: {
 				manualChunks: () => {
 					return 'general';
 				}
-			}
+			},
+			external: ['sharp']
 		}
 	}
 });
