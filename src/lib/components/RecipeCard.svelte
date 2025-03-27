@@ -1,24 +1,6 @@
 <script lang="ts">
 	let { recipe } = $props();
 	let transform = $state('scale(1)');
-	import { onMount } from 'svelte';
-
-	let imageUrl = '/media?src=' + encodeURIComponent(recipe.image_url);
-	let fallbackUrl = recipe.image_url;
-	let imgSrc = $state(imageUrl);
-
-	async function checkImage() {
-		try {
-			const res = await fetch(imageUrl, { method: 'HEAD' });
-			if (!res.ok) {
-				imgSrc = fallbackUrl;
-			}
-		} catch {
-			imgSrc = fallbackUrl;
-		}
-	}
-	$effect(() => console.log(imgSrc));
-	onMount(checkImage);
 </script>
 
 <div class="col-md-4">
@@ -32,7 +14,9 @@
 			style:transform
 		>
 			<img
-				src={'/media?src=' + encodeURIComponent(recipe.image_url)}
+				src={'/media?src=' +
+					encodeURIComponent(recipe.image_url) +
+					'&formaTwidth=500&formaTheight=200'}
 				class="card-img-top"
 				alt={recipe.name}
 				style="object-fit: cover; height: 200px"
