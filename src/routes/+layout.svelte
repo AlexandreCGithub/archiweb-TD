@@ -4,7 +4,7 @@
 	import NavBar from '$lib/components/NavBar.svelte';
 	import darkMode from '$lib/stores/darkMode';
 	import homeImg from '$lib/images/home.webp';
-	import iconImg from '$lib/images/favicon.png';
+	import iconImg from '$lib/images/favicon.webp';
 
 	let { data, children } = $props();
 
@@ -32,7 +32,7 @@
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="icon" href={iconImg} />
+	<link rel="icon" type="image/webp" sizes="192x192" href={iconImg} />
 	<meta name="description" content="Navigation bar of the website" />
 </svelte:head>
 

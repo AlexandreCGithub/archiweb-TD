@@ -42,9 +42,6 @@ export default defineConfig({
 		]
 	},
 	build: {
-		commonjsOptions: {
-			exclude: []
-		},
 		rollupOptions: {
 			output: {
 				manualChunks: () => {

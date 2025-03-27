@@ -23,7 +23,7 @@ export async function GET({ url }) {
 		return new Response(imageUrl, {
 			headers: {
 				'Content-Type': 'text/plain',
-				'Cache-Control': 'public, max-age=86400'
+				'Cache-Control': 'must-revalidate, public, max-age=3600'
 			}
 		});
 	}
@@ -31,7 +31,7 @@ export async function GET({ url }) {
 		return new Response(imageUrl, {
 			headers: {
 				'Content-Type': 'text/plain',
-				'Cache-Control': 'public, max-age=86400'
+				'Cache-Control': 'must-revalidate, public, max-age=3600'
 			}
 		});
 	}
