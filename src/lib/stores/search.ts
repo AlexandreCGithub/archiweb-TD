@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
+// store for the search feature
 const defaultValue = '';
 const initialValue = browser
 	? (window.localStorage.getItem('searchValue') ?? defaultValue)

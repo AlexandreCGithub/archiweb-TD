@@ -10,7 +10,7 @@ on:
 
 jobs:
   ci:
-    name: CI - Tests
+    name: CI - Tests # CI : runs on any push on main or on a branch with a PR
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +35,7 @@ jobs:
         run: bun run test
 
   cd:
-    name: CD - Build & Push Docker Image
+    name: CD - Build & Push Docker Image # CD : runs on pushes on main, if CI succeeds
     runs-on: ubuntu-latest
     needs: ci
     if: success() && github.ref == 'refs/heads/main'

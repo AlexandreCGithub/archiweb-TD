@@ -1,10 +1,11 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-const defaultValue = 'true';
+// this store manages the dark mode of the app
+const defaultValue = 'true'; // by default, darkmode
 const initialValue = browser
 	? (window.localStorage.getItem('darkMode') ?? defaultValue)
-	: defaultValue;
+	: defaultValue; // initial value from browser
 
 const darkMode = writable<string>(initialValue);
 
