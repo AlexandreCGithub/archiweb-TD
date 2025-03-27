@@ -1,6 +1,5 @@
 <script lang="ts">
 	import 'bootstrap/dist/css/bootstrap.min.css';
-	import 'bootstrap-icons/font/bootstrap-icons.min.css';
 	import scriptSrc from 'bootstrap/dist/js/bootstrap.bundle.min.js?url';
 	import Footbar from '$lib/components/FootBar.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
