@@ -50,6 +50,6 @@
 				>
 			</a>
 		</div>
-		<p class="lead mb-3 fix-white-color fs-6">Version : {commitNumber}</p>
+		<p>Version: {commitNumber}</p>
 	</div>
 </footer>
