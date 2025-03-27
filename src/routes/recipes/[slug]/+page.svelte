@@ -72,7 +72,15 @@
 				class="p-0 border-0 bg-transparent"
 				aria-label="View larger image of the recipe"
 			>
-				<img src={recipe.image_url} class="img-fluid rounded-2 shadow" alt={recipe.name} />
+				<img
+					src={'/media?src=' + encodeURIComponent(recipe.image_url)}
+					class="img-fluid rounded-2 shadow"
+					alt={recipe.name}
+					onerror={(e) => {
+						const target = e.target as HTMLImageElement;
+						if (target) target.src = recipe.image_url;
+					}}
+				/>
 			</button>
 		</div>
 		<div class="col-md-8 d-flex flex-column justify-content-center">
@@ -210,7 +218,6 @@
 		tabindex="-1"
 		role="dialog"
 		aria-labelledby="myModalLabel"
-		aria-hidden="true"
 	>
 		<div class="modal-dialog modal-fullscreen">
 			<div class="modal-content">
@@ -221,10 +228,14 @@
 				</div>
 				<div class="modal-body d-flex justify-content-center align-items-center">
 					<img
-						src={recipe.image_url}
+						src={'/media?src=' + encodeURIComponent(recipe.image_url)}
 						class="imagepreview"
-						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
 						alt={recipe.name}
+						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
+						onerror={(e) => {
+							const target = e.target as HTMLImageElement;
+							if (target) target.src = recipe.image_url;
+						}}
 					/>
 				</div>
 			</div>
