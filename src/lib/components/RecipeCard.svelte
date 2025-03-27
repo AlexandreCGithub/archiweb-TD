@@ -14,10 +14,16 @@
 			style:transform
 		>
 			<img
-				src={'/media?src=' + encodeURIComponent(recipe.image_url)}
+				src={'/media?src=' +
+					encodeURIComponent(recipe.image_url) +
+					'&formaTwidth=500&formaTheight=200'}
 				class="card-img-top"
 				alt={recipe.name}
 				style="object-fit: cover; height: 200px"
+				onerror={(e) => {
+					const target = e.target as HTMLImageElement;
+					if (target) target.src = recipe.image_url;
+				}}
 			/>
 			<div class="card-body text-start">
 				<div class="d-flex justify-content-between align-items-start">

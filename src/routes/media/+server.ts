@@ -3,8 +3,21 @@ import sharp from 'sharp';
 import { Buffer } from 'buffer';
 
 export async function GET({ url }) {
-	const imageUrl = decodeURIComponent(url.toString()).split('/media?src=')[1];
-
+	const imageUrl = decodeURIComponent(url.toString())
+		.split('/media?src=')[1]
+		.split('&formaTwidth=')[0];
+	let width;
+	let height;
+	try {
+		width = parseInt(
+			decodeURIComponent(url.toString()).split('&formaTwidth=')[1].split('&formaTheight=')[0],
+			10
+		);
+		height = parseInt(decodeURIComponent(url.toString()).split('&formaTheight=')[1]);
+	} catch {
+		width = 0;
+		height = 0;
+	}
 	const response = await fetch(imageUrl);
 	if (!response.ok) {
 		return new Response(imageUrl, {
@@ -25,8 +38,15 @@ export async function GET({ url }) {
 	try {
 		const abuffer = await response.arrayBuffer();
 		const buffer = await Buffer.from(new Uint8Array(abuffer));
-
-		const webpBuffer = await sharp(buffer.buffer).resize(500, 200).webp({ quality: 80 }).toBuffer();
+		let webpBuffer;
+		if (width === 0 || height === 0) {
+			webpBuffer = await sharp(buffer.buffer).webp({ quality: 80 }).toBuffer();
+		} else {
+			webpBuffer = await sharp(buffer.buffer)
+				.resize(width, height)
+				.webp({ quality: 80 })
+				.toBuffer();
+		}
 		const blob = new Blob([webpBuffer]);
 		const stream = blob.stream();
 
