@@ -30,5 +30,7 @@ RUN npm install --os=linux --libc=musl --cpu=x64 sharp
 COPY --from=builder /app/build ./build
 EXPOSE 80
 
+RUN sed -i '1s/{/{\n  "type": "module",/' package.json
+
 # Lancer l'application avec Bun
 ENTRYPOINT ["node", "./build"]
