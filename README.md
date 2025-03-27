@@ -1,5 +1,14 @@
 # TD-archiweb
 
+![Languages](https://img.shields.io/github/languages/top/AlexandreCGithub/archiweb-TD)
+![Contributors](https://img.shields.io/github/contributors/AlexandreCGithub/archiweb-TD)
+![Install with Bun](https://img.shields.io/badge/Install%20with-Bun-ff6347)
+
+![Vitest](https://img.shields.io/badge/Test%20with-Vitest-00b4d8)
+![Tests](https://github.com/AlexandreCGithub/archiweb-TD/actions/workflows/docker-image.yml/badge.svg)
+![Prettier](https://img.shields.io/badge/Prettier-Enabled-brightgreen)
+![ESLint](https://img.shields.io/badge/ESLint-Enabled-brightgreen)
+
 ## 1. Description
 
 Project built for the archiweb class, which is a recipes website.
@@ -12,17 +21,23 @@ This project uses bun as a package manager
 
 ### Local deployment
 
-Download repository
+1. Download and unzip, or clone the repository
 
-Install bun if needed
+2. Install bun if needed
 
-Install dependencies:
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+3. Open a terminal on the repository
+
+4. Install dependencies:
 
 ```bash
 bun run install
 ```
 
-Run (dev mode)
+5. Run (dev mode)
 
 ```bash
 bun dev
@@ -34,7 +49,7 @@ Add `--open` to automatically open web browser
 
 The app is supposed to be deployed [there](https://chi.cours.quimerch.com/)
 
-Based on the docker image published [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general)
+Based on the docker image published [online](https://hub.docker.com/repository/docker/magnoir/archiweb-td/general) automatically by our pipeline
 
 ## 3. Contents
 
@@ -82,8 +97,9 @@ bun run test
 
 ## 5. Performance optimisations
 
+The sites tries to have the best performance possible.
 Performance [here](https://performance.quimerch.com/?token=cs)
 
 ## 6. CO2 emissions and Green IT
 
-Link here
+Link [here](https://www.ecoindex.fr/)
