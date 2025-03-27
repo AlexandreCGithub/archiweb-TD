@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 import type { Cookies } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ cookies }: { cookies: Cookies }) => {
-	const token = cookies.get('token');
+	const token = cookies.get('token'); // getting the token
 
 	if (!token) {
 		return {
