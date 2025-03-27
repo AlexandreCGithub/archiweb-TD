@@ -8,27 +8,6 @@
 	let { data }: PageProps = $props();
 	let recipe: Recipe = data.recipe;
 	let favoritecount = $state('');
-
-	let imgAssessment = $state(true);
-	let imgSrc = $state(recipe.image_url);
-
-	onMount(async () => {
-		try {
-			const response = await fetch(encodeURIComponent(recipe.image_url));
-
-			if (!response.ok) {
-				imgAssessment = false;
-				return;
-			}
-
-			const blob = await response.blob();
-			imgSrc = URL.createObjectURL(blob);
-		} catch (error) {
-			console.error("Erreur lors du chargement de l'image :", error);
-			imgAssessment = false;
-		}
-	});
-
 	onMount(() => {
 		const hr = source(`https://gourmet.cours.quimerch.com/recipes/${recipe.id}/stars`, {
 			options: {
@@ -87,12 +66,13 @@
 >
 	<div class="row text-start mb-4">
 		<div class="col-md-4">
-			<button type="button" onclick={changeModalStatus} class="p-0 border-0 bg-transparent">
-				{#if imgAssessment}
-					<img src={imgSrc} class="img-fluid rounded-2 shadow" alt={recipe.name} />
-				{:else}
-					<img src={recipe.image_url} class="img-fluid rounded-2 shadow" alt={recipe.name} />
-				{/if}
+			<button
+				type="button"
+				onclick={changeModalStatus}
+				class="p-0 border-0 bg-transparent"
+				aria-label="View larger image of the recipe"
+			>
+				<img src={recipe.image_url} class="img-fluid rounded-2 shadow" alt={recipe.name} />
 			</button>
 		</div>
 		<div class="col-md-8 d-flex flex-column justify-content-center">
@@ -118,7 +98,7 @@
 						/>
 						<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
 					</svg>
-					<span> Preparation </span><span class="fw-bold">: {recipe.prep_time} min</span>
+					<span> Préparation </span><span class="fw-bold">: {recipe.prep_time} min</span>
 				</div>
 				<div>
 					<svg
@@ -240,21 +220,12 @@
 					></button>
 				</div>
 				<div class="modal-body d-flex justify-content-center align-items-center">
-					{#if imgAssessment}
-						<img
-							src={imgSrc}
-							class="imagepreview"
-							style="max-width: 100%; max-height: 100vh; object-fit: contain;"
-							alt={recipe.name}
-						/>
-					{:else}
-						<img
-							src={recipe.image_url}
-							class="imagepreview"
-							style="max-width: 100%; max-height: 100vh; object-fit: contain;"
-							alt={recipe.name}
-						/>
-					{/if}
+					<img
+						src={recipe.image_url}
+						class="imagepreview"
+						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
+						alt={recipe.name}
+					/>
 				</div>
 			</div>
 		</div>
