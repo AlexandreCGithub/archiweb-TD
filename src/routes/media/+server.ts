@@ -5,7 +5,14 @@ export async function GET({ url }) {
 
 	try {
 		const response = await fetch(imageUrl);
-		if (!response.ok) throw error(500, "Erreur lors du fetch de l'image");
+		if (!response.ok) {
+			return new Response(imageUrl, {
+				headers: {
+					'Content-Type': response.headers.get('Content-Type') || 'image/jpeg',
+					'Cache-Control': 'public, max-age=86400'
+				}
+			});
+		}
 
 		return new Response(response.body, {
 			headers: {
