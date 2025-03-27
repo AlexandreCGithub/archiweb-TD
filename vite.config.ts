@@ -1,9 +1,10 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vite';
+import { purgeCss } from 'vite-plugin-svelte-purgecss';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), purgeCss()],
 	test: {
 		workspace: [
 			{

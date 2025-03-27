@@ -71,3 +71,7 @@
 :global(.fix-white-color) {
 	color: #f8f9fa !important;
 }
+
+main {
+	min-height: 100vh;
+}

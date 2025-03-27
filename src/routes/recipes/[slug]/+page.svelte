@@ -13,17 +13,20 @@
 	let imgSrc = $state(recipe.image_url);
 
 	onMount(async () => {
-		const response = await fetch('/media?src=' + recipe.image_url);
-		if (!response.ok) {
-			throw new Error(`Erreur HTTP: ${response.status}`);
-		}
+		try {
+			const response = await fetch(encodeURIComponent(recipe.image_url));
 
-		if (response.headers.get('content-type') === 'text/plain') {
+			if (!response.ok) {
+				imgAssessment = false;
+				return;
+			}
+
+			const blob = await response.blob();
+			imgSrc = URL.createObjectURL(blob);
+		} catch (error) {
+			console.error("Erreur lors du chargement de l'image :", error);
 			imgAssessment = false;
-			return;
 		}
-		const blob = await response.blob();
-		imgSrc = URL.createObjectURL(blob);
 	});
 
 	onMount(() => {
@@ -63,6 +66,11 @@
 	const changeModalStatus = () => {
 		isModalOpen = isModalOpen ? false : true;
 	};
+
+	const starFilled =
+		'M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z';
+	const starEmpty =
+		'M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z';
 </script>
 
 <svelte:head>
@@ -97,17 +105,55 @@
 			<p class="fst-italic fs-6 mb-4">by {recipe.created_by}</p>
 			<div class="d-flex justify-content-between align-items-center mb-2">
 				<div>
-					<i class="bi bi-clock"></i>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						class="bi bi-clock"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"
+						/>
+						<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+					</svg>
 					<span> Preparation </span><span class="fw-bold">: {recipe.prep_time} min</span>
 				</div>
 				<div>
-					<i class="bi bi-clock-history"></i>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						class="bi bi-clock-history"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"
+						/>
+						<path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z" />
+						<path
+							d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"
+						/>
+					</svg>
 					<span> Cuisson </span><span class="fw-bold">: {recipe.cook_time} min</span>
 				</div>
 			</div>
 			<div class="d-flex justify-content-between align-items-center mb-2">
 				<div>
-					<i class="bi bi-fire"></i>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						class="bi bi-fire"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"
+						/>
+					</svg>
 					<span> Calories </span><span class="fw-bold"
 						>: {#if recipe.calories}
 							{recipe.calories}
@@ -147,38 +193,16 @@
 							aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
 							formaction={isFavorite ? '?/deleteFavorite' : '?/addFavorite'}
 						>
-							<!-- svelte-ignore a11y_no_static_element_interactions -->
-							<i
-								id="star"
-								class={isFavorite ? 'bi bi-star-fill text-danger' : 'bi bi-star'}
-								onmouseenter={(event) => {
-									if (!isFavorite) {
-										event.currentTarget.classList.remove('bi-star');
-										event.currentTarget.classList.add('bi-star-fill', 'text-danger');
-									} else {
-										event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
-										event.currentTarget.classList.add('bi-star');
-									}
-								}}
-								onmouseout={(event) => {
-									if (!isFavorite) {
-										event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
-										event.currentTarget.classList.add('bi-star');
-									} else {
-										event.currentTarget.classList.remove('bi-star');
-										event.currentTarget.classList.add('bi-star-fill', 'text-danger');
-									}
-								}}
-								onblur={(event) => {
-									if (!isFavorite) {
-										event.currentTarget.classList.remove('bi-star-fill', 'text-danger');
-										event.currentTarget.classList.add('bi-star');
-									} else {
-										event.currentTarget.classList.remove('bi-star');
-										event.currentTarget.classList.add('bi-star-fill', 'text-danger');
-									}
-								}}
-							></i>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="bi"
+								width="16"
+								height="16"
+								fill="currentColor"
+								viewBox="0 0 16 16"
+							>
+								<path d={isFavorite ? starEmpty : starFilled} />
+							</svg>
 						</button>
 					</div>
 					<br /><br />
