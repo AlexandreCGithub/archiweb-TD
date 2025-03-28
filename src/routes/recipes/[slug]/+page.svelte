@@ -173,7 +173,7 @@
 						};
 					}}
 				>
-					<input type="hidden" name="recipeID" value={recipe.id} />
+					<input type="hidden" id="recipeID" name="recipeID" value={recipe.id} />
 					<div>
 						<button
 							type="submit"
@@ -231,6 +231,7 @@
 						src={'/media?src=' + encodeURIComponent(recipe.image_url)}
 						class="imagepreview"
 						alt={recipe.name}
+						loading="lazy"
 						style="max-width: 100%; max-height: 100vh; object-fit: contain;"
 						onerror={(e) => {
 							const target = e.target as HTMLImageElement;

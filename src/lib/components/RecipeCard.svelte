@@ -17,7 +17,8 @@
 				src={'/media?src=' +
 					encodeURIComponent(recipe.image_url) +
 					'&formaTwidth=500&formaTheight=200'}
-				class="card-img-top"
+				class="card-img-top w-100 mw-75 d-block mx-auto"
+				loading="eager"
 				alt={recipe.name}
 				style="object-fit: cover; height: 200px"
 				onerror={(e) => {

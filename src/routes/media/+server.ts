@@ -6,6 +6,15 @@ export async function GET({ url }) {
 	const imageUrl = decodeURIComponent(url.toString())
 		.split('/media?src=')[1]
 		.split('&formaTwidth=')[0];
+	const allowedDomains = ['localhost', 'chi.cours.quimerch.com/'];
+	const urlObj = new URL(url);
+	if (!allowedDomains.includes(urlObj.hostname)) {
+		return error(403, 'Forbidden: Domain not allowed');
+	}
+	if (!['http:', 'https:'].includes(urlObj.protocol)) {
+		return error(400, 'Invalid URL scheme');
+	}
+
 	let width;
 	let height;
 	try {
@@ -18,20 +27,40 @@ export async function GET({ url }) {
 		width = 0;
 		height = 0;
 	}
+	if (isNaN(width) || isNaN(height) || width < 0 || height < 0 || width > 2000 || height > 2000) {
+		return error(400, 'Invalid width/height');
+	}
 	const response = await fetch(imageUrl);
 	if (!response.ok) {
 		return new Response(imageUrl, {
 			headers: {
 				'Content-Type': 'text/plain',
-				'Cache-Control': 'must-revalidate, public, max-age=3600'
+				'Cache-Control': 'must-revalidate, public, max-age=86400'
 			}
 		});
+	}
+	const allowedMimeTypes = [
+		'image/jpeg',
+		'image/png',
+		'image/webp',
+		'image/bmp',
+		'image/gif',
+		'image/apng',
+		'image/avif',
+		'image/svg+xml',
+		'image/tiff',
+		'image/ico'
+	];
+
+	const contentType = response.headers.get('content-type') || '';
+	if (!allowedMimeTypes.some((type) => contentType.includes(type))) {
+		return error(415, 'Unsupported media type');
 	}
 	if (!response.body) {
 		return new Response(imageUrl, {
 			headers: {
 				'Content-Type': 'text/plain',
-				'Cache-Control': 'must-revalidate, public, max-age=3600'
+				'Cache-Control': 'must-revalidate, public, max-age=86400'
 			}
 		});
 	}
@@ -53,7 +82,7 @@ export async function GET({ url }) {
 		return new Response(stream, {
 			headers: {
 				'Content-Type': 'image/webp',
-				'Cache-Control': 'must-revalidate, public, max-age=3600'
+				'Cache-Control': 'must-revalidate, public, max-age=86400'
 			}
 		});
 	} catch (e) {
