@@ -6,7 +6,7 @@ export async function GET({ url }) {
 	const imageUrl = decodeURIComponent(url.toString())
 		.split('/media?src=')[1]
 		.split('&formaTwidth=')[0];
-	const allowedDomains = ['localhost', 'chi.cours.quimerch.com/'];
+	const allowedDomains = ['localhost', 'chi.cours.quimerch.com'];
 	const urlObj = new URL(url);
 	if (!allowedDomains.includes(urlObj.hostname)) {
 		return error(403, 'Forbidden: Domain not allowed');
