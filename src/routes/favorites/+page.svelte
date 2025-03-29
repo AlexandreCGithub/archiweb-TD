@@ -3,7 +3,7 @@
 	import MainPage from '$lib/components/MainPage.svelte';
 
 	let { data } = $props();
-	let dataRecipes: Recipe[] = data?.recipes;
+	let dataRecipes: Recipe[] = data?.recipes; // list of all favorites of logged in user
 	let title = 'Favoris';
 	let subtitle = 'Vos plats favoris !';
 	let isPageFavorite = true;
