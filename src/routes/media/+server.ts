@@ -3,9 +3,12 @@ import sharp from 'sharp';
 import { Buffer } from 'buffer';
 
 export async function GET({ url }) {
+	// Extract image URL from query parameters
 	const imageUrl = decodeURIComponent(url.toString())
 		.split('/media?src=')[1]
 		.split('&formaTwidth=')[0];
+
+	// Define allowed domains for security reasons
 	const allowedDomains = ['localhost', 'chi.cours.quimerch.com'];
 	const urlObj = new URL(url);
 	if (!allowedDomains.includes(urlObj.hostname)) {
@@ -15,6 +18,7 @@ export async function GET({ url }) {
 		return error(400, 'Invalid URL scheme');
 	}
 
+	// Extract width and height from URL, ensuring they are valid numbers
 	let width;
 	let height;
 	try {
@@ -30,6 +34,8 @@ export async function GET({ url }) {
 	if (isNaN(width) || isNaN(height) || width < 0 || height < 0 || width > 2000 || height > 2000) {
 		return error(400, 'Invalid width/height');
 	}
+
+	// Fetch the original image
 	const response = await fetch(imageUrl);
 	if (!response.ok) {
 		return new Response(imageUrl, {
@@ -39,6 +45,8 @@ export async function GET({ url }) {
 			}
 		});
 	}
+
+	// Check if the image format is allowed
 	const allowedMimeTypes = [
 		'image/jpeg',
 		'image/png',
@@ -76,6 +84,8 @@ export async function GET({ url }) {
 				.webp({ quality: 80 })
 				.toBuffer();
 		}
+
+		// Return the processed image as a stream
 		const blob = new Blob([webpBuffer]);
 		const stream = blob.stream();
 

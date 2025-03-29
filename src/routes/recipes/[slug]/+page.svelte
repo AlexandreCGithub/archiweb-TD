@@ -6,8 +6,8 @@
 	import { onMount } from 'svelte';
 
 	let { data }: PageProps = $props();
-	let recipe: Recipe = data.recipe;
-	let favoritecount = $state('');
+	let recipe: Recipe = data.recipe; // particular recipe of the page
+	let favoritecount = $state(''); // number of favorites this recipe has
 	onMount(() => {
 		const hr = source(`https://gourmet.cours.quimerch.com/recipes/${recipe.id}/stars`, {
 			options: {
@@ -19,7 +19,7 @@
 		});
 	});
 
-	let isFavorite = $state(false);
+	let isFavorite = $state(false); // is this recipe already favorite (knows thanks to the store)
 	isFavorite = data.isAlreadyFavorite;
 	let msg = $state('');
 

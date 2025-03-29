@@ -3,7 +3,7 @@
 	import MainPage from '$lib/components/MainPage.svelte';
 
 	let { data } = $props();
-	let dataRecipes: Recipe[] = data.recipes;
+	let dataRecipes: Recipe[] = data.recipes; // all the recipes
 	let title = 'Marmitron';
 	let subtitle = 'Découvrez nos recettes';
 	let isPageFavorite = false;
