@@ -49,6 +49,7 @@ export const actions = {
 				path: '/',
 				maxAge: 60 * 15,
 				httpOnly: true,
+				secure: true,
 				sameSite: 'strict'
 			});
 		}

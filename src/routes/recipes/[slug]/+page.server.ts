@@ -9,15 +9,7 @@ import {
 } from '$lib/stores/favoritesStore';
 import type { Recipe } from '$lib/types';
 import { getMyFavorites, postFavorite, deleteFavorite, getRecipe } from '$lib/api';
-
-const parseJwt = (token: string | undefined) => {
-	if (token == undefined) return undefined;
-	try {
-		return JSON.parse(atob(token.split('.')[1]));
-	} catch (e) {
-		return e;
-	}
-};
+import { parseJwt } from '$lib/utils/parseJwt';
 
 // To determine if the specific recipe on this page is already a favorite, we use a store
 // It is populated if the current store is null
