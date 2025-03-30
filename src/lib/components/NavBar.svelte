@@ -4,17 +4,9 @@
 	import darkMode from '$lib/stores/darkMode';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { parseJwt } from '$lib/utils/parseJwt';
 
 	let { data } = $props();
-
-	const parseJwt = (token: string | null) => {
-		if (!token) return null;
-		try {
-			return JSON.parse(atob(token.split('.')[1]));
-		} catch (e) {
-			return e;
-		}
-	};
 
 	let userPseudo = $state(parseJwt(data?.token)?.iss);
 

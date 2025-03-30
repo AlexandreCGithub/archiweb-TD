@@ -4,6 +4,7 @@
 	import type { Recipe } from '$lib/types/Recipe';
 	import { source } from 'sveltekit-sse';
 	import { onMount } from 'svelte';
+	import { parseJwt } from '$lib/utils/parseJwt';
 
 	let { data }: PageProps = $props();
 	let recipe: Recipe = data.recipe; // particular recipe of the page
@@ -22,15 +23,6 @@
 	let isFavorite = $state(false); // is this recipe already favorite (knows thanks to the store)
 	isFavorite = data.isAlreadyFavorite;
 	let msg = $state('');
-
-	const parseJwt = (token: string | null) => {
-		if (!token) return null;
-		try {
-			return JSON.parse(atob(token.split('.')[1]));
-		} catch (e) {
-			return e;
-		}
-	};
 
 	let userPseudo = $state(parseJwt(data?.token)?.iss);
 
