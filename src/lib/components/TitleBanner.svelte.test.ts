@@ -4,7 +4,7 @@ import TitleBanner from '$lib/components/TitleBanner.svelte';
 import homeImg from '$lib/images/home.webp';
 
 describe('TitleBanner Component', () => {
-	test('affiche correctement le titre et le sous-titre', () => {
+	test('displays the title and subtitle correctly', () => {
 		const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 
 		render(TitleBanner, { props: { titleData } });
@@ -13,7 +13,7 @@ describe('TitleBanner Component', () => {
 		expect(screen.getByText(titleData.subtitle)).toBeInTheDocument();
 	});
 
-	test('Mouvement quand hover', async () => {
+	test('hover effect triggers scale transformation', async () => {
 		const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 		const { container } = render(TitleBanner, { props: { titleData } });
 
@@ -30,7 +30,7 @@ describe('TitleBanner Component', () => {
 		}
 	});
 
-	test('Affichage du fond', () => {
+	test('displays the background image', () => {
 		const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 		const { container } = render(TitleBanner, { props: { titleData } });
 
@@ -38,7 +38,7 @@ describe('TitleBanner Component', () => {
 		expect(div).toHaveStyle(`background: url('${homeImg}') center/cover no-repeat`);
 	});
 
-	test('Les titres ont la classe fix-white-color', () => {
+	test('titles have the fix-white-color class', () => {
 		const titleData = { title: 'Favoris', subtitle: 'Vos plats favoris !' };
 		const { container } = render(TitleBanner, { props: { titleData } });
 
