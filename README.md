@@ -68,6 +68,7 @@ Based on the docker image published [online](https://hub.docker.com/repository/d
 - User can see its own favorites if connected
 - User can see the number of favorites a recipe has in all cases
 - Any one should be able to connect and the website should work
+- Note : we will only display the recipes that have `"published":true`, and will not display those with `false`
 
 ## 4. Tests, CI/CD Pipeline & Good practices
 

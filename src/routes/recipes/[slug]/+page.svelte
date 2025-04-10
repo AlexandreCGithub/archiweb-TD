@@ -5,6 +5,7 @@
 	import type { Recipe } from '$lib/types/Recipe';
 	import { source } from 'sveltekit-sse';
 	import { onMount } from 'svelte';
+	import { parseJwt } from '$lib/utils/parseJwt';
 
 	// Import functions
 	import { parseJwt } from '$lib/functions/parseJWT';
@@ -44,7 +45,6 @@
 		imgheight: 400
 	};
 
-	// Run before the page is loaded
 	onMount(() => {
 		const hr = source(`https://gourmet.cours.quimerch.com/recipes/${recipe.id}/stars`, {
 			options: {
@@ -59,6 +59,7 @@
 	// Constants (functions)
 	const changeFavorite = (): boolean => (isFavorite = !isFavorite);
 	const changeModalStatus = () => (isModalOpen = isModalOpen ? false : true);
+
 </script>
 
 <svelte:head>

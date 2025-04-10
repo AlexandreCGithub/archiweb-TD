@@ -11,16 +11,14 @@ import type { Recipe } from '$lib/types';
 import { getMyFavorites, postFavorite, deleteFavorite, getRecipe } from '$lib/api';
 import { parseJwt } from '$lib/functions/parseJWT';
 
-// Pour savoir si la recette particulière de cette page est déjà favorite, on utilise un store
-// Il est rempli si le store actuel est null
-
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const userPseudo = parseJwt(cookies.get('token'))?.iss;
 	if (!userPseudo) {
-		resetFavorites();
+		resetFavorites(); // if no pseudo : empty the store
 	}
 
 	if (get(favoritesTab) == null && userPseudo) {
+		// if empty store and pseudo : fill the store with its curent favorites (storing only he ids)
 		const favResponse = await getMyFavorites(cookies.get('token') as string);
 		if (favResponse.ok) {
 			const favJsonResponse = await favResponse.json();
@@ -32,10 +30,11 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	}
 
 	const { slug } = params;
-	const favorites = get(favoritesTab);
-	const isAlreadyFavorite = favorites ? favorites.includes(slug) : false;
 
-	const response = await getRecipe(slug);
+	const favorites = get(favoritesTab); // getting the favorites id from the store
+	const isAlreadyFavorite = favorites ? favorites.includes(slug) : false; // determine if the recipe is already a favorite using the store
+
+	const response = await getRecipe(slug); // get the specific recipe of this page
 
 	if (response.status == 404) {
 		error(404, `Recette ${slug} introuvable.`);
