@@ -21,14 +21,26 @@ beforeEach(() => {
 
 describe('RecipeCard Component', () => {
 	const recipe = {
-		id: 1,
+		id: '1',
 		name: 'Spaghetti Bolognese',
 		description: 'A classic Italian dish with rich flavors and hearty meat sauce.',
 		image_url:
 			'https://www.croquonslavie.fr/sites/default/files/srh_recipes/786c9164177d449db9ac600b253d7956.jpeg',
 		when_to_eat: 'Dinner',
 		prep_time: 30,
-		cook_time: 45
+		cook_time: 45,
+		createdAt: '2023-10-01T12:00:00Z',
+		instructions: 'Cook pasta, prepare sauce, mix together, and serve.',
+		category: 'Main Course',
+		published: true,
+		created_by: 'Chef John',
+		updatedAt: '2023-10-02T12:00:00Z',
+		ingredients: ['pasta', 'ground beef', 'tomato sauce', 'onions', 'garlic'],
+		tags: ['Italian', 'Dinner', 'Pasta'],
+		calories: 600,
+		cost: 15.99,
+		servings: 4,
+		disclaimer: 'Nutritional values are approximate.'
 	};
 
 	test('affiche correctement le nom de la recette', () => {

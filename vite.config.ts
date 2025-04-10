@@ -39,7 +39,17 @@ export default defineConfig({
 					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}']
 				}
 			}
-		]
+		],
+		coverage: {
+			include: ['src/**/*.{js,ts,svelte}'],
+			exclude: ['src/**/*.test.{js,ts}', 'src/**/*.spec.{js,ts}'],
+			thresholds: {
+				lines: 50,
+				functions: 50,
+				branches: 50,
+				statements: 50
+			}
+		}
 	},
 	build: {
 		rollupOptions: {

@@ -1,9 +1,15 @@
 <script lang="ts">
+	// Imports types
 	import type { Recipe } from '$lib/types/Recipe';
+	// Imports stores
 	import searchValue from '$lib/stores/search';
+	// Imports components
 	import TitleBanner from '$lib/components/TitleBanner.svelte';
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
+	// Imports functions
+	import { removeAccents } from '$lib/utils/removeAccents';
 
+	// Props, dynamic variables and states
 	let {
 		pageTitle,
 		title,
@@ -17,20 +23,18 @@
 		dataRecipes: Recipe[];
 		isPageFavorite: boolean;
 	} = $props();
-	let recipes: Recipe[] = dataRecipes;
-
-	function removeAccents(str: string): string {
-		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-	}
-
 	let filteredRecipes: Recipe[] = $state([]);
 
+	// Constants
+	const recipes: Recipe[] = dataRecipes;
+	const titleData: { title: string; subtitle: string } = { title: title, subtitle: subtitle };
+
+	// Reactive variables
 	$effect(() => {
 		filteredRecipes = recipes.filter((recipe) =>
 			removeAccents(recipe.name.toLowerCase()).includes(removeAccents($searchValue.toLowerCase()))
 		);
 	});
-	const titleData = { title: title, subtitle: subtitle };
 </script>
 
 <svelte:head>

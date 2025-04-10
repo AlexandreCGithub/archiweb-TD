@@ -11,9 +11,6 @@ import type { Recipe } from '$lib/types';
 import { getMyFavorites, postFavorite, deleteFavorite, getRecipe } from '$lib/api';
 import { parseJwt } from '$lib/utils/parseJwt';
 
-// To determine if the specific recipe on this page is already a favorite, we use a store
-// It is populated if the current store is null
-
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const userPseudo = parseJwt(cookies.get('token'))?.iss;
 	if (!userPseudo) {

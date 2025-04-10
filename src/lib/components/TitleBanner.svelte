@@ -1,11 +1,14 @@
 <script lang="ts">
+	// Imports
 	import homeImg from '$lib/images/home.webp';
+
+	// Props, dynamic variables and states
 	let { titleData } = $props();
+	let transform_title: string = $state('scale(1)');
 
-	let transform_title = $state('scale(1)');
-
-	let title = $state(titleData.title);
-	let subtitle = $state(titleData.subtitle);
+	// Constants
+	const title: string = titleData.title;
+	const subtitle: string = titleData.subtitle;
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
