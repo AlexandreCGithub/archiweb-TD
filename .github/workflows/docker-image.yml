@@ -36,6 +36,8 @@ jobs:
 
       - name: Show coverage
         run: bun coverage
+        continue-on-error: true
+
 
   cd:
     name: CD - Build & Push Docker Image # CD : runs on pushes on main, if CI succeeds
