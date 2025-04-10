@@ -43,32 +43,32 @@ describe('RecipeCard Component', () => {
 		disclaimer: 'Nutritional values are approximate.'
 	};
 
-	test('affiche correctement le nom de la recette', () => {
+	test('Display recipe name correctly', () => {
 		render(RecipeCard, { props: { recipe } });
 
 		expect(screen.getByText(recipe.name)).toBeInTheDocument();
 	});
 
-	test("affiche correctement l'image de la recette", () => {
+	test('Display recipe image correctly', () => {
 		render(RecipeCard, { props: { recipe } });
 
 		expect(screen.getByAltText(recipe.name)).toHaveAttribute('alt', recipe.name);
 	});
 
-	test('affiche correctement la description de la recette', () => {
+	test('Display recipe description correctly', () => {
 		render(RecipeCard, { props: { recipe } });
 
 		const description = screen.getByText(recipe.description.slice(0, 30) + '...');
 		expect(description).toBeInTheDocument();
 	});
 
-	test('affiche correctement le badge when_to_eat', () => {
+	test('Display badge when_to_eat correctly', () => {
 		render(RecipeCard, { props: { recipe } });
 
 		expect(screen.getByText(recipe.when_to_eat)).toBeInTheDocument();
 	});
 
-	test('affiche le bouton Voir la recette', () => {
+	test('Display button "Voir la recette"', () => {
 		render(RecipeCard, { props: { recipe } });
 
 		expect(screen.getByText('Voir la recette')).toBeInTheDocument();

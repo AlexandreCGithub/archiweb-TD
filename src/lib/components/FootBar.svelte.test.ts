@@ -10,7 +10,7 @@ vi.mock('$env/dynamic/public', () => ({
 }));
 
 describe('FootBar Component', () => {
-	test('Affiche le bon texte sur la FootBar', () => {
+	test('Display right text', () => {
 		render(FootBar);
 		expect(screen.getByText("Site de l'équipe Chi.")).toBeInTheDocument();
 		expect(screen.getByText('Version: 1.0.0')).toBeInTheDocument();

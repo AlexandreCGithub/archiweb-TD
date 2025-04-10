@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/svelte';
 import MainPage from '$lib/components/MainPage.svelte';
 
 describe('MainPage - Texte Favoris', () => {
-	test('affiche le titre et le sous-titre correctement', () => {
+	test('display title and subtitle correctly', () => {
 		const title = 'Favoris';
 		const subtitle = 'Vos plats favoris !';
 		const pageTitle = 'Favoris';
