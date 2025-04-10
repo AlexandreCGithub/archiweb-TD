@@ -9,15 +9,7 @@ import {
 } from '$lib/stores/favoritesStore';
 import type { Recipe } from '$lib/types';
 import { getMyFavorites, postFavorite, deleteFavorite, getRecipe } from '$lib/api';
-
-const parseJwt = (token: string | undefined) => {
-	if (token == undefined) return undefined;
-	try {
-		return JSON.parse(atob(token.split('.')[1]));
-	} catch (e) {
-		return e;
-	}
-};
+import { parseJwt } from '$lib/functions/parseJWT';
 
 // Pour savoir si la recette particulière de cette page est déjà favorite, on utilise un store
 // Il est rempli si le store actuel est null
@@ -40,7 +32,6 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	}
 
 	const { slug } = params;
-
 	const favorites = get(favoritesTab);
 	const isAlreadyFavorite = favorites ? favorites.includes(slug) : false;
 

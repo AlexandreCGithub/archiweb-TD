@@ -1,13 +1,22 @@
 <script lang="ts">
+	// Imports Bootstrap CSS
 	import 'bootstrap/dist/css/bootstrap.min.css';
+
+	// Imports Components
 	import Footbar from '$lib/components/FootBar.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
+
+	// Imports stores
 	import darkMode from '$lib/stores/darkMode';
+
+	// Imports images
 	import homeImg from '$lib/images/home.webp';
 	import iconImg from '$lib/images/favicon.webp';
 
+	// Props
 	let { data, children } = $props();
 
+	// Dark mode/Light mode
 	$effect(() => {
 		if ($darkMode === 'true') {
 			document.documentElement.style.setProperty('--dark-mode', '#212529');

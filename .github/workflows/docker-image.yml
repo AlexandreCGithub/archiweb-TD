@@ -34,6 +34,9 @@ jobs:
       - name: Run tests
         run: bun run test
 
+      - name: Show coverage
+        run: bun coverage
+
   cd:
     name: CD - Build & Push Docker Image # CD : runs on pushes on main, if CI succeeds
     runs-on: ubuntu-latest
