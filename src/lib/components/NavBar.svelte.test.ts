@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/svelte';
 import NavBar from './NavBar.svelte';
 
 describe('NavBar Component', () => {
-	test('affiche le lien Accueil', () => {
+	test('Display link to home', () => {
 		render(NavBar, { data: { token: null, data: undefined, status: undefined } });
 
 		// Vérifie que le lien "Accueil" est bien affiché
@@ -11,7 +11,7 @@ describe('NavBar Component', () => {
 		expect(homeLink).toBeInTheDocument();
 	});
 
-	test('affiche le bouton Se connecter', () => {
+	test('Display button to connect', () => {
 		render(NavBar);
 
 		// Vérifie que le bouton "Se connecter" est bien affiché
