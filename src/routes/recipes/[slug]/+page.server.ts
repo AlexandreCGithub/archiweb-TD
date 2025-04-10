@@ -9,7 +9,7 @@ import {
 } from '$lib/stores/favoritesStore';
 import type { Recipe } from '$lib/types';
 import { getMyFavorites, postFavorite, deleteFavorite, getRecipe } from '$lib/api';
-import { parseJwt } from '$lib/functions/parseJWT';
+import { parseJwt } from '$lib/utils/parseJwt';
 
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const userPseudo = parseJwt(cookies.get('token'))?.iss;

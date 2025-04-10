@@ -21,7 +21,7 @@ beforeEach(() => {
 
 describe('RecipeCard Component', () => {
 	const recipe = {
-		id: "1",
+		id: '1',
 		name: 'Spaghetti Bolognese',
 		description: 'A classic Italian dish with rich flavors and hearty meat sauce.',
 		image_url:

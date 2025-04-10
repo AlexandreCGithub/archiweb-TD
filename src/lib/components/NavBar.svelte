@@ -3,18 +3,16 @@
 	import { applyAction, deserialize } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { parseJwt } from '$lib/utils/parseJwt';
 
 	// Imports stores
 	import searchValue from '$lib/stores/search';
 	import darkMode from '$lib/stores/darkMode';
 	// Imports functions
-	import { parseJwt } from '$lib/functions/parseJWT';
+	import { parseJwt } from '$lib/utils/parseJwt';
 
 	// Imports icons
 	import { sunStringIcon } from '$lib/icons/sun';
 	import { moonStringIcon } from '$lib/icons/moon';
-
 
 	// Props, dynamic variables and states
 	let { data } = $props();

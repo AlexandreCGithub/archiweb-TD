@@ -7,7 +7,7 @@
 	import TitleBanner from '$lib/components/TitleBanner.svelte';
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
 	// Imports functions
-	import { removeAccents } from '$lib/functions/removeAccents';
+	import { removeAccents } from '$lib/utils/removeAccents';
 
 	// Props, dynamic variables and states
 	let {

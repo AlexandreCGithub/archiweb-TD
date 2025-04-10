@@ -5,10 +5,9 @@
 	import type { Recipe } from '$lib/types/Recipe';
 	import { source } from 'sveltekit-sse';
 	import { onMount } from 'svelte';
-	import { parseJwt } from '$lib/utils/parseJwt';
 
-	// Import functions
-	import { parseJwt } from '$lib/functions/parseJWT';
+	// Imports functions
+	import { parseJwt } from '$lib/utils/parseJwt';
 
 	// Imports Components
 	import ProxyImg from '$lib/components/ProxyImg.svelte';
@@ -59,7 +58,6 @@
 	// Constants (functions)
 	const changeFavorite = (): boolean => (isFavorite = !isFavorite);
 	const changeModalStatus = () => (isModalOpen = isModalOpen ? false : true);
-
 </script>
 
 <svelte:head>
