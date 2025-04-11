@@ -1,5 +1,4 @@
 import { describe, test, expect, vi, beforeAll } from 'vitest';
-import { writable } from 'svelte/store';
 import searchValue from './search';
 
 beforeAll(() => {
