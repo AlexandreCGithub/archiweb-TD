@@ -1,6 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/svelte';
+import { render, screen } from '@testing-library/svelte';
 import MainPage from './MainPage.svelte';
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 // Mock des props
 const mockProps = {
