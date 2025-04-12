@@ -1,17 +1,11 @@
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { transformImage } from './media';
-import { ReadableStream } from 'web-streams-polyfill/ponyfill/es6';
 
 globalThis.fetch = vi.fn();
-globalThis.Blob = vi.fn().mockImplementation((content) => ({
-	stream: () => new ReadableStream()
-}));
 
 beforeEach(() => {
 	vi.clearAllMocks();
 });
-
-const sampleBuffer = new Uint8Array([1, 2, 3, 4]);
 
 describe('transformImage', () => {
 	test('returns placeholder response when fetch fails', async () => {
