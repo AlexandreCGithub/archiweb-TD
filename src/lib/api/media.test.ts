@@ -9,7 +9,7 @@ beforeEach(() => {
 
 describe('transformImage', () => {
 	test('returns placeholder response when fetch fails', async () => {
-		(fetch as any).mockResolvedValueOnce({
+		(globalThis.fetch as vi.Mock).mockResolvedValueOnce({
 			ok: false,
 			body: null
 		});
