@@ -1,4 +1,4 @@
-import { describe, test, expect, vi, beforeEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach, type Mock } from 'vitest';
 import { transformImage } from './media';
 
 globalThis.fetch = vi.fn();
@@ -9,10 +9,11 @@ beforeEach(() => {
 
 describe('transformImage', () => {
 	test('returns placeholder response when fetch fails', async () => {
-		(globalThis.fetch as vi.Mock).mockResolvedValueOnce({
+		globalThis.fetch = vi.fn().mockResolvedValueOnce({
 			ok: false,
-			body: null
-		});
+			body: null,
+			headers: new Headers()
+		}) as Mock;
 
 		const res = await transformImage({
 			fullUrl: 'https://localhost/image.jpg',
