@@ -15,6 +15,7 @@ export const allowedMimeTypes = [
 	'image/ico'
 ];
 
+// function when we need to apply some transformation to the image
 export async function transformImage(params: {
 	fullUrl: string;
 	imageUrl: string;

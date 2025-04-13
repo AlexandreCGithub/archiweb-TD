@@ -13,9 +13,13 @@
 
 Project built for the archiweb class, which is a recipes website.
 
+We are the Chi team.
+
 This project uses Svelte/Sveltekit
 
 This project uses bun as a package manager
+
+Our site is in french, but our documentation and comments will be in english
 
 ## 2. Deployment
 
@@ -100,7 +104,4 @@ bun run test
 
 The sites tries to have the best performance possible.
 Performance [here](https://performance.quimerch.com/?token=cs)
-
-## 6. CO2 emissions and Green IT
-
-Link [here](https://www.ecoindex.fr/)
+Can also be tested using Lighthouse
