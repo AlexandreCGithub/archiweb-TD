@@ -2,6 +2,10 @@ import type { PageServerLoad } from './$types';
 import { type Actions, fail } from '@sveltejs/kit';
 import { getRecipes, postLogin } from '$lib/api';
 
+/*
+ * This is the main page of the app. It loads all the recipes from the API and displays them in a grid.
+ */
+
 export const load: PageServerLoad = async () => {
 	const response = await getRecipes(); // get all the recipes using the API
 

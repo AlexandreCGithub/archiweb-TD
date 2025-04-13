@@ -4,7 +4,7 @@
 	// Imports Icons
 	import { dockerStringIcon1, dockerStringIcon2 } from '$lib/icons/docker';
 	import { githubStringIcon } from '$lib/icons/github';
-
+	// Our version number.
 	const commitNumber: string = env?.PUBLIC_VITE_COMMIT_NUMBER || 'dev';
 </script>
 

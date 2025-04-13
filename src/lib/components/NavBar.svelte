@@ -76,7 +76,7 @@
 
 <div class="container py-md-3 py-sm-0 px-0 mx-auto text-center">
 	<nav class="navbar navbar-expand-sm">
-		<!-- Contenu de la navbar -->
+		<!-- Navbar content -->
 		<div class="navbar-collapse mx-0" id="navbarNav">
 			<ul class="navbar-nav me-auto mb-0">
 				<li class="nav-item me-3">
@@ -152,7 +152,7 @@
 		</div>
 	</nav>
 </div>
-
+<!-- Connection modal -->
 {#if isModalOpen}
 	<div class="modal fade show d-block" tabindex="-1" style="display: block;">
 		<div class="modal-dialog">
