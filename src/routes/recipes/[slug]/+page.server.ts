@@ -11,14 +11,22 @@ import type { Recipe } from '$lib/types';
 import { getMyFavorites, postFavorite, deleteFavorite, getRecipe } from '$lib/api';
 import { parseJwt } from '$lib/utils/parseJwt';
 
+/*
+ * This function is called when the page (a specific recipe page) is loaded.
+ * To know if the recipe is already a favorite, to be able to color the star or not, we check the store. It avoids requesting all recipes each time
+ * If the store is empty, we need to request the API to get the user's favorites and fill it.
+ * Then this page allows to add or remove the recipe from the favorites.
+ */
+
 export const load: PageServerLoad = async ({ params, cookies }) => {
+	// get the pseudo from the token in the cookie
 	const userPseudo = parseJwt(cookies.get('token'))?.iss;
 	if (!userPseudo) {
 		resetFavorites(); // if no pseudo : empty the store
 	}
 
 	if (get(favoritesTab) == null && userPseudo) {
-		// if empty store and pseudo : fill the store with its curent favorites (storing only he ids)
+		// if empty store and pseudo existing : fill the favorites store with its current favorites (storing only the ids)
 		const favResponse = await getMyFavorites(cookies.get('token') as string);
 		if (favResponse.ok) {
 			const favJsonResponse = await favResponse.json();
@@ -64,7 +72,7 @@ export const actions = {
 			cookies.get('token') as string
 		);
 		if (response.ok) {
-			addFavoriteToStore(String(recipeID));
+			addFavoriteToStore(String(recipeID)); // update our store too
 			return { success: true, action: 'addFavorite', isFavorite: true };
 		} else {
 			return { success: false, action: 'addFavorite', isFavorite: false };
@@ -83,7 +91,7 @@ export const actions = {
 		);
 
 		if (response.ok) {
-			removeFavoriteFromStore(String(recipeID));
+			removeFavoriteFromStore(String(recipeID)); // update our store too
 			return { success: true, action: 'deleteFavorite', isFavorite: false };
 		} else {
 			return { success: false, action: 'deleteFavorite', isFavorite: true };
