@@ -26,7 +26,6 @@
 	// Props, dynamic variables and states
 	let { data }: PageProps = $props();
 	let favoritecount = $state('');
-	let msg = $state('');
 	let isFavorite = $state(data.isAlreadyFavorite);
 	let isModalOpen = $state(false);
 	let userPseudo = $state(parseJwt(data?.token ?? undefined)?.iss);
@@ -39,7 +38,7 @@
 		class: 'img-fluid rounded-2 shadow',
 		loading: 'lazy',
 		alt: recipe.name,
-		style: 'object-fit: cover; height: 200px',
+		style: 'object-fit: cover; height: 300px',
 		imgwidth: 500,
 		imgheight: 400
 	};
@@ -143,15 +142,16 @@
 					>
 				</div>
 			</div>
-
-			<p class="lead mt-4">{recipe.description}</p>
-			{#if favoritecount != ''}
-				{#if favoritecount == '0'}
-					<p>Nobody ⭐ this recipe yet</p>
-				{:else}
-					<p>{favoritecount} ⭐ for this recipe !</p>
+			<div class="d-flex justify-content-between align-items-center mb-2">
+				<span class="lead">{recipe.description}</span>
+				{#if favoritecount != ''}
+					{#if favoritecount == '0'}
+						<span>Personne n'a cette recette dans ses favoris</span>
+					{:else}
+						<span>{favoritecount} ⭐ pour cette recette</span>
+					{/if}
 				{/if}
-			{/if}
+			</div>
 			{#if userPseudo}
 				<form
 					method="POST"
@@ -166,12 +166,14 @@
 					}}
 				>
 					<input type="hidden" id="recipeID" name="recipeID" value={recipe.id} />
-					<div>
+					<div class="d-flex align-items-center gap-2">
+						<span>Pour ajouter ou retirer cette recette de vos favoris : </span>
 						<button
 							type="submit"
 							class="btn btn-outline-light"
 							aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
 							formaction={isFavorite ? '?/deleteFavorite' : '?/addFavorite'}
+							style="border : none"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -185,8 +187,6 @@
 							</svg>
 						</button>
 					</div>
-					<br /><br />
-					<p><strong>{msg}</strong></p>
 				</form>
 			{/if}
 		</div>
